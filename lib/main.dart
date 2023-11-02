@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:funcional_timer_app/painel.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Painel());
 }
 
 class MyApp extends StatelessWidget {
