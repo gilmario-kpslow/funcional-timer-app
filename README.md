@@ -1,16 +1,9 @@
 # funcional_timer_app
 
-A new Flutter project.
+Projeto de app de timer para exercicios funcionais
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Aqui é consulte o site oficial que não terá problemas.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter](https://docs.flutter.dev)
