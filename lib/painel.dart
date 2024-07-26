@@ -7,7 +7,9 @@ class Painel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Programacao> lista = [
-      Programacao(nome: 'Programa 01', segundos: 300, tocarSom: true),
+      Programacao(nome: "Funcional 01", id: 1),
+      Programacao(nome: "Funcional 02", id: 2),
+      Programacao(nome: "Funcional 03", id: 3)
     ];
 
     return MaterialApp(

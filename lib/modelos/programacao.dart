@@ -1,4 +1,5 @@
 class Programacao {
   final String nome;
-  Programacao({required this.nome});
+  final int id;
+  Programacao({required this.nome, required this.id});
 }

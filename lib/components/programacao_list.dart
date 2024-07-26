@@ -1,12 +1,11 @@
-import 'package:despesas/models/transacao.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:funcional_timer_app/modelos/programacao.dart';
 
 class TransactionList extends StatelessWidget {
-  const TransactionList(this.transacoes, this.delete, {super.key});
+  const TransactionList(this.programacoes, this.delete, {super.key});
 
-  final List<Transacao> transacoes;
-  final Function(String id) delete;
+  final List<Programacao> programacoes;
+  final Function(int id) delete;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +17,7 @@ class TransactionList extends StatelessWidget {
         SizedBox(
           height: constraints.maxHeight * 0.20,
           child: Text(
-            "Nenhuma transação",
+            "Nenhuma registro",
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
@@ -36,9 +35,9 @@ class TransactionList extends StatelessWidget {
     });
 
     final lista = ListView.builder(
-        itemCount: transacoes.length,
+        itemCount: programacoes.length,
         itemBuilder: (context, index) {
-          final tr = transacoes[index];
+          final tr = programacoes[index];
           return Card(
             elevation: 5,
             margin: const EdgeInsets.symmetric(
@@ -53,18 +52,18 @@ class TransactionList extends StatelessWidget {
                   padding: const EdgeInsets.all(6.0),
                   child: FittedBox(
                     child: Text(
-                      'R\$ ${tr.valor}',
+                      'R\$ ${tr.nome}',
                       style: const TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
               ),
               title: Text(
-                tr.titulo,
+                tr.nome,
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               subtitle: Text(
-                DateFormat('d MMM y').format(tr.data),
+                "sub Titulo",
               ),
               trailing: MediaQuery.of(context).size.width > 400
                   ? ElevatedButton(
@@ -87,6 +86,6 @@ class TransactionList extends StatelessWidget {
           );
         });
 
-    return SizedBox(child: transacoes.isEmpty ? vazio : lista);
+    return SizedBox(child: programacoes.isEmpty ? vazio : lista);
   }
 }
