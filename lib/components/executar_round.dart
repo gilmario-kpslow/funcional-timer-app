@@ -17,22 +17,38 @@ class ExecutarRound extends StatelessWidget {
     ]);
 
     final round = Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ElevatedButton(onPressed: () {}, child: const Text("1 Round")),
+        const Text(
+            style: TextStyle(
+                fontSize: 50, color: Colors.blue, fontWeight: FontWeight.bold),
+            "1 Round"),
         const ContadorTempo(tempo: 300)
       ],
     );
 
     final player = Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        TextButton(onPressed: () {}, child: Icon(Icons.play_arrow)),
-        TextButton(onPressed: () {}, child: Icon(Icons.stop))
+        TextButton(
+            onPressed: () {},
+            child: Icon(
+              Icons.play_arrow,
+              size: 80,
+            )),
+        TextButton(
+            onPressed: () {},
+            child: Icon(
+              Icons.stop,
+              size: 80,
+            ))
       ],
     );
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [botoes, round, player],
     );
   }

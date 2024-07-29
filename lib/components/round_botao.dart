@@ -14,7 +14,10 @@ class RoundButton extends StatelessWidget {
         onPressed: () {},
         color: Theme.of(context).colorScheme.error,
       ),
-      Text(nome)
+      Text(
+          style:
+              const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+          nome)
     ]);
   }
 }

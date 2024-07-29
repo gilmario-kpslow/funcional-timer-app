@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/executar_round.dart';
+import 'package:funcional_timer_app/components/round_form.dart';
 import 'package:funcional_timer_app/painel.dart';
 
 void main() {
@@ -42,14 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final main = ExecutarRound();
+    const main = ExecutarRound();
+    const round = RoundForm();
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: main,
+      body: round,
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Incrementar',
