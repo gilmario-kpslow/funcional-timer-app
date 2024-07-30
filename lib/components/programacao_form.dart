@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/adaptative_input.dart';
 
-class RoundForm extends StatefulWidget {
-  const RoundForm(this.onSubmit, {super.key});
+class ProgramacaoForm extends StatefulWidget {
+  const ProgramacaoForm(this.onSubmit, {super.key});
 
   final void Function(String, int) onSubmit;
 
   @override
-  State<RoundForm> createState() => _RoundForm();
+  State<ProgramacaoForm> createState() => _ProgramacaoForm();
 }
 
-class _RoundForm extends State<RoundForm> {
+class _ProgramacaoForm extends State<ProgramacaoForm> {
   final _nomeController = TextEditingController();
   final _tempoController = TextEditingController();
 

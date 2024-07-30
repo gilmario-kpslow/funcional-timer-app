@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:funcional_timer_app/components/drawer.dart';
 import 'package:funcional_timer_app/components/executar_round.dart';
+import 'package:funcional_timer_app/components/programacao_list.dart';
 import 'package:funcional_timer_app/components/round_form.dart';
-import 'package:funcional_timer_app/painel.dart';
+import 'package:funcional_timer_app/modelos/programacao.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,25 +35,52 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  int _selectedIndex = 0;
 
   void _incrementCounter() {
+    print('_incrementCounter');
+  }
+
+  void _onItemTapped(int index) {
     setState(() {
-      _counter++;
+      _selectedIndex = index;
     });
   }
 
+  _addData(String nome, int tempo) {}
+
   @override
   Widget build(BuildContext context) {
+    List<Programacao> lista = [
+      Programacao(
+          nome: "Funcional 1", descricao: 'Funcional de exemplo', id: 1),
+      Programacao(nome: "Treino 01", descricao: 'Trino de exemplo', id: 2),
+      Programacao(
+          nome: "Funcional 2", descricao: 'Funcional de exemplo 2', id: 3),
+      Programacao(
+          nome: "Treino demorado", descricao: 'Trino demorado 2', id: 4),
+      Programacao(nome: "Outros", descricao: 'Outros trinamentos', id: 5)
+    ];
+
+    ProgramacaoList programacoes = ProgramacaoList(
+      lista,
+      (a) {
+        print(a);
+      },
+    );
     const main = ExecutarRound();
-    const round = RoundForm();
+    var round = RoundForm(_addData);
+    const painel = Text("Programacoes");
+
+    List<Widget> _widgetOptions = <Widget>[programacoes, round, main];
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: round,
+      body: _widgetOptions[_selectedIndex],
+      drawer: DefaultDrawer(_onItemTapped, index: _selectedIndex),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Incrementar',

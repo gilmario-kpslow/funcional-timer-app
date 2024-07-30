@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/modelos/programacao.dart';
 
-class TransactionList extends StatelessWidget {
-  const TransactionList(this.programacoes, this.delete, {super.key});
+class ProgramacaoList extends StatelessWidget {
+  const ProgramacaoList(this.programacoes, this.delete, {super.key});
 
   final List<Programacao> programacoes;
   final Function(int id) delete;
@@ -45,43 +45,20 @@ class TransactionList extends StatelessWidget {
               horizontal: 5,
             ),
             child: ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Colors.blueAccent,
-                radius: 28,
-                child: Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: FittedBox(
-                    child: Text(
-                      'R\$ ${tr.nome}',
-                      style: const TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
               title: Text(
                 tr.nome,
-                style: Theme.of(context).textTheme.titleSmall,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               subtitle: Text(
-                "sub Titulo",
+                tr.descricao,
               ),
-              trailing: MediaQuery.of(context).size.width > 400
-                  ? ElevatedButton(
-                      child: Text(
-                        "Excluir",
-                        style: Theme.of(context).textTheme.titleSmall,
-                      ),
-                      onPressed: () {
-                        delete(tr.id);
-                      },
-                    )
-                  : IconButton(
-                      icon: const Icon(Icons.delete),
-                      onPressed: () {
-                        delete(tr.id);
-                      },
-                      color: Theme.of(context).colorScheme.error,
-                    ),
+              trailing: IconButton(
+                icon: const Icon(Icons.list),
+                onPressed: () {
+                  delete(tr.id);
+                },
+                color: Theme.of(context).colorScheme.error,
+              ),
             ),
           );
         });
