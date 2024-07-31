@@ -1,11 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:funcional_timer_app/components/popup_menu.dart';
+import 'package:funcional_timer_app/enums/menu_item_option.dart';
 import 'package:funcional_timer_app/modelos/programacao.dart';
 
 class ProgramacaoList extends StatelessWidget {
-  const ProgramacaoList(this.programacoes, this.delete, {super.key});
+  const ProgramacaoList(this.programacoes, this.delete, this.editar,
+      {super.key});
 
   final List<Programacao> programacoes;
   final Function(int id) delete;
+  final Function(Programacao entity) editar;
+
+  _menuSelect(MenuItemOption option, dynamic value) {
+    switch (option) {
+      case MenuItemOption.Editar:
+        {
+          editar(value);
+          break;
+        }
+      case MenuItemOption.Excluir:
+        {
+          delete(value.id);
+          break;
+        }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,13 +71,14 @@ class ProgramacaoList extends StatelessWidget {
               subtitle: Text(
                 tr.descricao,
               ),
-              trailing: IconButton(
-                icon: const Icon(Icons.list),
-                onPressed: () {
-                  delete(tr.id);
-                },
-                color: Theme.of(context).colorScheme.error,
-              ),
+              trailing: PopupMenu(select: _menuSelect, value: tr),
+              // trailing: IconButton(
+              //   icon: const Icon(Icons.list),
+              //   onPressed: () {
+
+              //   },
+              //   color: Theme.of(context).colorScheme.error,
+              // ),
             ),
           );
         });

@@ -62,12 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
       Programacao(nome: "Outros", descricao: 'Outros trinamentos', id: 5)
     ];
 
-    ProgramacaoList programacoes = ProgramacaoList(
-      lista,
-      (a) {
-        print(a);
-      },
-    );
+    ProgramacaoList programacoes = ProgramacaoList(lista, (id) {
+      print(id);
+      print("Excluir");
+    }, (Programacao entity) {
+      print("Editar");
+      print(entity);
+    });
     const main = ExecutarRound();
     var round = RoundForm(_addData);
     const painel = Text("Programacoes");
