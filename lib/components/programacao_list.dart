@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/popup_menu.dart';
 import 'package:funcional_timer_app/enums/menu_item_option.dart';
-import 'package:funcional_timer_app/modelos/programacao.dart';
+import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class ProgramacaoList extends StatelessWidget {
   const ProgramacaoList(this.programacoes, this.delete, this.editar,
@@ -45,10 +45,7 @@ class ProgramacaoList extends StatelessWidget {
         ),
         SizedBox(
           height: constraints.maxHeight * 0.50,
-          child: Image.asset(
-            "assets/images/waiting.png",
-            fit: BoxFit.fitHeight,
-          ),
+          child: Text("Vazio"),
         ),
       ]);
     });
