@@ -4,7 +4,7 @@ import 'package:funcional_timer_app/components/adaptative_input.dart';
 class ProgramacaoForm extends StatefulWidget {
   const ProgramacaoForm(this.onSubmit, {super.key});
 
-  final void Function(String, int) onSubmit;
+  final void Function(String, String) onSubmit;
 
   @override
   State<ProgramacaoForm> createState() => _ProgramacaoForm();
@@ -12,17 +12,17 @@ class ProgramacaoForm extends StatefulWidget {
 
 class _ProgramacaoForm extends State<ProgramacaoForm> {
   final _nomeController = TextEditingController();
-  final _tempoController = TextEditingController();
+  final _descricaoController = TextEditingController();
 
   _submitForm() {
-    final title = _nomeController.text;
-    final value = int.tryParse(_tempoController.text) ?? 0;
+    final nome = _nomeController.text;
+    final descricao = _descricaoController.text;
 
-    if (title.isEmpty || value <= 0) {
+    if (nome.isEmpty || descricao.isEmpty) {
       return;
     }
 
-    widget.onSubmit(title, value);
+    widget.onSubmit(nome, descricao);
   }
 
   @override
@@ -35,21 +35,20 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
           Container(
             alignment: Alignment.center,
             width: double.infinity,
-            child: Text(
-              "Criar novo Round",
+            child: const Text(
+              "Criar Programação",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          Text("Nome"),
-          TextFormField(),
-          AdaptativeInputText(label: "", controller: _nomeController),
-          Text("Tempo"),
-          TextFormField(),
-          Text("som"),
-          Checkbox(
-            value: false,
-            onChanged: (a) {},
-          )
+          TextField(
+            decoration: const InputDecoration(labelText: "Nome"),
+            controller: _nomeController,
+          ),
+          TextField(
+            decoration: const InputDecoration(labelText: "Descrição"),
+            controller: _descricaoController,
+          ),
+          ElevatedButton(onPressed: _submitForm, child: Text("Salvar"))
         ],
       ),
     );

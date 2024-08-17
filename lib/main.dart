@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/drawer.dart';
 import 'package:funcional_timer_app/components/executar_round.dart';
+import 'package:funcional_timer_app/components/programacao_form.dart';
 import 'package:funcional_timer_app/components/programacao_list.dart';
 import 'package:funcional_timer_app/components/round_form.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
+import 'package:funcional_timer_app/core/service/programacao_service.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,9 +39,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
   List<Programacao> lista = List.empty();
+  ProgramacaoService service = ProgramacaoService();
 
-  void _incrementCounter() {
-    print('_incrementCounter');
+  void _cadastrarProgramacao() {
+    showModalBottomSheet(
+        context: context,
+        builder: (ctx) {
+          return ProgramacaoForm(_addProgramacao);
+        });
+  }
+
+  _addProgramacao(String descricao, String nome) async {
+    final p = Programacao(0, nome, descricao);
+    await service.salvar(p);
+    var list = await service.getLista();
+
+    setState(() {
+      lista = list;
+    });
+
+    Navigator.of(context).pop();
   }
 
   void _onItemTapped(int index) {
@@ -50,13 +71,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ProgramacaoList programacoes = ProgramacaoList(lista, (id) {
-      print(id);
-      print("Excluir");
-    }, (Programacao entity) {
-      print("Editar");
-      print(entity);
-    });
+    ProgramacaoList programacoes =
+        ProgramacaoList(lista, (id) {}, (Programacao entity) {});
     const main = ExecutarRound();
     var round = RoundForm(_addData);
     const painel = Text("Programacoes");
@@ -71,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: _widgetOptions[_selectedIndex],
       drawer: DefaultDrawer(_onItemTapped, index: _selectedIndex),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _cadastrarProgramacao,
         tooltip: 'Incrementar',
         child: const Icon(Icons.add),
       ),

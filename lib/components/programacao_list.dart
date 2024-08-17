@@ -45,7 +45,7 @@ class ProgramacaoList extends StatelessWidget {
         ),
         SizedBox(
           height: constraints.maxHeight * 0.50,
-          child: Text("Vazio"),
+          child: const Text("Vazio"),
         ),
       ]);
     });
