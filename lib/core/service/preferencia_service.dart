@@ -22,9 +22,7 @@ class PreferenciaService {
   }
 
   Future<void> setValue(String value, Preferencia key) async {
-    if (_preferences == null) {
-      initPreferences();
-    }
+    initPreferences();
     _preferences.setString(key.name, value);
   }
 }

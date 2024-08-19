@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/adaptative_input.dart';
 
 class ProgramacaoForm extends StatefulWidget {
   const ProgramacaoForm(this.onSubmit, {super.key});
@@ -27,30 +26,28 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
 
   @override
   Widget build(BuildContext context) {
-    final form = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            alignment: Alignment.center,
-            width: double.infinity,
-            child: const Text(
-              "Criar Programação",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
+    final form = Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          width: double.infinity,
+          child: const Text(
+            "Criar Programação",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
-          TextField(
-            decoration: const InputDecoration(labelText: "Nome"),
-            controller: _nomeController,
-          ),
-          TextField(
-            decoration: const InputDecoration(labelText: "Descrição"),
-            controller: _descricaoController,
-          ),
-          ElevatedButton(onPressed: _submitForm, child: Text("Salvar"))
-        ],
-      ),
+        ),
+        TextField(
+          decoration: const InputDecoration(labelText: "Nome"),
+          controller: _nomeController,
+        ),
+        TextField(
+          decoration: const InputDecoration(labelText: "Descrição"),
+          controller: _descricaoController,
+        ),
+        ElevatedButton(onPressed: _submitForm, child: const Text("Salvar"))
+      ],
     );
 
     return SizedBox(child: form);

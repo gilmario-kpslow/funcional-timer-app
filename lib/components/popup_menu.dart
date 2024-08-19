@@ -12,15 +12,22 @@ class PopupMenu extends StatelessWidget {
     return PopupMenuButton(
         onSelected: (option) => select(option, value),
         itemBuilder: (BuildContext context) => [
-              PopupMenuItem(
-                value: MenuItemOption.Editar,
+              const PopupMenuItem(
+                value: MenuItemOption.selecionar,
+                child: ListTile(
+                  title: Text("Selecionar"),
+                  leading: Icon(Icons.check),
+                ),
+              ),
+              const PopupMenuItem(
+                value: MenuItemOption.editar,
                 child: ListTile(
                   title: Text("Editar"),
                   leading: Icon(Icons.edit),
                 ),
               ),
-              PopupMenuItem(
-                value: MenuItemOption.Excluir,
+              const PopupMenuItem(
+                value: MenuItemOption.excluir,
                 child: ListTile(
                   title: Text("Excluir"),
                   leading: Icon(Icons.remove),

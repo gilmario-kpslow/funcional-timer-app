@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:funcional_timer_app/components/contador_tempo.dart';
 import 'package:funcional_timer_app/components/round_botao.dart';
+import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class ExecutarRound extends StatelessWidget {
-  const ExecutarRound({super.key});
+  final Programacao programacao;
+  const ExecutarRound(this.programacao, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +17,15 @@ class ExecutarRound extends StatelessWidget {
       RoundButton(icon: Icons.settings_suggest, nome: "Configurar"),
     ]);
 
-    final round = Column(
+    const round = Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Text(
+        Text(
             style: TextStyle(
                 fontSize: 50, color: Colors.blue, fontWeight: FontWeight.bold),
             "1 Round"),
-        const ContadorTempo(tempo: 300)
+        ContadorTempo(tempo: 300)
       ],
     );
 
@@ -34,22 +35,27 @@ class ExecutarRound extends StatelessWidget {
       children: [
         TextButton(
             onPressed: () {},
-            child: Icon(
+            child: const Icon(
               Icons.play_arrow,
               size: 80,
             )),
         TextButton(
             onPressed: () {},
-            child: Icon(
+            child: const Icon(
               Icons.stop,
               size: 80,
             ))
       ],
     );
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [botoes, round, player],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(programacao.nome),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [botoes, round, player],
+      ),
     );
   }
 }

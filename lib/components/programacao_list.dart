@@ -4,23 +4,30 @@ import 'package:funcional_timer_app/enums/menu_item_option.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class ProgramacaoList extends StatelessWidget {
-  const ProgramacaoList(this.programacoes, this.delete, this.editar,
+  const ProgramacaoList(
+      this.programacoes, this.delete, this.editar, this.selecionar,
       {super.key});
 
   final List<Programacao> programacoes;
   final Function(int id) delete;
   final Function(Programacao entity) editar;
+  final Function(Programacao entity) selecionar;
 
   _menuSelect(MenuItemOption option, dynamic value) {
     switch (option) {
-      case MenuItemOption.Editar:
+      case MenuItemOption.editar:
         {
           editar(value);
           break;
         }
-      case MenuItemOption.Excluir:
+      case MenuItemOption.excluir:
         {
           delete(value.id);
+          break;
+        }
+      case MenuItemOption.selecionar:
+        {
+          selecionar(value);
           break;
         }
     }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/drawer.dart';
 import 'package:funcional_timer_app/components/executar_round.dart';
@@ -71,18 +69,23 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    ProgramacaoList programacoes =
-        ProgramacaoList(lista, (id) {}, (Programacao entity) {});
-    const main = ExecutarRound();
+    ProgramacaoList programacoes = ProgramacaoList(
+        lista, (id) {}, (Programacao entity) {}, (Programacao entity) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ExecutarRound(entity)),
+      );
+    });
+    // const main = ExecutarRound();
     var round = RoundForm(_addData);
-    const painel = Text("Programacoes");
+    // const painel = Text("Programacoes");
 
-    List<Widget> _widgetOptions = <Widget>[programacoes, round, main];
+    List<Widget> _widgetOptions = <Widget>[programacoes, round];
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Funcional APP"),
+        title: const Text("Funcional APP"),
       ),
       body: _widgetOptions[_selectedIndex],
       drawer: DefaultDrawer(_onItemTapped, index: _selectedIndex),

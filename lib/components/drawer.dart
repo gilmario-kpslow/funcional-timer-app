@@ -36,6 +36,16 @@ class DefaultDrawer extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
+          ListTile(
+            title: const Text('Configurações'),
+            selected: index == 2,
+            onTap: () {
+              // Update the state of the app
+              _tap(2);
+              // Then close the drawer
+              Navigator.pop(context);
+            },
+          ),
         ],
       ),
     );
