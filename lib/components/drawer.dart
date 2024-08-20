@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:funcional_timer_app/components/configuracao.dart';
 
 class DefaultDrawer extends StatelessWidget {
   final index = 0;
@@ -38,12 +39,16 @@ class DefaultDrawer extends StatelessWidget {
           ),
           ListTile(
             title: const Text('Configurações'),
-            selected: index == 2,
+            // selected: index == 2,
             onTap: () {
               // Update the state of the app
-              _tap(2);
+              // _tap(2);
               // Then close the drawer
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Configuracao()),
+              );
             },
           ),
         ],

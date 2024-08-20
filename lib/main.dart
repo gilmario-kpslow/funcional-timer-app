@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/drawer.dart';
 import 'package:funcional_timer_app/components/executar_round.dart';
@@ -76,9 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
         MaterialPageRoute(builder: (context) => ExecutarRound(entity)),
       );
     });
-    // const main = ExecutarRound();
     var round = RoundForm(_addData);
-    // const painel = Text("Programacoes");
 
     List<Widget> _widgetOptions = <Widget>[programacoes, round];
 

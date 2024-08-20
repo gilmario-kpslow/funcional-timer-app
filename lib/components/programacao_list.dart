@@ -36,25 +36,19 @@ class ProgramacaoList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final vazio = LayoutBuilder(builder: (xtx, constraints) {
-      return Column(children: [
-        SizedBox(
-          height: constraints.maxHeight * 0.05,
-        ),
-        SizedBox(
-          height: constraints.maxHeight * 0.20,
-          child: Text(
-            "Nenhuma registro",
-            style: Theme.of(context).textTheme.titleLarge,
-          ),
-        ),
-        SizedBox(
-          height: constraints.maxHeight * 0.05,
-        ),
-        SizedBox(
-          height: constraints.maxHeight * 0.50,
-          child: const Text("Vazio"),
-        ),
-      ]);
+      return Padding(
+        padding: const EdgeInsets.only(top: 20),
+        child: Row(
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Nenhuma registro",
+                style: Theme.of(context).textTheme.titleLarge,
+                // textAlign: TextAlign.center,
+              ),
+            ]),
+      );
     });
 
     final lista = ListView.builder(
@@ -76,6 +70,7 @@ class ProgramacaoList extends StatelessWidget {
                 tr.descricao,
               ),
               trailing: PopupMenu(select: _menuSelect, value: tr),
+              leading: Text("${tr.id}"),
               // trailing: IconButton(
               //   icon: const Icon(Icons.list),
               //   onPressed: () {
