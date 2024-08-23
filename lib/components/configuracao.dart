@@ -1,10 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:funcional_timer_app/components/mensagem.dart';
+import 'package:funcional_timer_app/core/database/databaseutil.dart';
 
 class Configuracao extends StatelessWidget {
-  final _tabelaController = TextEditingController();
+  // final _tabelaController = TextEditingController();
 
-  _criarBanco() {
-    print(_tabelaController.text);
+  _criarBanco(BuildContext context) async {
+    try {
+      await DatabaseUtil.recriarBanco();
+      Notificacao.info(context, "Banco recriando com sucesso!");
+    } catch (e) {
+      Notificacao.error(context, "Erro: $e");
+    }
+  }
+
+  _removeBanco(BuildContext context) async {
+    try {
+      await DatabaseUtil.removerBanco();
+      Notificacao.info(context, "Banco removido com sucesso!");
+    } catch (e) {
+      Notificacao.error(context, "Erro: ${e}");
+    }
   }
 
   @override
@@ -15,15 +31,25 @@ class Configuracao extends StatelessWidget {
         actions: [IconButton(onPressed: () {}, icon: Icon(Icons.gesture))],
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ElevatedButton(
-            onPressed: _criarBanco,
-            child: Text("Criar tabela selecionada"),
+            style: ButtonStyle(),
+            onPressed: () {
+              _removeBanco(context);
+            },
+            child: Text("Remover banco"),
           ),
-          DropdownMenu(controller: _tabelaController, dropdownMenuEntries: [
-            DropdownMenuEntry(value: "Programacao", label: "Programação"),
-            DropdownMenuEntry(value: "Round", label: "Rounds"),
-          ]),
+          ElevatedButton(
+            onPressed: () {
+              _criarBanco(context);
+            },
+            child: Text("Recriar banco"),
+          ),
+          // DropdownMenu(controller: _tabelaController, dropdownMenuEntries: [
+          //   DropdownMenuEntry(value: "Programacao", label: "Programação"),
+          //   DropdownMenuEntry(value: "Round", label: "Rounds"),
+          // ]),
         ],
       ),
     );

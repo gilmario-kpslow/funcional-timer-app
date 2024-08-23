@@ -21,4 +21,14 @@ class DatabaseUtil {
       'CREATE TABLE ROUND(id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL)',
     );
   }
+
+  static Future<void> removerBanco() async {
+    final db = await getDatabase();
+    await db.execute(
+      'DROP TABLE ROUND;',
+    );
+    await db.execute(
+      'DROP TABLE PROGRAMACAO;',
+    );
+  }
 }
