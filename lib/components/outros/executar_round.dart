@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/contador_tempo.dart';
-import 'package:funcional_timer_app/components/round_botao.dart';
+import 'package:funcional_timer_app/components/layout/contador_tempo.dart';
+import 'package:funcional_timer_app/components/layout/round_botao.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class ExecutarRound extends StatelessWidget {

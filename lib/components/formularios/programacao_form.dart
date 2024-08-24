@@ -30,14 +30,6 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
-          alignment: Alignment.center,
-          width: double.infinity,
-          child: const Text(
-            "Criar Programação",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
-        ),
         TextField(
           decoration: const InputDecoration(labelText: "Nome"),
           controller: _nomeController,
@@ -46,10 +38,29 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
           decoration: const InputDecoration(labelText: "Descrição"),
           controller: _descricaoController,
         ),
-        ElevatedButton(onPressed: _submitForm, child: const Text("Salvar"))
       ],
     );
 
-    return SizedBox(child: form);
+    return AlertDialog(
+      scrollable: true,
+      title: Container(
+        alignment: Alignment.center,
+        child: const Text(
+          "Criar Programação",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      content: form,
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancelar'),
+        ),
+        TextButton(
+          onPressed: () => _submitForm(),
+          child: const Text('Salvar'),
+        ),
+      ],
+    );
   }
 }

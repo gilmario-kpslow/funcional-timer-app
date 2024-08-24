@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/adaptative_input.dart';
+import 'package:funcional_timer_app/components/layout/adaptative_input.dart';
+import 'package:funcional_timer_app/core/modelos/round.dart';
 
 class RoundForm extends StatefulWidget {
+  final void Function(Round round) onSubmit;
   const RoundForm(this.onSubmit, {super.key});
-
-  final void Function(String, int) onSubmit;
 
   @override
   State<RoundForm> createState() => _RoundForm();
 }
 
 class _RoundForm extends State<RoundForm> {
+  _RoundForm();
   final _nomeController = TextEditingController();
   final _tempoController = TextEditingController();
+  bool som = false;
+
+  void _changeSom(bool? value) {
+    if (value == null) {
+      som = false;
+      return;
+    }
+    som = value;
+  }
 
   _submitForm() {
-    final title = _nomeController.text;
-    final value = int.tryParse(_tempoController.text) ?? 0;
+    final nome = _nomeController.text;
+    final tempo = int.tryParse(_tempoController.text) ?? 0;
 
-    if (title.isEmpty || value <= 0) {
+    if (nome.isEmpty || tempo <= 0) {
       return;
     }
 
-    widget.onSubmit(title, value);
+    Round round = Round.basico(nome: nome, tempo: tempo, som: som);
+
+    widget.onSubmit(round);
   }
 
   @override
@@ -34,21 +46,20 @@ class _RoundForm extends State<RoundForm> {
         children: [
           Container(
             alignment: Alignment.center,
-            width: double.infinity,
-            child: Text(
+            child: const Text(
               "Criar novo Round",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
-          Text("Nome"),
+          const Text("Nome"),
           TextFormField(),
           AdaptativeInputText(label: "", controller: _nomeController),
-          Text("Tempo"),
+          const Text("Tempo"),
           TextFormField(),
-          Text("som"),
+          const Text("som"),
           Checkbox(
             value: false,
-            onChanged: (a) {},
+            onChanged: _changeSom,
           )
         ],
       ),

@@ -1,15 +1,20 @@
 import 'package:funcional_timer_app/core/modelos/entity.dart';
+import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class Round extends Entity<Round> {
-  final int id;
+  int? id;
   final String nome;
   final int tempo;
   final bool som;
+  int? programacaoId;
   Round(
       {required this.nome,
       required this.id,
       required this.tempo,
-      required this.som});
+      required this.som,
+      required this.programacaoId});
+
+  Round.basico({required this.nome, required this.tempo, required this.som});
 
   @override
   Round fromMap(Map<String, dynamic> jsonMap) {
@@ -18,7 +23,13 @@ class Round extends Entity<Round> {
 
   @override
   Map<String, dynamic> toMap() {
-    return {'id': id, 'nome': nome, 'tempo': tempo, 'som': som};
+    return {
+      'id': id,
+      'nome': nome,
+      'tempo': tempo,
+      'som': som,
+      'programacao_id': programacaoId
+    };
   }
 
   static Round fromJson(Map<String, dynamic> map) {
@@ -26,6 +37,7 @@ class Round extends Entity<Round> {
         nome: map['nome'] as String,
         id: map['id'] as int,
         tempo: map['tempo'] as int,
-        som: map['som'] as bool);
+        som: map['som'] as bool,
+        programacaoId: map['programacao_id'] as int);
   }
 }

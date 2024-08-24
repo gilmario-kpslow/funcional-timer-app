@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/mensagem.dart';
+import 'package:funcional_timer_app/core/util/mensagem.dart';
 import 'package:funcional_timer_app/core/database/databaseutil.dart';
 
 class Configuracao extends StatelessWidget {
