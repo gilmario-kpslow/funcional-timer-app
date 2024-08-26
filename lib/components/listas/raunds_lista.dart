@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/layout/popup_menu.dart';
+import 'package:funcional_timer_app/core/modelos/round.dart';
 import 'package:funcional_timer_app/enums/menu_item_option.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
-class ProgramacaoList extends StatelessWidget {
-  const ProgramacaoList(
-      this.programacoes, this.delete, this.editar, this.selecionar,
+class RoundList extends StatelessWidget {
+  const RoundList(this.lista, this.delete, this.editar, this.selecionar,
       {super.key});
 
-  final List<Programacao> programacoes;
+  final List<Round> lista;
   final Function(int id) delete;
-  final Function(Programacao entity) editar;
-  final Function(Programacao entity) selecionar;
+  final Function(Round entity) editar;
+  final Function(Round entity) selecionar;
 
   _menuSelect(MenuItemOption option, dynamic value) {
     switch (option) {
@@ -43,7 +42,7 @@ class ProgramacaoList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Nenhuma registro",
+                "Nenhuma round registrado",
                 style: Theme.of(context).textTheme.titleLarge,
                 // textAlign: TextAlign.center,
               ),
@@ -51,10 +50,10 @@ class ProgramacaoList extends StatelessWidget {
       );
     });
 
-    final lista = ListView.builder(
-        itemCount: programacoes.length,
+    final listaComponent = ListView.builder(
+        itemCount: lista.length,
         itemBuilder: (context, index) {
-          final tr = programacoes[index];
+          final tr = lista[index];
           return Card(
             elevation: 5,
             margin: const EdgeInsets.symmetric(
@@ -67,7 +66,7 @@ class ProgramacaoList extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               subtitle: Text(
-                tr.descricao,
+                tr.nome,
               ),
               trailing: PopupMenu(select: _menuSelect, value: tr),
               leading: Text("${tr.id}"),
@@ -82,6 +81,6 @@ class ProgramacaoList extends StatelessWidget {
           );
         });
 
-    return SizedBox(child: programacoes.isEmpty ? vazio : lista);
+    return SizedBox(child: lista.isEmpty ? vazio : listaComponent);
   }
 }

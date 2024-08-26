@@ -12,7 +12,7 @@ class RoundService {
     );
   }
 
-  Future<List<Round>> getLista(int idPrograma) async {
+  Future<List<Round>> getLista(int? idPrograma) async {
     final db = await DatabaseUtil.getDatabase();
     final List<Map<String, dynamic>> lista = await db.query(
       'round',

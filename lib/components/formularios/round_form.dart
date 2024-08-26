@@ -18,10 +18,12 @@ class _RoundForm extends State<RoundForm> {
 
   void _changeSom(bool? value) {
     if (value == null) {
-      som = false;
       return;
     }
-    som = value;
+
+    setState(() {
+      som = value;
+    });
   }
 
   _submitForm() {
@@ -39,32 +41,47 @@ class _RoundForm extends State<RoundForm> {
 
   @override
   Widget build(BuildContext context) {
-    final form = Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            alignment: Alignment.center,
-            child: const Text(
-              "Criar novo Round",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const Text("Nome"),
-          TextFormField(),
-          AdaptativeInputText(label: "", controller: _nomeController),
-          const Text("Tempo"),
-          TextFormField(),
-          const Text("som"),
-          Checkbox(
-            value: false,
-            onChanged: _changeSom,
-          )
-        ],
-      ),
+    final form = Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: _nomeController,
+          decoration: InputDecoration(labelText: "Nome"),
+        ),
+        TextField(
+          controller: _tempoController,
+          decoration: InputDecoration(labelText: "Tempo"),
+        ),
+        const Text("som"),
+        Checkbox(
+          value: som,
+          onChanged: _changeSom,
+        )
+      ],
     );
 
-    return SizedBox(child: form);
+    return AlertDialog(
+      scrollable: true,
+      title: Container(
+        alignment: Alignment.center,
+        child: const Text(
+          "Criar Round",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      ),
+      content: form,
+      actions: <Widget>[
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Cancelar'),
+        ),
+        TextButton(
+          onPressed: () => _submitForm(),
+          child: const Text('Salvar'),
+        ),
+      ],
+    );
+    ;
   }
 }
