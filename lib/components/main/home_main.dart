@@ -31,15 +31,15 @@ class _HomeMainState extends State<HomeMain> {
   Widget build(BuildContext context) {
     var round = RoundForm(_addData);
 
-    var dashboard = Dashboard();
+    var dashboard = const Dashboard();
 
-    List<Widget> _widgetOptions = <Widget>[dashboard, round];
+    List<Widget> widgetOptions = <Widget>[dashboard, round];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("Funcional Timer APP"),
       ),
-      body: _widgetOptions[_selectedIndex],
+      body: widgetOptions[_selectedIndex],
       drawer: DefaultDrawer(_onItemTapped, index: _selectedIndex),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -47,6 +47,5 @@ class _HomeMainState extends State<HomeMain> {
         child: const Icon(Icons.add),
       ),
     );
-    ;
   }
 }

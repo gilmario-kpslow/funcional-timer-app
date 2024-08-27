@@ -1,5 +1,4 @@
 import 'package:funcional_timer_app/core/modelos/entity.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class Round extends Entity<Round> {
   int? id;

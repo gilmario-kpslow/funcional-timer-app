@@ -57,15 +57,31 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
   Widget build(BuildContext context) {
     Programacao programacao = widget.programacao;
 
-    Container status = Container(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Status do programa: ativo"),
-          Text("Número de Rounds: ${lista.length}"),
-          Text("Tempo total: $tempo"),
-        ],
+    SizedBox status = SizedBox(
+      width: double.infinity,
+      child: Card(
+        margin: EdgeInsets.all(10),
+        elevation: 3,
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Status do programa: ativo",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              Text(
+                "Número de Rounds: ${lista.length}",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+              Text(
+                "Tempo total: $tempo",
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
+            ],
+          ),
+        ),
       ),
     );
 
@@ -81,6 +97,7 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
           status,
           consulta,

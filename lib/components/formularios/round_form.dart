@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/layout/adaptative_input.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
 
 class RoundForm extends StatefulWidget {
@@ -47,11 +46,14 @@ class _RoundForm extends State<RoundForm> {
       children: [
         TextField(
           controller: _nomeController,
-          decoration: InputDecoration(labelText: "Nome"),
+          decoration: const InputDecoration(labelText: "Nome"),
         ),
         TextField(
           controller: _tempoController,
-          decoration: InputDecoration(labelText: "Tempo"),
+          decoration: const InputDecoration(labelText: "Tempo"),
+          // keyboardAppearance: KeyboardKey.,
+          keyboardType: const TextInputType.numberWithOptions(
+              signed: false, decimal: false),
         ),
         const Text("som"),
         Checkbox(
@@ -82,6 +84,5 @@ class _RoundForm extends State<RoundForm> {
         ),
       ],
     );
-    ;
   }
 }

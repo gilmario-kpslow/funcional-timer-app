@@ -6,6 +6,6 @@ class ContadorTempo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(style: TextStyle(fontSize: 100), "$tempo");
+    return Text(style: const TextStyle(fontSize: 100), "$tempo");
   }
 }

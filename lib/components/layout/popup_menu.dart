@@ -5,7 +5,7 @@ class PopupMenu extends StatelessWidget {
   final void Function(MenuItemOption option, dynamic value) select;
   final dynamic value;
 
-  PopupMenu({super.key, required this.select, required this.value});
+  const PopupMenu({super.key, required this.select, required this.value});
 
   @override
   Widget build(BuildContext context) {

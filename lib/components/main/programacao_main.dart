@@ -24,6 +24,13 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
     });
   }
 
+  @override
+  void activate() async {
+    print("Get Lista");
+    super.activate();
+    await _getLista();
+  }
+
   _cadastrarProgramacao() async {
     showDialog(
         useSafeArea: false,
@@ -34,7 +41,7 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
   }
 
   _addProgramacao(String descricao, String nome) async {
-    final p = Programacao.basico(nome, descricao);
+    final p = Programacao.basico(nome, descricao, STATUS_ATIVO);
     await service.salvar(p);
     var list = await service.getLista();
 
