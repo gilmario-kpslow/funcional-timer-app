@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:funcional_timer_app/components/layout/adaptative_input.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
 
@@ -14,7 +15,9 @@ class _RoundForm extends State<RoundForm> {
   _RoundForm();
   final _nomeController = TextEditingController();
   final _tempoController = TextEditingController();
-  bool som = false;
+  final _delayController = TextEditingController();
+  bool somInicio = false;
+  bool somTermino = false;
 
   void _changeSom(bool? value) {
     if (value == null) {
@@ -22,19 +25,35 @@ class _RoundForm extends State<RoundForm> {
     }
 
     setState(() {
-      som = value;
+      somInicio = value;
+    });
+  }
+
+  void _changeSomTermino(bool? value) {
+    if (value == null) {
+      return;
+    }
+
+    setState(() {
+      somTermino = value;
     });
   }
 
   _submitForm() {
     final nome = _nomeController.text;
     final tempo = int.tryParse(_tempoController.text) ?? 0;
+    final delay = int.tryParse(_delayController.text) ?? 0;
 
     if (nome.isEmpty || tempo <= 0) {
       return;
     }
 
-    Round round = Round.basico(nome: nome, tempo: tempo, som: som);
+    Round round = Round.basico(
+        nome: nome,
+        tempo: tempo,
+        somInicio: somInicio,
+        delayTermino: delay,
+        somTermino: somTermino);
 
     widget.onSubmit(round);
   }
@@ -52,12 +71,45 @@ class _RoundForm extends State<RoundForm> {
         TextField(
           controller: _tempoController,
           decoration: InputDecoration(labelText: "Tempo"),
+          keyboardType: TextInputType.number,
+          inputFormatters: [
+            TextInputFormatter.withFunction(
+              (oldValue, newValue) {
+                print("${oldValue.text} asdasdasdasdasd");
+                print("${newValue.text} asdasdasdasdasd");
+
+                return TextEditingValue(text: "exemplo");
+              },
+            )
+          ],
         ),
-        const Text("som"),
-        Checkbox(
-          value: som,
-          onChanged: _changeSom,
-        )
+        Row(
+          children: [
+            Checkbox(
+              value: somInicio,
+              onChanged: _changeSom,
+            ),
+            const Text("Tocam som no início"),
+          ],
+        ),
+        Row(
+          children: [
+            Checkbox(
+              value: somTermino,
+              onChanged: _changeSomTermino,
+            ),
+            const Text("Tocar Som ao término"),
+          ],
+        ),
+        somTermino
+            ? TextField(
+                controller: _delayController,
+                decoration:
+                    const InputDecoration(labelText: "Delay termino (s)"),
+                keyboardType: TextInputType.number,
+                inputFormatters: [LengthLimitingTextInputFormatter(3)],
+              )
+            : Container()
       ],
     );
 

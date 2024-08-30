@@ -1,0 +1,2 @@
+#!/bin/bash
+flutter emulators --launch TelefoneBom_API_35

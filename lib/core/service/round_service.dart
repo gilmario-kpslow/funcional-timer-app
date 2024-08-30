@@ -19,7 +19,13 @@ class RoundService {
     );
 
     return lista.map((Map<String, dynamic> m) {
-      return Round.basico(nome: "", som: false, tempo: 0).fromMap(m);
+      return Round.basico(
+              nome: "",
+              somInicio: false,
+              tempo: 0,
+              delayTermino: 0,
+              somTermino: false)
+          .fromMap(m);
     }).toList();
   }
 }
