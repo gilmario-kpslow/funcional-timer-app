@@ -60,10 +60,10 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
     SizedBox status = SizedBox(
       width: double.infinity,
       child: Card(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         elevation: 3,
         child: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

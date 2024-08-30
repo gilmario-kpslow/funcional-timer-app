@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:funcional_timer_app/components/layout/adaptative_input.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
+import 'package:funcional_timer_app/core/util/mask.dart';
 
 class RoundForm extends StatefulWidget {
   final void Function(Round round) onSubmit;
@@ -69,16 +70,29 @@ class _RoundForm extends State<RoundForm> {
           decoration: const InputDecoration(labelText: "Nome"),
         ),
         TextField(
+          onTap: () {
+            Future<TimeOfDay?> selectedTime = showTimePicker(
+              initialTime: TimeOfDay.now(),
+              context: context,
+            );
+            selectedTime.then((a) {
+              print(a);
+              _tempoController.text = a.toString();
+            });
+          },
           controller: _tempoController,
+          readOnly: true,
           decoration: InputDecoration(labelText: "Tempo"),
           keyboardType: TextInputType.number,
           inputFormatters: [
             TextInputFormatter.withFunction(
               (oldValue, newValue) {
-                print("${oldValue.text} asdasdasdasdasd");
-                print("${newValue.text} asdasdasdasdasd");
+                print("Old Value ${oldValue.text}");
+                print("new Value ${newValue.text}");
 
-                return TextEditingValue(text: "exemplo");
+                return TextEditingValue(
+                  text: maskTime(newValue.text),
+                );
               },
             )
           ],
