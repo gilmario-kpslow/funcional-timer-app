@@ -15,7 +15,7 @@ class DatabaseUtil {
     final db = await getDatabase();
 
     await db.execute(
-      'CREATE TABLE PROGRAMACAO(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT)',
+      'CREATE TABLE PROGRAMACAO(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT, status TEXT)',
     );
     await db.execute(
       'CREATE TABLE ROUND(id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL)',

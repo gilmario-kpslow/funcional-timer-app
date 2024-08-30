@@ -53,7 +53,7 @@ class DefaultDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Configuracao()),
+                MaterialPageRoute(builder: (context) => const Configuracao()),
               );
             },
           ),

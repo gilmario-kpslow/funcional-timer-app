@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:flutter/services.dart';
 import 'package:funcional_timer_app/components/layout/adaptative_input.dart';
+=======
+>>>>>>> e717443f1bf3aeec2d6fb5c81fc1309eb124e514
 import 'package:funcional_timer_app/core/modelos/round.dart';
 
 class RoundForm extends StatefulWidget {
@@ -66,7 +69,7 @@ class _RoundForm extends State<RoundForm> {
       children: [
         TextField(
           controller: _nomeController,
-          decoration: InputDecoration(labelText: "Nome"),
+          decoration: const InputDecoration(labelText: "Nome"),
         ),
         TextField(
           controller: _tempoController,
@@ -134,6 +137,5 @@ class _RoundForm extends State<RoundForm> {
         ),
       ],
     );
-    ;
   }
 }

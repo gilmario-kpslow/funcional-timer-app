@@ -3,13 +3,10 @@ import 'package:funcional_timer_app/core/modelos/entity.dart';
 class Programacao extends Entity<Programacao> {
   final String nome;
   final String descricao;
+  final String status;
   int? id;
-  // final List<Round> rounds;
-  // Programacao(this.id, this.nome, this.descricao, this.rounds);
-  Programacao(this.id, this.nome, this.descricao);
-  // Programacao({id, required nome, required descricao});
-
-  Programacao.basico(this.nome, this.descricao);
+  Programacao(this.id, this.nome, this.descricao, this.status);
+  Programacao.basico(this.nome, this.descricao, this.status);
 
   @override
   Programacao fromMap(Map<String, dynamic> jsonMap) {
@@ -22,13 +19,18 @@ class Programacao extends Entity<Programacao> {
       'id': id,
       'nome': nome,
       'descricao': descricao,
-      // 'rounds': rounds.map((i) => i.toJson()).toList()
+      'status': status,
     };
   }
 
   static Programacao fromJson(Map<String, dynamic> map) {
     return Programacao(
-        map['id'] as int, map['nome'] as String, map['descricao'] as String);
-    // map['rounds'].map((i) => Round.fromJson(i)).toList().cast<Round>());
+        map['id'] as int, //
+        map['nome'] as String,
+        map['descricao'] as String,
+        map['status'] as String);
   }
 }
+
+const String STATUS_ATIVO = "ATIVO";
+const String STATUS_EXCLUIDO = "EXCLUIDO";

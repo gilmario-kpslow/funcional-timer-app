@@ -3,6 +3,8 @@ import 'package:funcional_timer_app/core/util/mensagem.dart';
 import 'package:funcional_timer_app/core/database/databaseutil.dart';
 
 class Configuracao extends StatelessWidget {
+  const Configuracao({super.key});
+
   // final _tabelaController = TextEditingController();
 
   _criarBanco(BuildContext context) async {

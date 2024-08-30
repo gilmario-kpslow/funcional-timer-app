@@ -56,7 +56,7 @@ class ProgramacaoList extends StatelessWidget {
         itemBuilder: (context, index) {
           final tr = programacoes[index];
           return Card(
-            elevation: 5,
+            elevation: 3,
             margin: const EdgeInsets.symmetric(
               vertical: 8,
               horizontal: 5,
@@ -71,13 +71,6 @@ class ProgramacaoList extends StatelessWidget {
               ),
               trailing: PopupMenu(select: _menuSelect, value: tr),
               leading: Text("${tr.id}"),
-              // trailing: IconButton(
-              //   icon: const Icon(Icons.list),
-              //   onPressed: () {
-
-              //   },
-              //   color: Theme.of(context).colorScheme.error,
-              // ),
             ),
           );
         });
