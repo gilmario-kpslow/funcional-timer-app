@@ -3,6 +3,7 @@ import 'package:funcional_timer_app/core/modelos/entity.dart';
 class Round extends Entity<Round> {
   int? id;
   final String nome;
+  String? descricao;
   final int tempo;
   final bool somInicio;
   bool? somTermino;
@@ -11,6 +12,7 @@ class Round extends Entity<Round> {
 
   Round(
       {required this.nome,
+      required this.descricao,
       required this.id,
       required this.tempo,
       required this.somInicio,
@@ -20,6 +22,7 @@ class Round extends Entity<Round> {
 
   Round.basico(
       {required this.nome,
+      this.descricao,
       required this.tempo,
       required this.somInicio,
       this.somTermino = false,
@@ -35,8 +38,11 @@ class Round extends Entity<Round> {
     return {
       'id': id,
       'nome': nome,
+      'descricao': descricao,
       'tempo': tempo,
-      'som': somInicio,
+      'somInicio': somInicio,
+      'somTermino': somTermino,
+      'delayTermino': delayTermino,
       'programacao_id': programacaoId
     };
   }
@@ -44,11 +50,19 @@ class Round extends Entity<Round> {
   static Round fromJson(Map<String, dynamic> map) {
     return Round(
         nome: map['nome'] as String,
+        descricao: map['descricao'] as String,
         id: map['id'] as int,
         tempo: map['tempo'] as int,
-        somInicio: map['somInicio'] as bool,
-        somTermino: map['somTermino'] as bool,
+        somInicio: parseBool(map['somInicio'] as int),
+        somTermino: parseBool(map['somTermino'] as int),
         delayTermino: map['delayTermino'] as int,
         programacaoId: map['programacao_id'] as int);
+  }
+
+  static parseBool(int value) {
+    if (value > 0) {
+      return true;
+    }
+    return false;
   }
 }

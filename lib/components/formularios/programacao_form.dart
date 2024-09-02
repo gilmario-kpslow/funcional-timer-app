@@ -37,6 +37,8 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
         TextField(
           decoration: const InputDecoration(labelText: "Descrição"),
           controller: _descricaoController,
+          minLines: 2,
+          maxLines: 4,
         ),
       ],
     );
