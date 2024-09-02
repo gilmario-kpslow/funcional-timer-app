@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:funcional_timer_app/components/layout/adaptative_input.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
 import 'package:funcional_timer_app/core/util/mask.dart';
 
@@ -17,6 +16,7 @@ class _RoundForm extends State<RoundForm> {
   final _nomeController = TextEditingController();
   final _tempoController = TextEditingController();
   final _delayController = TextEditingController();
+  final _descricaoController = TextEditingController();
   bool somInicio = false;
   bool somTermino = false;
 
@@ -42,8 +42,11 @@ class _RoundForm extends State<RoundForm> {
 
   _submitForm() {
     final nome = _nomeController.text;
-    final tempo = int.tryParse(_tempoController.text) ?? 0;
-    final delay = int.tryParse(_delayController.text) ?? 0;
+    final descricao = _descricaoController.text;
+    final tempo =
+        int.tryParse(_tempoController.text.replaceFirst(":", "")) ?? 0;
+    final delay =
+        int.tryParse(_delayController.text.replaceFirst(":", "")) ?? 0;
 
     if (nome.isEmpty || tempo <= 0) {
       return;
@@ -51,6 +54,7 @@ class _RoundForm extends State<RoundForm> {
 
     Round round = Round.basico(
         nome: nome,
+        descricao: descricao,
         tempo: tempo,
         somInicio: somInicio,
         delayTermino: delay,
@@ -70,26 +74,17 @@ class _RoundForm extends State<RoundForm> {
           decoration: const InputDecoration(labelText: "Nome"),
         ),
         TextField(
-          onTap: () {
-            Future<TimeOfDay?> selectedTime = showTimePicker(
-              initialTime: TimeOfDay.now(),
-              context: context,
-            );
-            selectedTime.then((a) {
-              print(a);
-              _tempoController.text = a.toString();
-            });
-          },
+          controller: _descricaoController,
+          decoration: const InputDecoration(labelText: "Descrição"),
+          maxLines: 2,
+        ),
+        TextField(
           controller: _tempoController,
-          readOnly: true,
-          decoration: InputDecoration(labelText: "Tempo"),
+          decoration: const InputDecoration(labelText: "Tempo"),
           keyboardType: TextInputType.number,
           inputFormatters: [
             TextInputFormatter.withFunction(
               (oldValue, newValue) {
-                print("Old Value ${oldValue.text}");
-                print("new Value ${newValue.text}");
-
                 return TextEditingValue(
                   text: maskTime(newValue.text),
                 );
@@ -121,7 +116,15 @@ class _RoundForm extends State<RoundForm> {
                 decoration:
                     const InputDecoration(labelText: "Delay termino (s)"),
                 keyboardType: TextInputType.number,
-                inputFormatters: [LengthLimitingTextInputFormatter(3)],
+                inputFormatters: [
+                  TextInputFormatter.withFunction(
+                    (oldValue, newValue) {
+                      return TextEditingValue(
+                        text: maskTime(newValue.text),
+                      );
+                    },
+                  )
+                ],
               )
             : Container()
       ],
@@ -130,6 +133,7 @@ class _RoundForm extends State<RoundForm> {
     return AlertDialog(
       scrollable: true,
       title: Container(
+        width: 350,
         alignment: Alignment.center,
         child: const Text(
           "Criar Round",

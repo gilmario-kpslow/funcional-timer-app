@@ -44,13 +44,12 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
 
     var list = await roudeService.getLista(programacao.id);
     var t = list.map((r) => r.tempo).reduce((a, b) => a + b);
+    Navigator.pop(context);
 
     setState(() {
       lista = list;
       tempo = t;
     });
-
-    Navigator.pop(context);
   }
 
   @override
@@ -58,7 +57,6 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
     Programacao programacao = widget.programacao;
 
     SizedBox status = SizedBox(
-      width: double.infinity,
       child: Card(
         margin: const EdgeInsets.all(10),
         elevation: 3,
@@ -94,15 +92,20 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("Programa: ${programacao.nome}"),
+        primary: true,
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          status,
-          consulta,
-        ],
-      ),
+      // body: Column(
+      //   crossAxisAlignment: CrossAxisAlignment.start,
+      //   mainAxisAlignment: MainAxisAlignment.start,
+      //   children: [
+      //     // status,
+      //     consulta,
+      //   ],
+      // ),
+
+      body: SizedBox(
+          width: double.infinity, height: double.infinity, child: consulta),
+
       floatingActionButton: FloatingActionButton(
         onPressed: _cadastrarRound,
         tooltip: 'Incrementar',
