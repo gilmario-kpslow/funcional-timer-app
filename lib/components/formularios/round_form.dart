@@ -82,7 +82,7 @@ class _RoundForm extends State<RoundForm> {
           },
           controller: _tempoController,
           readOnly: true,
-          decoration: InputDecoration(labelText: "Tempo"),
+          decoration: const InputDecoration(labelText: "Tempo"),
           keyboardType: TextInputType.number,
           inputFormatters: [
             TextInputFormatter.withFunction(
