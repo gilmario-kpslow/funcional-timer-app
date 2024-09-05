@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/layout/popup_menu.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
+import 'package:funcional_timer_app/core/util/tempoutil.dart';
 import 'package:funcional_timer_app/enums/menu_item_option.dart';
 
 class RoundList extends StatelessWidget {
-  const RoundList(this.lista, this.delete, this.editar, this.selecionar,
+  const RoundList(
+      this.lista, this.delete, this.editar, this.selecionar, this._reorder,
       {super.key});
 
   final List<Round> lista;
-  final Function(int id) delete;
+  final Function(Round entity) delete;
   final Function(Round entity) editar;
   final Function(Round entity) selecionar;
+  final Function(int index, int newIndex) _reorder;
 
   _menuSelect(MenuItemOption option, dynamic value) {
     switch (option) {
@@ -21,7 +24,7 @@ class RoundList extends StatelessWidget {
         }
       case MenuItemOption.excluir:
         {
-          delete(value.id);
+          delete(value);
           break;
         }
       case MenuItemOption.selecionar:
@@ -50,34 +53,29 @@ class RoundList extends StatelessWidget {
       );
     });
 
-    final listaComponent = ListView.builder(
+    final listaComponent = ReorderableListView.builder(
+        onReorder: _reorder,
         itemCount: lista.length,
         itemBuilder: (context, index) {
           final tr = lista[index];
-          return Card(
-            elevation: 5,
-            margin: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 5,
+          return ListTile(
+            key: Key("${tr.id}"),
+            title: Text(
+              tr.nome,
+              style: Theme.of(context).textTheme.titleLarge,
             ),
-            child: ListTile(
-              title: Text(
-                tr.nome,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              subtitle: Text(
-                tr.nome,
-              ),
-              trailing: PopupMenu(select: _menuSelect, value: tr),
-              leading: Text("${tr.id}"),
-              // trailing: IconButton(
-              //   icon: const Icon(Icons.list),
-              //   onPressed: () {
+            subtitle: Text(
+              "${TempoUtil.format(tr.tempo)} ${tr.descricao ?? ""}",
+            ),
+            trailing: PopupMenu(select: _menuSelect, value: tr),
+            leading: Text("${tr.id} ${tr.ordem}"),
+            // trailing: IconButton(
+            //   icon: const Icon(Icons.list),
+            //   onPressed: () {
 
-              //   },
-              //   color: Theme.of(context).colorScheme.error,
-              // ),
-            ),
+            //   },
+            //   color: Theme.of(context).colorScheme.error,
+            // ),
           );
         });
 

@@ -9,12 +9,14 @@ class Round extends Entity<Round> {
   bool? somTermino;
   int? delayTermino;
   int? programacaoId;
+  int? ordem;
 
   Round(
       {required this.nome,
       required this.descricao,
       required this.id,
       required this.tempo,
+      required this.ordem,
       required this.somInicio,
       required this.somTermino,
       required this.delayTermino,
@@ -26,7 +28,8 @@ class Round extends Entity<Round> {
       required this.tempo,
       required this.somInicio,
       this.somTermino = false,
-      this.delayTermino = 0});
+      this.delayTermino = 0,
+      this.ordem = 0});
 
   @override
   Round fromMap(Map<String, dynamic> jsonMap) {
@@ -43,7 +46,8 @@ class Round extends Entity<Round> {
       'somInicio': somInicio,
       'somTermino': somTermino,
       'delayTermino': delayTermino,
-      'programacao_id': programacaoId
+      'programacao_id': programacaoId,
+      'ordem': ordem,
     };
   }
 
@@ -53,6 +57,7 @@ class Round extends Entity<Round> {
         descricao: map['descricao'] as String,
         id: map['id'] as int,
         tempo: map['tempo'] as int,
+        ordem: map['ordem'] as int,
         somInicio: parseBool(map['somInicio'] as int),
         somTermino: parseBool(map['somTermino'] as int),
         delayTermino: map['delayTermino'] as int,
