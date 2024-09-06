@@ -3,6 +3,7 @@ import 'package:funcional_timer_app/components/formularios/programacao_form.dart
 import 'package:funcional_timer_app/components/listas/programacao_list.dart';
 import 'package:funcional_timer_app/components/main/programa_main.dart';
 import 'package:funcional_timer_app/components/outros/executar_round.dart';
+import 'package:funcional_timer_app/components/outros/programa_form_service.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
 import 'package:funcional_timer_app/core/service/programacao_service.dart';
 
@@ -15,6 +16,7 @@ class ProgramacaoMain extends StatefulWidget {
 
 class _ProgramacaoMainState extends State<ProgramacaoMain> {
   ProgramacaoService service = ProgramacaoService();
+  ProgramaFormService formService = ProgramaFormService();
   List<Programacao> lista = List.empty();
 
   _getLista() async {
@@ -25,24 +27,16 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
   }
 
   @override
-  void activate() async {
-    print("Get Lista");
-    super.activate();
-    await _getLista();
+  void initState() {
+    super.initState();
+    _getLista();
   }
 
   _cadastrarProgramacao() async {
-    showDialog(
-        useSafeArea: false,
-        context: context,
-        builder: (ctx) {
-          return ProgramacaoForm(_addProgramacao);
-        });
+    formService.showFormDialog(context, _addProgramacao);
   }
 
-  _addProgramacao(String descricao, String nome) async {
-    final p = Programacao.basico(nome, descricao, STATUS_ATIVO);
-    await service.salvar(p);
+  _addProgramacao(Programacao programa) async {
     var list = await service.getLista();
 
     setState(() {
@@ -77,7 +71,7 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
       body: programacoes,
       floatingActionButton: FloatingActionButton(
         onPressed: _cadastrarProgramacao,
-        tooltip: 'Incrementar',
+        tooltip: 'Novo programa',
         child: const Icon(Icons.add),
       ),
     );

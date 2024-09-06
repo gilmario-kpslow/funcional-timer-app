@@ -3,6 +3,12 @@ import 'package:funcional_timer_app/core/modelos/programacao.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProgramacaoService {
+  get(int? id) async {
+    final db = await DatabaseUtil.getDatabase();
+    var m = await db.query('programacao', where: "id =?", whereArgs: [id]);
+    return Programacao(0, "", "", "").fromMap(m[0]);
+  }
+
   salvar(Programacao entity) async {
     final db = await DatabaseUtil.getDatabase();
     await db.insert(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/layout/popup_menu.dart';
+import 'package:funcional_timer_app/components/outros/menu_template.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
 import 'package:funcional_timer_app/core/util/tempoutil.dart';
 import 'package:funcional_timer_app/enums/menu_item_option.dart';
@@ -14,6 +15,16 @@ class RoundList extends StatelessWidget {
   final Function(Round entity) editar;
   final Function(Round entity) selecionar;
   final Function(int index, int newIndex) _reorder;
+  static const List<MenuTemplate> _opcoes = [
+    MenuTemplate(
+        titulo: "Selecionar",
+        icone: Icons.check,
+        valor: MenuItemOption.selecionar),
+    MenuTemplate(
+        titulo: "Editar", icone: Icons.edit, valor: MenuItemOption.editar),
+    MenuTemplate(
+        titulo: "Remover", icone: Icons.remove, valor: MenuItemOption.excluir)
+  ];
 
   _menuSelect(MenuItemOption option, dynamic value) {
     switch (option) {
@@ -32,6 +43,8 @@ class RoundList extends StatelessWidget {
           selecionar(value);
           break;
         }
+      case MenuItemOption.visualizar:
+        break;
     }
   }
 
@@ -67,7 +80,11 @@ class RoundList extends StatelessWidget {
             subtitle: Text(
               "${TempoUtil.format(tr.tempo)} ${tr.descricao ?? ""}",
             ),
-            trailing: PopupMenu(select: _menuSelect, value: tr),
+            trailing: PopupMenu(
+              select: _menuSelect,
+              value: tr,
+              template: _opcoes,
+            ),
             leading: Text("${tr.id} ${tr.ordem}"),
             // trailing: IconButton(
             //   icon: const Icon(Icons.list),

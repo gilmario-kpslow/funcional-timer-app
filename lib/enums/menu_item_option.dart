@@ -1,1 +1,1 @@
-enum MenuItemOption { editar, excluir, selecionar }
+enum MenuItemOption { editar, excluir, selecionar, visualizar }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/formularios/round_form.dart';
 import 'package:funcional_timer_app/components/listas/raunds_lista.dart';
+import 'package:funcional_timer_app/components/outros/programa_form_service.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
 import 'package:funcional_timer_app/core/service/programacao_service.dart';
@@ -21,11 +22,30 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
   List<Round> lista = List.empty();
   String tempo = "";
   int selectedIndex = 0;
+  ProgramaFormService formService = ProgramaFormService();
+  Programacao? programacao;
 
   @override
   void initState() {
     super.initState();
     _getLista();
+    setState(() {
+      programacao = widget.programacao;
+    });
+  }
+
+  _cadastrarProgramacao() async {
+    formService.showFormDialog(context, _addProgramacao);
+  }
+
+  _addProgramacao(Programacao programa) async {
+    var p = service.get(programacao?.id);
+
+    setState(() {
+      programa = p;
+    });
+
+    Navigator.pop(context);
   }
 
   _getLista() async {
@@ -173,8 +193,11 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
       ),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text("Programa: ${programacao.nome}"),
+        title: Text(programacao.nome),
         primary: true,
+        actions: [
+          IconButton(onPressed: _cadastrarProgramacao, icon: Icon(Icons.edit)),
+        ],
       ),
       body: widgets[selectedIndex],
       floatingActionButton: FloatingActionButton(
