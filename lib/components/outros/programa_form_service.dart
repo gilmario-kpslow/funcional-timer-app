@@ -6,22 +6,19 @@ import 'package:funcional_timer_app/core/service/programacao_service.dart';
 class ProgramaFormService {
   ProgramacaoService service = ProgramacaoService();
 
-// Function(Programacao programa) callback;
-  showFormDialog(context, Function(Programacao programa) callBack) {
+  showFormDialog(context, Function callBack, Programacao? programacao) {
     showDialog(
         useSafeArea: false,
         context: context,
         builder: (ctx) {
-          return ProgramacaoForm((String nome, String descricao) async {
-            var p = await _addProgramacao(nome, descricao);
-            callBack(p);
-          });
+          return ProgramacaoForm((Programacao programacao) async {
+            await _addProgramacao(programacao);
+            callBack();
+          }, programacao);
         });
   }
 
-  Future<Programacao> _addProgramacao(String nome, String descricao) async {
-    final p = Programacao.basico(nome, descricao, STATUS_ATIVO);
+  _addProgramacao(Programacao p) async {
     await service.salvar(p);
-    return p;
   }
 }

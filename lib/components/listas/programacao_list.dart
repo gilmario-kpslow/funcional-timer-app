@@ -79,6 +79,8 @@ class ProgramacaoList extends StatelessWidget {
             trailing:
                 PopupMenu(select: _menuSelect, value: tr, template: _opcoes),
             leading: Text("${tr.id}"),
+            hoverColor: Color(Colors.amberAccent.value),
+            dense: false,
           );
         });
 

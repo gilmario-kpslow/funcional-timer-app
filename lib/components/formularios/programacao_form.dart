@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:funcional_timer_app/core/modelos/programacao.dart';
 
 class ProgramacaoForm extends StatefulWidget {
-  const ProgramacaoForm(this.onSubmit, {super.key});
+  final Programacao? programa;
+  const ProgramacaoForm(this.onSubmit, this.programa, {super.key});
 
-  final void Function(String, String) onSubmit;
+  final void Function(Programacao p) onSubmit;
 
   @override
   State<ProgramacaoForm> createState() => _ProgramacaoForm();
@@ -12,35 +14,62 @@ class ProgramacaoForm extends StatefulWidget {
 class _ProgramacaoForm extends State<ProgramacaoForm> {
   final _nomeController = TextEditingController();
   final _descricaoController = TextEditingController();
+  int id = 0;
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    _nomeController.text = widget.programa?.nome ?? "";
+    _descricaoController.text = widget.programa?.descricao ?? "";
+    id = widget.programa?.id ?? 0;
+  }
+
+  String? _defaultValidate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Campo obrigatório';
+    }
+    return null;
+  }
 
   _submitForm() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
     final nome = _nomeController.text;
     final descricao = _descricaoController.text;
 
-    if (nome.isEmpty || descricao.isEmpty) {
-      return;
-    }
+    var entity = Programacao(null, nome, descricao, STATUS_ATIVO);
 
-    widget.onSubmit(nome, descricao);
+    if (id != 0) {
+      entity.id = id;
+      // round.ordem = widget.round?.ordem;
+    }
+    widget.onSubmit(entity);
   }
 
   @override
   Widget build(BuildContext context) {
-    final form = Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        TextField(
-          decoration: const InputDecoration(labelText: "Nome"),
-          controller: _nomeController,
-        ),
-        TextField(
-          decoration: const InputDecoration(labelText: "Descrição"),
-          controller: _descricaoController,
-          minLines: 2,
-          maxLines: 4,
-        ),
-      ],
+    final form = Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(labelText: "Nome"),
+            controller: _nomeController,
+            validator: _defaultValidate,
+          ),
+          TextFormField(
+            decoration: const InputDecoration(labelText: "Descrição"),
+            controller: _descricaoController,
+            minLines: 2,
+            maxLines: 4,
+            validator: _defaultValidate,
+          ),
+        ],
+      ),
     );
 
     return AlertDialog(

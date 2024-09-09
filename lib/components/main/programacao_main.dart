@@ -33,7 +33,7 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
   }
 
   _cadastrarProgramacao() async {
-    formService.showFormDialog(context, _addProgramacao);
+    formService.showFormDialog(context, _addProgramacao, null);
   }
 
   _addProgramacao(Programacao programa) async {

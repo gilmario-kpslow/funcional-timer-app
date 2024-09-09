@@ -34,15 +34,15 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
     });
   }
 
-  _cadastrarProgramacao() async {
-    formService.showFormDialog(context, _addProgramacao);
+  _editarProgramacao() async {
+    formService.showFormDialog(context, _addProgramacao, programacao);
   }
 
-  _addProgramacao(Programacao programa) async {
-    var p = service.get(programacao?.id);
+  _addProgramacao() async {
+    var p = await service.get(programacao?.id);
 
     setState(() {
-      programa = p;
+      programacao = p;
     });
 
     Navigator.pop(context);
@@ -130,7 +130,7 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
 
   @override
   Widget build(BuildContext context) {
-    Programacao programacao = widget.programacao;
+    // Programacao programacao = widget.programacao;
 
     var status = SizedBox(
       width: double.infinity,
@@ -145,10 +145,10 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   DadoPrograma(
-                    texto: "Status: ${programacao.status}",
+                    texto: "Status: ${programacao?.status}",
                   ),
                   DadoPrograma(
-                    texto: "Descrição: ${programacao.descricao}",
+                    texto: "Descrição: ${programacao?.descricao}",
                   ),
                   DadoPrograma(
                     texto: "Número de Rounds: ${lista.length}",
@@ -193,10 +193,11 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
       ),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(programacao.nome),
+        title: Text(programacao?.nome ?? ""),
         primary: true,
         actions: [
-          IconButton(onPressed: _cadastrarProgramacao, icon: Icon(Icons.edit)),
+          IconButton(
+              onPressed: _editarProgramacao, icon: const Icon(Icons.edit)),
         ],
       ),
       body: widgets[selectedIndex],

@@ -3,7 +3,7 @@ class TempoUtil {
     var minuto = "${(tempo / 60).floor()}";
     var segundos = "${tempo % 60}";
 
-    return "${minuto.padLeft(2, "0")}:${segundos.padLeft(2, "0")}";
+    return "$minuto:${segundos.padLeft(2, "0")}";
   }
 
   static int parse(String tempo) {
