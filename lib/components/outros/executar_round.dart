@@ -7,6 +7,7 @@ import 'package:funcional_timer_app/core/modelos/programacao.dart';
 import 'package:funcional_timer_app/core/modelos/round.dart';
 import 'package:funcional_timer_app/core/service/programacao_service.dart';
 import 'package:funcional_timer_app/core/service/round_service.dart';
+import 'package:funcional_timer_app/core/util/somutil.dart';
 
 class ExecutarRound extends StatefulWidget {
   final Programacao programacao;
@@ -25,6 +26,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   int _tempo = 0;
   bool _ativo = false;
   Timer? timer;
+  SomUtil? _player;
 
   @override
   void initState() {
@@ -34,6 +36,8 @@ class _ExecutarRoundState extends State<ExecutarRound> {
         _rounds = lista;
         _selecionado = lista[0];
         _tempo = _selecionado?.tempo ?? 0;
+        _player = SomUtil();
+        _player?.init();
       });
     });
   }
@@ -70,6 +74,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     }
     _ativo = true;
     timer = Timer.periodic(const Duration(seconds: 1), _relogio);
+    _player?.play();
   }
 
   _voltar() {
