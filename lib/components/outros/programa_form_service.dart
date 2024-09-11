@@ -13,7 +13,7 @@ class ProgramaFormService {
         builder: (ctx) {
           return ProgramacaoForm((Programacao programacao) async {
             await _addProgramacao(programacao);
-            callBack();
+            await callBack();
           }, programacao);
         });
   }

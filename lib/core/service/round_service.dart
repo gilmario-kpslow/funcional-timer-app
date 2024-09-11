@@ -61,4 +61,9 @@ class RoundService {
     final db = await DatabaseUtil.getDatabase();
     await db.delete(table, where: 'id= ?', whereArgs: [id]);
   }
+
+  deleteByPrograma(int? id) async {
+    final db = await DatabaseUtil.getDatabase();
+    await db.delete(table, where: "programacao_id=?", whereArgs: [id]);
+  }
 }

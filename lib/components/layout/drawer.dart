@@ -18,8 +18,12 @@ class DefaultDrawer extends StatelessWidget {
       child: ListView(
         children: [
           const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Text("Funcional APP")),
+            decoration: BoxDecoration(color: Colors.indigoAccent),
+            child: Text(
+              "Funcional Timer",
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            ),
+          ),
           ListTile(
             title: const Text("Home"),
             selected: index == 0,

@@ -36,7 +36,7 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
     formService.showFormDialog(context, _addProgramacao, null);
   }
 
-  _addProgramacao(Programacao programa) async {
+  _addProgramacao() async {
     var list = await service.getLista();
 
     setState(() {
@@ -46,22 +46,51 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
     Navigator.pop(context);
   }
 
+  _editar(Programacao entity) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => ProgramaMain(entity)));
+  }
+
+  _selecionar(Programacao entity) {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ExecutarRound(entity)));
+  }
+
+  _remover(Programacao entity) {
+    showDialog(
+      useSafeArea: true,
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          title: const Text("Remover Registro"),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: [Text("Remover o rograma")],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("Cancelar"),
+            ),
+            TextButton(
+              onPressed: () {
+                service.delete(entity.id);
+                _getLista();
+                Navigator.pop(context);
+              },
+              child: const Text("Confirmar"),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     ProgramacaoList programacoes =
-        ProgramacaoList(lista, (id) {}, (Programacao entity) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ProgramaMain(entity)),
-      );
-    }, (Programacao entity) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => ExecutarRound(entity)),
-      );
-    });
-
-    _getLista();
+        ProgramacaoList(lista, _remover, _editar, _selecionar);
 
     return Scaffold(
       appBar: AppBar(

@@ -41,11 +41,11 @@ class _HomeMainState extends State<HomeMain> {
       ),
       body: widgetOptions[_selectedIndex],
       drawer: DefaultDrawer(_onItemTapped, index: _selectedIndex),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Incrementar',
-        child: const Icon(Icons.add),
-      ),
+      //floatingActionButton: FloatingActionButton(
+      //  onPressed: () {},
+      //  tooltip: 'Incrementar',
+      //child: const Icon(Icons.add),
+      //),
     );
   }
 }

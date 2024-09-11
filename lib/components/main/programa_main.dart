@@ -86,16 +86,16 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
             ),
             actions: <Widget>[
               TextButton(
-                child: const Text('Confirmar'),
+                child: const Text('Cancelar'),
                 onPressed: () {
-                  roudeService.delete(round.id);
-                  _getLista();
                   Navigator.pop(context);
                 },
               ),
               TextButton(
-                child: const Text('Cancelar'),
+                child: const Text('Confirmar'),
                 onPressed: () {
+                  roudeService.delete(round.id);
+                  _getLista();
                   Navigator.pop(context);
                 },
               ),

@@ -10,7 +10,7 @@ class ProgramacaoList extends StatelessWidget {
       {super.key});
 
   final List<Programacao> programacoes;
-  final Function(int id) delete;
+  final Function(Programacao entity) delete;
   final Function(Programacao entity) editar;
   final Function(Programacao entity) selecionar;
   static const List<MenuTemplate> _opcoes = [
@@ -35,7 +35,7 @@ class ProgramacaoList extends StatelessWidget {
         }
       case MenuItemOption.excluir:
         {
-          delete(value.id);
+          delete(value);
           break;
         }
       case MenuItemOption.selecionar:

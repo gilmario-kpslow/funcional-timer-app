@@ -1,8 +1,11 @@
 import 'package:funcional_timer_app/core/database/databaseutil.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
+import 'package:funcional_timer_app/core/service/round_service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProgramacaoService {
+  RoundService roundService = RoundService();
+
   get(int? id) async {
     final db = await DatabaseUtil.getDatabase();
     var m = await db.query('programacao', where: "id =?", whereArgs: [id]);
@@ -25,5 +28,11 @@ class ProgramacaoService {
     return lista.map((Map<String, dynamic> m) {
       return Programacao(0, "", "", "").fromMap(m);
     }).toList();
+  }
+
+  delete(int? id) async {
+    final db = await DatabaseUtil.getDatabase();
+    await roundService.deleteByPrograma(id);
+    await db.delete("programacao", where: "id=?", whereArgs: [id]);
   }
 }

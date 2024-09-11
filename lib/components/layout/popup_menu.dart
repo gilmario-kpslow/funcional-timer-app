@@ -18,10 +18,15 @@ class PopupMenu extends StatelessWidget {
     return PopupMenuButton(
       onSelected: (option) => select(option, value),
       itemBuilder: (BuildContext context) => template
-          .map((item) => PopupMenuItem(
+          .map(
+            (item) => PopupMenuItem(
               value: item.valor,
               child: ListTile(
-                  title: Text(item.titulo), leading: Icon(item.icone))))
+                title: Text(item.titulo),
+                leading: Icon(item.icone),
+              ),
+            ),
+          )
           .toList() as List<PopupMenuItem>,
     );
   }

@@ -18,9 +18,11 @@ class DatabaseUtil {
       'CREATE TABLE PROGRAMACAO(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT, status TEXT)',
     );
     await db.execute(
-      'CREATE TABLE ROUND( ' +
-          ' id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL, delayTermino INTEGER, somTermino boolean, somInicio boolean, ordem INTEGER not null)',
+      'CREATE TABLE ROUND( id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL, delayTermino INTEGER, somTermino boolean, somInicio boolean, ordem INTEGER not null)',
     );
+
+    //await db.execute(
+    //'CREATE TABLE PROGRAMACAO_HISTORICO id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, data_execucao DATETIME NOT NULL)');
   }
 
   static Future<void> removerBanco() async {

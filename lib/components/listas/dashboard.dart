@@ -5,6 +5,13 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Dashboard - Colocar ultimos Programas executados");
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      //mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text("Dashboard - Colocar ultimos"),
+        Text("data"),
+      ],
+    );
   }
 }
