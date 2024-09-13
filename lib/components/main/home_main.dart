@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/formularios/round_form.dart';
-import 'package:funcional_timer_app/components/layout/drawer.dart';
-import 'package:funcional_timer_app/components/listas/dashboard.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
-import 'package:funcional_timer_app/core/modelos/round.dart';
-import 'package:funcional_timer_app/core/service/programacao_service.dart';
+import 'package:cristimer/components/formularios/round_form.dart';
+import 'package:cristimer/components/layout/drawer.dart';
+import 'package:cristimer/components/listas/dashboard.dart';
+import 'package:cristimer/core/modelos/programacao.dart';
+import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/service/programacao_service.dart';
 
 class HomeMain extends StatefulWidget {
   const HomeMain({super.key});

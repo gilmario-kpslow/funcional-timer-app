@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:funcional_timer_app/core/modelos/round.dart';
-import 'package:funcional_timer_app/core/util/mask.dart';
-import 'package:funcional_timer_app/core/util/tempoutil.dart';
+import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/util/mask.dart';
+import 'package:cristimer/core/util/tempoutil.dart';
 
 class RoundForm extends StatefulWidget {
   final void Function(Round round) onSubmit;

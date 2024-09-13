@@ -1,4 +1,4 @@
-import 'package:funcional_timer_app/core/modelos/entity.dart';
+import 'package:cristimer/core/modelos/entity.dart';
 
 class Programacao extends Entity<Programacao> {
   final String nome;

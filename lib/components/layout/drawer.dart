@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/main/programacao_main.dart';
-import 'package:funcional_timer_app/components/outros/configuracao.dart';
+import 'package:cristimer/components/main/programacao_main.dart';
+import 'package:cristimer/components/outros/configuracao.dart';
 
 class DefaultDrawer extends StatelessWidget {
   final index = 0;

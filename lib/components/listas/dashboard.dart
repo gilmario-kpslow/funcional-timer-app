@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:funcional_timer_app/components/main/programacao_main.dart';
-import 'package:path/path.dart';
+// import 'package:flutter/widgets.dart';
+import 'package:cristimer/components/main/programacao_main.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});

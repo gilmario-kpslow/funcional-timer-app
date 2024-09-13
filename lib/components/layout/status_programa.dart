@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
-import 'package:funcional_timer_app/core/modelos/round.dart';
+import 'package:cristimer/core/modelos/programacao.dart';
+import 'package:cristimer/core/modelos/round.dart';
 
 class StatusPrograma extends StatelessWidget {
   const StatusPrograma({

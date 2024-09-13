@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/layout/contador_tempo.dart';
-import 'package:funcional_timer_app/components/layout/round_botao.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
-import 'package:funcional_timer_app/core/modelos/round.dart';
-import 'package:funcional_timer_app/core/service/programacao_service.dart';
-import 'package:funcional_timer_app/core/service/round_service.dart';
-import 'package:funcional_timer_app/core/util/somutil.dart';
+import 'package:cristimer/components/layout/contador_tempo.dart';
+import 'package:cristimer/components/layout/round_botao.dart';
+import 'package:cristimer/core/modelos/programacao.dart';
+import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/service/programacao_service.dart';
+import 'package:cristimer/core/service/round_service.dart';
+import 'package:cristimer/core/util/somutil.dart';
 
 class ExecutarRound extends StatefulWidget {
   final Programacao programacao;

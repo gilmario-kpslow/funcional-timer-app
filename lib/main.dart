@@ -1,7 +1,5 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/main/home_main.dart';
+import 'package:cristimer/components/main/home_main.dart';
 
 void main() {
   runApp(const MyApp());

@@ -1,4 +1,4 @@
-import 'package:funcional_timer_app/core/modelos/entity.dart';
+import 'package:cristimer/core/modelos/entity.dart';
 
 class Round extends Entity<Round> {
   int? id;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/layout/popup_menu.dart';
-import 'package:funcional_timer_app/components/outros/menu_template.dart';
-import 'package:funcional_timer_app/core/modelos/round.dart';
-import 'package:funcional_timer_app/core/util/tempoutil.dart';
-import 'package:funcional_timer_app/enums/menu_item_option.dart';
+import 'package:cristimer/components/layout/popup_menu.dart';
+import 'package:cristimer/components/outros/menu_template.dart';
+import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/util/tempoutil.dart';
+import 'package:cristimer/enums/menu_item_option.dart';
 
 class RoundList extends StatelessWidget {
   const RoundList(

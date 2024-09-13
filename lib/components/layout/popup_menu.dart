@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/outros/menu_template.dart';
-import 'package:funcional_timer_app/enums/menu_item_option.dart';
+import 'package:cristimer/components/outros/menu_template.dart';
+import 'package:cristimer/enums/menu_item_option.dart';
 
 class PopupMenu extends StatelessWidget {
   final void Function(MenuItemOption option, dynamic value) select;

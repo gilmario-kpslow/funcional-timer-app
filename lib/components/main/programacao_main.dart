@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/components/formularios/programacao_form.dart';
-import 'package:funcional_timer_app/components/listas/programacao_list.dart';
-import 'package:funcional_timer_app/components/main/programa_main.dart';
-import 'package:funcional_timer_app/components/outros/executar_round.dart';
-import 'package:funcional_timer_app/components/outros/programa_form_service.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
-import 'package:funcional_timer_app/core/service/programacao_service.dart';
+import 'package:cristimer/components/listas/programacao_list.dart';
+import 'package:cristimer/components/main/programa_main.dart';
+import 'package:cristimer/components/outros/executar_round.dart';
+import 'package:cristimer/components/outros/programa_form_service.dart';
+import 'package:cristimer/core/modelos/programacao.dart';
+import 'package:cristimer/core/service/programacao_service.dart';
 
 class ProgramacaoMain extends StatefulWidget {
   const ProgramacaoMain({super.key});

@@ -1,8 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
-// import 'dart:async';
 
 class SomUtil {
-  AudioPlayer _player = AudioPlayer();
+  final AudioPlayer _player = AudioPlayer();
 
   init() async {
     _player.setReleaseMode(ReleaseMode.stop);

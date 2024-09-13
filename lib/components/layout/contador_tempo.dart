@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/core/util/tempoutil.dart';
+import 'package:cristimer/core/util/tempoutil.dart';
 
 class ContadorTempo extends StatelessWidget {
   final int tempo;

@@ -1,6 +1,6 @@
-import 'package:funcional_timer_app/core/database/databaseutil.dart';
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
-import 'package:funcional_timer_app/core/service/round_service.dart';
+import 'package:cristimer/core/database/databaseutil.dart';
+import 'package:cristimer/core/modelos/programacao.dart';
+import 'package:cristimer/core/service/round_service.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ProgramacaoService {

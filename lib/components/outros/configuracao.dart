@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:funcional_timer_app/core/util/mensagem.dart';
-import 'package:funcional_timer_app/core/database/databaseutil.dart';
+import 'package:cristimer/core/util/mensagem.dart';
+import 'package:cristimer/core/database/databaseutil.dart';
 
 class Configuracao extends StatelessWidget {
   const Configuracao({super.key});
 
-  // final _tabelaController = TextEditingController();
-
   _criarBanco(BuildContext context) async {
     try {
       await DatabaseUtil.recriarBanco();
-      Notificacao.info(context, "Banco recriando com sucesso!");
+      if (context.mounted) {
+        Notificacao.info(context, "Banco recriando com sucesso!");
+      }
     } catch (e) {
-      Notificacao.error(context, "Erro: $e");
+      if (context.mounted) {
+        Notificacao.error(context, "Erro: $e");
+      }
     }
   }
 

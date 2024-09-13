@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:funcional_timer_app/core/modelos/programacao.dart';
+import 'package:cristimer/core/modelos/programacao.dart';
 
 void main() {
   // Programacao p = Programacao("nome", "descricao", 10);

@@ -1,5 +1,5 @@
-import 'package:funcional_timer_app/core/database/databaseutil.dart';
-import 'package:funcional_timer_app/core/modelos/round.dart';
+import 'package:cristimer/core/database/databaseutil.dart';
+import 'package:cristimer/core/modelos/round.dart';
 import 'package:sqflite/sqflite.dart';
 
 class RoundService {
