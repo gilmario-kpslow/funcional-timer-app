@@ -7,7 +7,10 @@ import 'package:cristimer/core/util/tempoutil.dart';
 class RoundForm extends StatefulWidget {
   final void Function(Round round) onSubmit;
   final Round? round;
-  const RoundForm(this.onSubmit, this.round, {super.key});
+  final bool pausa;
+  const RoundForm(this.onSubmit, this.round, {super.key, this.pausa = false});
+  const RoundForm.pausa(this.onSubmit,
+      {super.key, this.round, this.pausa = true});
 
   @override
   State<RoundForm> createState() => _RoundForm();

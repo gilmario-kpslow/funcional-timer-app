@@ -40,13 +40,12 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
   }
 
   _addProgramacao() async {
+    Navigator.pop(context);
     var p = await service.get(programacao?.id);
 
     setState(() {
       programacao = p;
     });
-
-    Navigator.pop(context);
   }
 
   _getLista() async {
@@ -68,6 +67,15 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
         context: context,
         builder: (ctx) {
           return RoundForm(_addRound, round);
+        });
+  }
+
+  _cadastrarPausa() async {
+    showDialog(
+        useSafeArea: true,
+        context: context,
+        builder: (ctx) {
+          return RoundForm.pausa(_addRound);
         });
   }
 
@@ -109,10 +117,11 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
     Programacao programacao = widget.programacao;
     round.programacaoId = programacao.id;
 
+    Navigator.pop(context);
+
     await roudeService.salvar(round);
 
     await _getLista();
-    Navigator.pop(context);
   }
 
   _reorderRounds(int oldOrder, int newOrder) async {
@@ -165,6 +174,11 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
         title: Text(programacao?.nome ?? ""),
         primary: true,
         actions: [
+          IconButton(
+            onPressed: () => _cadastrarPausa,
+            icon: const Icon(Icons.add_box),
+            tooltip: "Adicionar Pausa",
+          ),
           IconButton(
               onPressed: _editarProgramacao, icon: const Icon(Icons.edit)),
         ],
