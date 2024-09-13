@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:funcional_timer_app/components/formularios/round_form.dart';
+import 'package:funcional_timer_app/components/layout/status_programa.dart';
 import 'package:funcional_timer_app/components/listas/raunds_lista.dart';
 import 'package:funcional_timer_app/components/outros/programa_form_service.dart';
 import 'package:funcional_timer_app/core/modelos/programacao.dart';
@@ -130,40 +131,8 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
 
   @override
   Widget build(BuildContext context) {
-    // Programacao programacao = widget.programacao;
-
-    var status = SizedBox(
-      width: double.infinity,
-      child: Column(
-        children: [
-          Card(
-            margin: const EdgeInsets.all(10),
-            elevation: 3,
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  DadoPrograma(
-                    texto: "Status: ${programacao?.status}",
-                  ),
-                  DadoPrograma(
-                    texto: "Descrição: ${programacao?.descricao}",
-                  ),
-                  DadoPrograma(
-                    texto: "Número de Rounds: ${lista.length}",
-                  ),
-                  Text(
-                    "Duração: $tempo",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    var status =
+        StatusPrograma(programacao: programacao, lista: lista, tempo: tempo);
 
     RoundList consulta = RoundList(
         lista, _removeRound, _cadastrarRound, _selecionaRound, _reorderRounds);
@@ -205,25 +174,6 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
         onPressed: () => _cadastrarRound(null),
         tooltip: 'Novo',
         child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
-
-class DadoPrograma extends StatelessWidget {
-  final String texto;
-  const DadoPrograma({
-    super.key,
-    required this.texto,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Text(
-        texto,
-        style: Theme.of(context).textTheme.bodyLarge,
       ),
     );
   }
