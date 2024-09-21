@@ -18,7 +18,7 @@ class DatabaseUtil {
       'CREATE TABLE PROGRAMACAO(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT, status TEXT)',
     );
     await db.execute(
-      'CREATE TABLE ROUND( id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL, delayTermino INTEGER, somTermino boolean, somInicio boolean, ordem INTEGER not null)',
+      'CREATE TABLE ROUND( id INTEGER PRIMARY KEY AUTOINCREMENT, programacao_id INTEGER NOT NULL, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL, delay_termino INTEGER DEFAULT 0, delay_inicio INTEGER DEFAULT 0, som_inicio TEXT, som_pre_termino TEXT, som_termino TEXT, ordem INTEGER not null)',
     );
 
     //await db.execute(

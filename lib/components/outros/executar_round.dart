@@ -37,7 +37,6 @@ class _ExecutarRoundState extends State<ExecutarRound> {
         _selecionado = lista[0];
         _tempo = _selecionado?.tempo ?? 0;
         _player = SomUtil();
-        _player?.init();
       });
     });
   }
@@ -50,12 +49,23 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       return;
     }
 
+    if (_tempo == _selecionado?.delayTermino) {
+      _player?.play(_selecionado?.somPreTermino);
+    }
+
     if (_tempo > 0) {
       setState(() {
         _tempo--;
       });
     } else if (_index < _rounds.length - 1) {
       _avancar();
+    }
+
+    if (_tempo == 0) {
+      timer.cancel();
+      setState(() {
+        _ativo = false;
+      });
     }
   }
 
@@ -65,16 +75,20 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       _selecionado = _rounds[_index];
       _tempo = _selecionado?.tempo ?? 0;
     });
+    if (_ativo) {
+      _player?.play(_selecionado?.somInicio);
+    }
   }
 
   _iniciar() {
-    print("${timer?.isActive}, ${_ativo}");
     if (_ativo) {
       return;
     }
-    _ativo = true;
+    setState(() {
+      _ativo = true;
+    });
     timer = Timer.periodic(const Duration(seconds: 1), _relogio);
-    _player?.play();
+    _player?.play(_selecionado?.somInicio);
   }
 
   _voltar() {
@@ -84,12 +98,14 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   }
 
   _pausar() {
-    _ativo = false;
+    setState(() {
+      _ativo = false;
+    });
   }
 
   _parar() {
-    _ativo = false;
     setState(() {
+      _ativo = false;
       _tempo = _selecionado?.tempo ?? 0;
     });
   }
@@ -98,6 +114,28 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     if (_index < _rounds.length - 1) {
       _reposicionar(1);
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    timer?.cancel();
+  }
+
+  _buttonPlay() {
+    return !_ativo
+        ? TextButton(
+            onPressed: _iniciar,
+            child: const Icon(
+              Icons.play_arrow,
+              size: 40,
+            ))
+        : TextButton(
+            onPressed: _pausar,
+            child: const Icon(
+              Icons.pause,
+              size: 40,
+            ));
   }
 
   @override
@@ -120,6 +158,13 @@ class _ExecutarRoundState extends State<ExecutarRound> {
             style: const TextStyle(
                 fontSize: 50, color: Colors.blue, fontWeight: FontWeight.bold),
             _selecionado?.nome ?? ""),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Text(
+            "${_selecionado?.descricao}",
+            style: const TextStyle(fontSize: 20),
+          ),
+        ),
         ContadorTempo(tempo: _tempo)
       ],
     );
@@ -134,18 +179,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
               Icons.arrow_back,
               size: 40,
             )),
-        TextButton(
-            onPressed: _iniciar,
-            child: const Icon(
-              Icons.play_arrow,
-              size: 40,
-            )),
-        TextButton(
-            onPressed: _pausar,
-            child: const Icon(
-              Icons.pause,
-              size: 40,
-            )),
+        _buttonPlay(),
         TextButton(
             onPressed: _parar,
             child: const Icon(
@@ -167,6 +201,9 @@ class _ExecutarRoundState extends State<ExecutarRound> {
           itemBuilder: (context, index) {
             var r = _rounds[index];
             return ListTile(
+              tileColor: Color(120),
+              selected: true,
+              dense: false,
               title: Text(
                 r.nome,
                 style: Theme.of(context).textTheme.titleLarge,
@@ -186,10 +223,11 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.programacao.nome),
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [botoes, round, lista],
+        children: [round, lista],
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.amber,

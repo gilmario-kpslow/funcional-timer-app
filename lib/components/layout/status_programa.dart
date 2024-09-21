@@ -14,6 +14,22 @@ class StatusPrograma extends StatelessWidget {
   final List<Round> lista;
   final String tempo;
 
+  _info(String titulo, String valor) {
+    return Container(
+      decoration:
+          const BoxDecoration(border: Border(bottom: BorderSide(width: 0.1))),
+      child: ListTile(
+        dense: false,
+        leading: const Icon(Icons.arrow_right),
+        title: Text(titulo),
+        trailing: Text(
+          valor,
+          style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,33 +41,10 @@ class StatusPrograma extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ListTile(
-                //   leading: const Text("Descrição"),
-                //   // title: const Text("Descrição"),
-                //   title: Text("${programacao?.descricao}"),
-                // ),
-                // ListTile(
-                //   title: const Text("Status"),
-                //   trailing: Text("${programacao?.status}"),
-                // ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Status"), Text("Outro")],
-                ),
-                DadoPrograma(
-                  texto: "Status: ${programacao?.status}",
-                ),
-                DadoPrograma(
-                  texto: "Descrição: ${programacao?.descricao}",
-                ),
-                DadoPrograma(
-                  texto: "Número de Rounds: ${lista.length}",
-                ),
-                Text(
-                  "Duração: $tempo",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
+                _info("Nome", programacao?.nome ?? ""),
+                _info("Descrição", programacao?.descricao ?? ""),
+                _info("Rounds", "${lista.length}"),
+                _info("Duração", tempo),
               ],
             ),
           ),

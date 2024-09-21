@@ -78,14 +78,16 @@ class RoundList extends StatelessWidget {
               style: Theme.of(context).textTheme.titleLarge,
             ),
             subtitle: Text(
-              "${TempoUtil.format(tr.tempo)} ${tr.descricao ?? ""}",
+              "${TempoUtil.format(tr.tempo)} ${tr.descricao}",
             ),
             trailing: PopupMenu(
               select: _menuSelect,
               value: tr,
               template: _opcoes,
             ),
-            leading: Text("${tr.id} ${tr.ordem}"),
+            leading: tr.nome == 'Pausa'
+                ? const Icon(Icons.pause)
+                : const Icon(Icons.play_arrow_outlined),
             // trailing: IconButton(
             //   icon: const Icon(Icons.list),
             //   onPressed: () {

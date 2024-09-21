@@ -62,7 +62,17 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/audio/sino01.mp3
+    - assets/audio/toque01.mp3
+    - assets/audio/toque02.mp3
+    - assets/audio/toque03.mp3
+    - assets/audio/toque04.mp3
+    - assets/audio/toque05.mp3
+    - assets/audio/toque06.ogg
+    - assets/audio/toque07.mp3
+    - assets/audio/toque08.mp3
+    - assets/audio/toque09.mp3
+    - assets/audio/toque10.mp3
+    - assets/audio/toque11.mp3
 
   # To add assets to your application, add an assets section, like this:
   # assets:

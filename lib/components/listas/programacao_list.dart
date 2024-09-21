@@ -19,9 +19,7 @@ class ProgramacaoList extends StatelessWidget {
         titulo: "Selecionar",
         valor: MenuItemOption.selecionar),
     MenuTemplate(
-        titulo: "Visualizar",
-        icone: Icons.remove_red_eye,
-        valor: MenuItemOption.visualizar),
+        titulo: "Editar", icone: Icons.edit, valor: MenuItemOption.visualizar),
     MenuTemplate(
         titulo: "Excluir", icone: Icons.remove, valor: MenuItemOption.excluir),
   ];

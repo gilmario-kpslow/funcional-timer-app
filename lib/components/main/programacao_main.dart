@@ -36,13 +36,12 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
   }
 
   _addProgramacao() async {
+    Navigator.pop(context);
     var list = await service.getLista();
 
     setState(() {
       lista = list;
     });
-
-    Navigator.pop(context);
   }
 
   _editar(Programacao entity) {
@@ -70,15 +69,22 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text("Cancelar"),
+              child: const Text(
+                "Cancelar",
+                style: TextStyle(color: Colors.redAccent),
+              ),
             ),
             TextButton(
-              onPressed: () {
-                service.delete(entity.id);
-                _getLista();
+              style: ButtonStyle(),
+              onPressed: () async {
                 Navigator.pop(context);
+                await service.delete(entity.id);
+                _getLista();
               },
-              child: const Text("Confirmar"),
+              child: const Text(
+                "Confirmar",
+                style: TextStyle(color: Colors.green),
+              ),
             ),
           ],
         );

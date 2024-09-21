@@ -7,7 +7,7 @@ class RoundService {
 
   salvar(Round entity) async {
     final db = await DatabaseUtil.getDatabase();
-    if (entity.ordem == null || entity.ordem == 0) {
+    if (entity.ordem == 0) {
       var ordem = await getOrder(entity.programacaoId);
 
       if (ordem.first.row[0] == null) {
@@ -16,6 +16,8 @@ class RoundService {
         entity.ordem = ordem.first.row[0] + 1;
       }
     }
+    print(entity.toMap());
+
     await db.insert(
       table,
       entity.toMap(),
@@ -29,13 +31,7 @@ class RoundService {
         orderBy: "ordem", where: "programacao_id=?", whereArgs: [idPrograma]);
 
     return lista.map((Map<String, dynamic> m) {
-      return Round.basico(
-              nome: "",
-              somInicio: false,
-              tempo: 0,
-              delayTermino: 0,
-              somTermino: false)
-          .fromMap(m);
+      return Round.fromMap(m);
     }).toList();
   }
 

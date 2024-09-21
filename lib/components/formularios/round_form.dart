@@ -1,3 +1,4 @@
+import 'package:cristimer/components/layout/seleciona_som.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cristimer/core/modelos/round.dart';
@@ -21,8 +22,10 @@ class _RoundForm extends State<RoundForm> {
   final _tempoController = TextEditingController();
   final _delayController = TextEditingController();
   final _descricaoController = TextEditingController();
-  bool somInicio = false;
-  bool somTermino = false;
+  final _somInicioController = TextEditingController();
+  final _somPreTerminoController = TextEditingController();
+  final _somTerminoController = TextEditingController();
+
   int id = 0;
 
   @override
@@ -31,34 +34,17 @@ class _RoundForm extends State<RoundForm> {
     _init();
   }
 
-  void _changeSom(bool? value) {
-    if (value == null) {
-      return;
-    }
-
-    setState(() {
-      somInicio = value;
-    });
-  }
-
   _init() {
+    print(widget.round?.somInicio);
     _nomeController.text = widget.round?.nome ?? "";
     _tempoController.text = TempoUtil.format(widget.round?.tempo ?? 0);
     _delayController.text = TempoUtil.format(widget.round?.delayTermino ?? 0);
     _descricaoController.text = widget.round?.descricao ?? "";
-    somInicio = widget.round?.somInicio ?? false;
-    somTermino = widget.round?.somTermino ?? false;
+    _somInicioController.text = widget.round?.somInicio ?? "";
+    _somPreTerminoController.text = widget.round?.somPreTermino ?? "";
+    _somTerminoController.text = widget.round?.somTermino ?? "";
+
     id = widget.round?.id ?? 0;
-  }
-
-  void _changeSomTermino(bool? value) {
-    if (value == null) {
-      return;
-    }
-
-    setState(() {
-      somTermino = value;
-    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -71,6 +57,19 @@ class _RoundForm extends State<RoundForm> {
   }
 
   _submitForm() {
+    if (widget.pausa) {
+      final tempo = TempoUtil.parse(_tempoController.text);
+      Round round = Round.basico(
+        nome: "Pausa",
+        descricao: "Pausa",
+        tempo: tempo,
+      );
+
+      widget.onSubmit(round);
+
+      return;
+    }
+
     if (!_formKey.currentState!.validate()) {
       return;
     }
@@ -79,24 +78,24 @@ class _RoundForm extends State<RoundForm> {
     final descricao = _descricaoController.text;
     final tempo = TempoUtil.parse(_tempoController.text);
     final delay = TempoUtil.parse(_delayController.text);
-
-    if (nome.isEmpty || tempo <= 0) {
-      return;
-    }
+    final somInicio = _somInicioController.text;
+    final somPreTermino = _somPreTerminoController.text;
+    final somTermino = _somTerminoController.text;
 
     Round round = Round.basico(
-        nome: nome,
-        descricao: descricao,
-        tempo: tempo,
-        somInicio: somInicio,
-        delayTermino: delay,
-        somTermino: somTermino);
+      nome: nome,
+      descricao: descricao,
+      tempo: tempo,
+      somInicio: somInicio,
+      somPreTermino: somPreTermino,
+      somTermino: somTermino,
+      delayTermino: delay,
+    );
 
     if (id != 0) {
       round.id = id;
-      round.ordem = widget.round?.ordem;
+      round.ordem = widget.round?.ordem ?? 0;
     }
-
     widget.onSubmit(round);
   }
 
@@ -134,41 +133,57 @@ class _RoundForm extends State<RoundForm> {
               )
             ],
           ),
-          Row(
-            children: [
-              Checkbox(
-                value: somInicio,
-                onChanged: _changeSom,
-              ),
-              const Text("Tocam som no início"),
+          TextFormField(
+            controller: _delayController,
+            decoration: const InputDecoration(labelText: "Delay termino (s)"),
+            keyboardType: TextInputType.number,
+            inputFormatters: [
+              TextInputFormatter.withFunction(
+                (oldValue, newValue) {
+                  return TextEditingValue(
+                    text: maskTime(newValue.text),
+                  );
+                },
+              )
             ],
           ),
-          Row(
-            children: [
-              Checkbox(
-                value: somTermino,
-                onChanged: _changeSomTermino,
-              ),
-              const Text("Tocar Som ao término"),
+          SelecionaSom(
+            label: "Som inicio",
+            controller: _somInicioController,
+          ),
+          SelecionaSom(
+            label: "Som pre termino",
+            controller: _somPreTerminoController,
+          ),
+          SelecionaSom(
+            label: "Som termino",
+            controller: _somTerminoController,
+          ),
+        ],
+      ),
+    );
+
+    final formBasico = Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          TextFormField(
+            controller: _tempoController,
+            decoration: const InputDecoration(labelText: "Tempo"),
+            keyboardType: TextInputType.number,
+            validator: _defaultValidate,
+            inputFormatters: [
+              TextInputFormatter.withFunction(
+                (oldValue, newValue) {
+                  return TextEditingValue(
+                    text: maskTime(newValue.text),
+                  );
+                },
+              )
             ],
           ),
-          somTermino
-              ? TextFormField(
-                  controller: _delayController,
-                  decoration:
-                      const InputDecoration(labelText: "Delay termino (s)"),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [
-                    TextInputFormatter.withFunction(
-                      (oldValue, newValue) {
-                        return TextEditingValue(
-                          text: maskTime(newValue.text),
-                        );
-                      },
-                    )
-                  ],
-                )
-              : Container()
         ],
       ),
     );
@@ -178,12 +193,12 @@ class _RoundForm extends State<RoundForm> {
       title: Container(
         width: 350,
         alignment: Alignment.center,
-        child: const Text(
-          "Criar Round",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        child: Text(
+          widget.pausa ? "Criar Pausa" : "Criar Round",
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
-      content: form,
+      content: widget.pausa ? formBasico : form,
       actions: <Widget>[
         TextButton(
           onPressed: () => Navigator.pop(context),

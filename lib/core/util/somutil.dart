@@ -3,13 +3,23 @@ import 'package:audioplayers/audioplayers.dart';
 class SomUtil {
   final AudioPlayer _player = AudioPlayer();
 
-  init() async {
+  SomUtil() {
     _player.setReleaseMode(ReleaseMode.stop);
-    await _player.setSource(AssetSource('audio/sino01.mp3'));
   }
 
-  play() async {
-    await _player.setSource(AssetSource('audio/sino01.mp3'));
+  play(String? source) async {
+    if (source == null || source == "") {
+      return;
+    }
+    await _player.setSource(AssetSource(source));
     await _player.resume();
+  }
+
+  pause() async {
+    await _player.pause();
+  }
+
+  stop() async {
+    await _player.stop();
   }
 }

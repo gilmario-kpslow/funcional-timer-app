@@ -1,3 +1,5 @@
+import 'package:cristimer/components/main/configuracao_programa.dart';
+// import 'package:cristimer/components/outros/configuracao.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/components/formularios/round_form.dart';
 import 'package:cristimer/components/layout/status_programa.dart';
@@ -29,6 +31,10 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
   @override
   void initState() {
     super.initState();
+    _init();
+  }
+
+  _init() {
     _getLista();
     setState(() {
       programacao = widget.programacao;
@@ -56,6 +62,14 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
     setState(() {
       lista = list;
       tempo = TempoUtil.format(t);
+    });
+  }
+
+  _configurar() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return ConfiguracaoPrograma();
+    })).then((a) {
+      _init();
     });
   }
 
@@ -158,12 +172,10 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
         },
         destinations: const [
           NavigationDestination(
-            // selectedIcon: Icon(Icons.home),
             icon: Icon(Icons.info),
             label: 'Status',
           ),
           NavigationDestination(
-            // selectedIcon: Icon(Icons.list_alt),
             icon: Icon(Icons.list),
             label: 'Rounds',
           ),
@@ -174,8 +186,13 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
         title: Text(programacao?.nome ?? ""),
         primary: true,
         actions: [
+          // IconButton(
+          //   onPressed: _configurar,
+          //   icon: const Icon(Icons.settings),
+          //   tooltip: "COnfigurações",
+          // ),
           IconButton(
-            onPressed: () => _cadastrarPausa,
+            onPressed: _cadastrarPausa,
             icon: const Icon(Icons.add_box),
             tooltip: "Adicionar Pausa",
           ),
