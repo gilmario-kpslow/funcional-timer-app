@@ -48,13 +48,38 @@ class Dashboard extends StatelessWidget {
           ],
         ),
         Text("Falta Fazer"),
-        ListTile(
+        const ListTile(
           dense: true,
-          title: const Text("Programas"),
-          trailing: const Icon(Icons.play_arrow),
-          onTap: () {
-            _navegarProgramas(context);
-          },
+          title: const Text("Colocar a acplicaçao como player de musica"),
+          subtitle: Text("Pesquisar"),
+          trailing: const Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: const Text("Dar play pelo relogio"),
+          subtitle: Text("Pesquisar"),
+          trailing: const Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: const Text("Fazer backup dos dados"),
+          trailing: const Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: const Text("Fazer restore dos dados"),
+          trailing: const Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: const Text("Falar a descrição das atividades"),
+          trailing: const Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: const Text(
+              "Criar animação de contagem quando o botao play for pressionado"),
+          trailing: const Icon(Icons.warning_amber_outlined),
         ),
       ],
     );

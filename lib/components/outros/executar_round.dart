@@ -41,7 +41,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     });
   }
 
-  _relogio(Timer timer) {
+  _relogio(Timer timer) async {
     print("$_ativo TIMER ${timer.tick}");
     if (!_ativo) {
       // timer = null;
@@ -49,24 +49,32 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       return;
     }
 
+    if (_tempo == _selecionado?.tempo) {
+      await _player?.play(_selecionado?.somInicio);
+    }
+
     if (_tempo == _selecionado?.delayTermino) {
-      _player?.play(_selecionado?.somPreTermino);
+      await _player?.play(_selecionado?.somPreTermino);
     }
 
     if (_tempo > 0) {
       setState(() {
         _tempo--;
       });
-    } else if (_index < _rounds.length - 1) {
-      _avancar();
+      return;
     }
 
-    if (_tempo == 0) {
-      timer.cancel();
-      setState(() {
-        _ativo = false;
-      });
+    if (_index < _rounds.length - 1) {
+      await _player?.play(_selecionado?.somTermino);
+      _avancar();
+      return;
     }
+
+    await _player?.play(_selecionado?.somTermino);
+    setState(() {
+      timer.cancel();
+      _ativo = false;
+    });
   }
 
   _reposicionar(int next) {
@@ -75,20 +83,24 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       _selecionado = _rounds[_index];
       _tempo = _selecionado?.tempo ?? 0;
     });
-    if (_ativo) {
-      _player?.play(_selecionado?.somInicio);
-    }
   }
 
-  _iniciar() {
+  // _paly() {
+  //   Timer.run(_iniciar());
+  // }
+
+  _iniciar() async {
     if (_ativo) {
       return;
+    }
+
+    if (_tempo < (_selecionado?.tempo ?? 0)) {
+      await _player?.play(_selecionado?.somInicio);
     }
     setState(() {
       _ativo = true;
     });
     timer = Timer.periodic(const Duration(seconds: 1), _relogio);
-    _player?.play(_selecionado?.somInicio);
   }
 
   _voltar() {
@@ -107,6 +119,8 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     setState(() {
       _ativo = false;
       _tempo = _selecionado?.tempo ?? 0;
+      _index = 0;
+      _reposicionar(0);
     });
   }
 
@@ -157,7 +171,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
         Text(
             style: const TextStyle(
                 fontSize: 50, color: Colors.blue, fontWeight: FontWeight.bold),
-            _selecionado?.nome ?? ""),
+            "${_ativo} ${_selecionado?.nome}"),
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
