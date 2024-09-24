@@ -1,5 +1,5 @@
+import 'package:cristimer/components/outros/configuracao.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter/widgets.dart';
 import 'package:cristimer/components/main/programacao_main.dart';
 
 class Dashboard extends StatelessWidget {
@@ -10,12 +10,44 @@ class Dashboard extends StatelessWidget {
         context, MaterialPageRoute(builder: (ctx) => const ProgramacaoMain()));
   }
 
+  _navegarConfiguracao(context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (ctx) => const Configuracao()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      //mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Menu inicial",
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            )
+          ],
+        ),
+        Row(
+          children: [
+            Flexible(
+              fit: FlexFit.tight,
+              child: ElevatedButton(
+                onPressed: () => _navegarConfiguracao(context),
+                child: const Text("Configurações"),
+              ),
+            ),
+            Flexible(
+                fit: FlexFit.tight,
+                child: ElevatedButton(
+                    onPressed: () => _navegarProgramas(context),
+                    child: const Text("Programas de Treino"))),
+          ],
+        ),
+        Text("Falta Fazer"),
         ListTile(
           dense: true,
           title: const Text("Programas"),
@@ -23,11 +55,6 @@ class Dashboard extends StatelessWidget {
           onTap: () {
             _navegarProgramas(context);
           },
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Programas"),
-          trailing: Icon(Icons.play_arrow),
         ),
       ],
     );

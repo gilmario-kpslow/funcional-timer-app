@@ -1,3 +1,4 @@
+import 'package:cristimer/components/layout/mensagem_util.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/components/listas/programacao_list.dart';
 import 'package:cristimer/components/main/programa_main.dart';
@@ -55,41 +56,13 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
   }
 
   _remover(Programacao entity) {
-    showDialog(
-      useSafeArea: true,
-      context: context,
-      builder: (ctx) {
-        return AlertDialog(
-          title: const Text("Remover Registro"),
-          content: const SingleChildScrollView(
-            child: ListBody(
-              children: [Text("Remover o rograma")],
-            ),
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text(
-                "Cancelar",
-                style: TextStyle(color: Colors.redAccent),
-              ),
-            ),
-            TextButton(
-              style: ButtonStyle(),
-              onPressed: () async {
-                Navigator.pop(context);
-                await service.delete(entity.id);
-                _getLista();
-              },
-              child: const Text(
-                "Confirmar",
-                style: TextStyle(color: Colors.green),
-              ),
-            ),
-          ],
-        );
-      },
-    );
+    MensagemUtil.confirmar(
+        context, 'Remover Registro', "Remover o Programa ${entity.nome}.",
+        () async {
+      Navigator.pop(context);
+      await service.delete(entity.id);
+      _getLista();
+    });
   }
 
   @override

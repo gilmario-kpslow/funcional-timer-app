@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:cristimer/components/main/home_main.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const FuncinalApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FuncinalApp extends StatelessWidget {
+  const FuncinalApp({super.key});
 
   @override
   Widget build(BuildContext context) {

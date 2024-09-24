@@ -1,3 +1,4 @@
+import 'package:cristimer/components/layout/mensagem_util.dart';
 import 'package:cristimer/components/main/configuracao_programa.dart';
 // import 'package:cristimer/components/outros/configuracao.dart';
 import 'package:flutter/material.dart';
@@ -94,37 +95,40 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
   }
 
   _removeRound(Round round) {
-    showDialog(
-        useSafeArea: true,
-        context: context,
-        builder: (ctx) {
-          return AlertDialog(
-            title: const Text('Remover Registro'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text("Remover o Round ${round.nome}."),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Cancelar'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              TextButton(
-                child: const Text('Confirmar'),
-                onPressed: () {
-                  roudeService.delete(round.id);
-                  _getLista();
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        });
+    MensagemUtil.confirmar(
+        context, 'Remover Registro', "Remover o Round ${round.nome}.", () {
+      roudeService.delete(round.id);
+      _getLista();
+      Navigator.pop(context);
+    });
+
+    // showDialog(
+    //     useSafeArea: true,
+    //     context: context,
+    //     builder: (ctx) {
+    //       return AlertDialog(
+    //         title: const Text('Remover Registro'),
+    //         content: SingleChildScrollView(
+    //           child: ListBody(
+    //             children: <Widget>[
+    //               Text("Remover o Round ${round.nome}."),
+    //             ],
+    //           ),
+    //         ),
+    //         actions: <Widget>[
+    //           TextButton(
+    //             child: const Text('Cancelar'),
+    //             onPressed: () {
+    //               Navigator.pop(context);
+    //             },
+    //           ),
+    //           TextButton(
+    //             child: const Text('Confirmar'),
+    //             onPressed: () {},
+    //           ),
+    //         ],
+    //       );
+    //     });
   }
 
   _addRound(Round round) async {
