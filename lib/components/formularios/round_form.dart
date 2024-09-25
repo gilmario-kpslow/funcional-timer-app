@@ -35,7 +35,7 @@ class _RoundForm extends State<RoundForm> {
   }
 
   _init() {
-    print(widget.round?.somInicio);
+    // print(widget.round?.somInicio);
     _nomeController.text = widget.round?.nome ?? "";
     _tempoController.text = TempoUtil.format(widget.round?.tempo ?? 0);
     _delayController.text = TempoUtil.format(widget.round?.delayTermino ?? 0);

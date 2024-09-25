@@ -39,7 +39,7 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
     final nome = _nomeController.text;
     final descricao = _descricaoController.text;
 
-    var entity = Programacao(null, nome, descricao, STATUS_ATIVO);
+    var entity = Programacao(null, nome, descricao, statusAtivo);
 
     if (id != 0) {
       entity.id = id;

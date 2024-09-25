@@ -47,39 +47,49 @@ class Dashboard extends StatelessWidget {
                     child: const Text("Programas de Treino"))),
           ],
         ),
-        Text("Falta Fazer"),
+        const Text("Falta Fazer"),
         const ListTile(
           dense: true,
-          title: const Text("Colocar a acplicaçao como player de musica"),
+          title: Text("Colocar a acplicaçao como player de musica"),
           subtitle: Text("Pesquisar"),
-          trailing: const Icon(Icons.warning_amber_outlined),
+          trailing: Icon(Icons.warning_amber_outlined),
         ),
         const ListTile(
           dense: true,
-          title: const Text("Dar play pelo relogio"),
+          title: Text("Dar play pelo relogio"),
           subtitle: Text("Pesquisar"),
-          trailing: const Icon(Icons.warning_amber_outlined),
+          trailing: Icon(Icons.warning_amber_outlined),
         ),
         const ListTile(
           dense: true,
-          title: const Text("Fazer backup dos dados"),
-          trailing: const Icon(Icons.warning_amber_outlined),
+          title: Text("Fazer backup dos dados"),
+          trailing: Icon(Icons.warning_amber_outlined),
         ),
         const ListTile(
           dense: true,
-          title: const Text("Fazer restore dos dados"),
-          trailing: const Icon(Icons.warning_amber_outlined),
+          title: Text("Fazer restore dos dados"),
+          trailing: Icon(Icons.warning_amber_outlined),
         ),
         const ListTile(
           dense: true,
-          title: const Text("Falar a descrição das atividades"),
-          trailing: const Icon(Icons.warning_amber_outlined),
+          title: Text("Falar a descrição das atividades"),
+          trailing: Icon(Icons.warning_amber_outlined),
         ),
         const ListTile(
           dense: true,
-          title: const Text(
+          title: Text(
               "Criar animação de contagem quando o botao play for pressionado"),
-          trailing: const Icon(Icons.warning_amber_outlined),
+          trailing: Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: Text("Criar a opção sobre pra falar do APP"),
+          trailing: Icon(Icons.warning_amber_outlined),
+        ),
+        const ListTile(
+          dense: true,
+          title: Text("Criar um site de ajuda"),
+          trailing: Icon(Icons.warning_amber_outlined),
         ),
       ],
     );

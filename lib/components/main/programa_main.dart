@@ -1,5 +1,5 @@
 import 'package:cristimer/components/layout/mensagem_util.dart';
-import 'package:cristimer/components/main/configuracao_programa.dart';
+// import 'package:cristimer/components/main/configuracao_programa.dart';
 // import 'package:cristimer/components/outros/configuracao.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/components/formularios/round_form.dart';
@@ -66,13 +66,13 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
     });
   }
 
-  _configurar() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return ConfiguracaoPrograma();
-    })).then((a) {
-      _init();
-    });
-  }
+  // _configurar() {
+  //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+  //     return ConfiguracaoPrograma();
+  //   })).then((a) {
+  //     _init();
+  //   });
+  // }
 
   _selecionaRound(Round round) {}
 

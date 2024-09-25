@@ -32,5 +32,5 @@ class Programacao extends Entity<Programacao> {
   }
 }
 
-const String STATUS_ATIVO = "ATIVO";
-const String STATUS_EXCLUIDO = "EXCLUIDO";
+const String statusAtivo = "ATIVO";
+const String statusExcluido = "EXCLUIDO";

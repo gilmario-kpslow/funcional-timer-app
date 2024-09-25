@@ -23,7 +23,7 @@ class Configuracao extends StatelessWidget {
       await DatabaseUtil.removerBanco();
       Notificacao.info(context, "Banco removido com sucesso!");
     } catch (e) {
-      Notificacao.error(context, "Erro: ${e}");
+      Notificacao.error(context, "Erro: $e");
     }
   }
 
@@ -31,24 +31,25 @@ class Configuracao extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Configurações"),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.gesture))],
+        title: const Text("Configurações"),
+        actions: [
+          IconButton(onPressed: () {}, icon: const Icon(Icons.gesture))
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ElevatedButton(
-            style: ButtonStyle(),
             onPressed: () {
               _removeBanco(context);
             },
-            child: Text("Remover banco"),
+            child: const Text("Remover banco"),
           ),
           ElevatedButton(
             onPressed: () {
               _criarBanco(context);
             },
-            child: Text("Recriar banco"),
+            child: const Text("Recriar banco"),
           ),
           // DropdownMenu(controller: _tabelaController, dropdownMenuEntries: [
           //   DropdownMenuEntry(value: "Programacao", label: "Programação"),

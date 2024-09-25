@@ -12,10 +12,10 @@ class _ConfiguracaoProgramaState extends State<ConfiguracaoPrograma> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Configuração"),
+        title: const Text("Configuração"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: Column(
+      body: const Column(
         children: [
           Text("data"),
         ],

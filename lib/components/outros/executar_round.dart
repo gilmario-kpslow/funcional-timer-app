@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:cristimer/components/layout/contador_tempo.dart';
-import 'package:cristimer/components/layout/round_botao.dart';
+// import 'package:cristimer/components/layout/round_botao.dart';
 import 'package:cristimer/core/modelos/programacao.dart';
 import 'package:cristimer/core/modelos/round.dart';
-import 'package:cristimer/core/service/programacao_service.dart';
+// import 'package:cristimer/core/service/programacao_service.dart';
 import 'package:cristimer/core/service/round_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
 
@@ -18,7 +18,7 @@ class ExecutarRound extends StatefulWidget {
 }
 
 class _ExecutarRoundState extends State<ExecutarRound> {
-  final ProgramacaoService _programacaoService = ProgramacaoService();
+  // final ProgramacaoService _programacaoService = ProgramacaoService();
   final RoundService _roundService = RoundService();
   List<Round> _rounds = [];
   Round? _selecionado;
@@ -42,7 +42,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   }
 
   _relogio(Timer timer) async {
-    print("$_ativo TIMER ${timer.tick}");
+    // print("$_ativo TIMER ${timer.tick}");
     if (!_ativo) {
       // timer = null;
       timer.cancel();
@@ -154,15 +154,15 @@ class _ExecutarRoundState extends State<ExecutarRound> {
 
   @override
   Widget build(BuildContext context) {
-    const botoes = Padding(
-      padding: EdgeInsets.only(bottom: 10.0),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-        RoundButton(
-            icon: Icons.published_with_changes_rounded, nome: "Reiniciar"),
-        RoundButton(icon: Icons.star_outline, nome: "Favoritar"),
-        RoundButton(icon: Icons.settings_suggest, nome: "Configurar"),
-      ]),
-    );
+    // const botoes = Padding(
+    //   padding: EdgeInsets.only(bottom: 10.0),
+    //   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+    //     RoundButton(
+    //         icon: Icons.published_with_changes_rounded, nome: "Reiniciar"),
+    //     RoundButton(icon: Icons.star_outline, nome: "Favoritar"),
+    //     RoundButton(icon: Icons.settings_suggest, nome: "Configurar"),
+    //   ]),
+    // );
 
     var round = Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -170,8 +170,8 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       children: [
         Text(
             style: const TextStyle(
-                fontSize: 50, color: Colors.blue, fontWeight: FontWeight.bold),
-            "${_ativo} ${_selecionado?.nome}"),
+                fontSize: 35, color: Colors.blue, fontWeight: FontWeight.bold),
+            "${_selecionado?.nome}"),
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
@@ -215,7 +215,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
           itemBuilder: (context, index) {
             var r = _rounds[index];
             return ListTile(
-              tileColor: Color(120),
+              tileColor: const Color.fromARGB(0, 0, 0, 124),
               selected: true,
               dense: false,
               title: Text(

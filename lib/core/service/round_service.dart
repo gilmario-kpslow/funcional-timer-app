@@ -16,7 +16,7 @@ class RoundService {
         entity.ordem = ordem.first.row[0] + 1;
       }
     }
-    print(entity.toMap());
+    // print(entity.toMap());
 
     await db.insert(
       table,
