@@ -47,50 +47,6 @@ class Dashboard extends StatelessWidget {
                     child: const Text("Programas de Treino"))),
           ],
         ),
-        const Text("Falta Fazer"),
-        const ListTile(
-          dense: true,
-          title: Text("Colocar a acplicaçao como player de musica"),
-          subtitle: Text("Pesquisar"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Dar play pelo relogio"),
-          subtitle: Text("Pesquisar"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Fazer backup dos dados"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Fazer restore dos dados"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Falar a descrição das atividades"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text(
-              "Criar animação de contagem quando o botao play for pressionado"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Criar a opção sobre pra falar do APP"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        const ListTile(
-          dense: true,
-          title: Text("Criar um site de ajuda"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
       ],
     );
   }
