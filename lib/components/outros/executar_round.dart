@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 
+import 'package:cristimer/components/outros/contador.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/components/layout/contador_tempo.dart';
 // import 'package:cristimer/components/layout/round_botao.dart';
@@ -49,12 +51,16 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       return;
     }
 
-    if (_tempo == _selecionado?.tempo) {
-      await _player?.play(_selecionado?.somInicio);
+    if (_tempo == (_selecionado?.tempo ?? 0)) {
+      _player?.play(_selecionado?.somInicio);
     }
 
-    if (_tempo == _selecionado?.delayTermino) {
-      await _player?.play(_selecionado?.somPreTermino);
+    if ((_tempo - 1) == (_selecionado?.delayTermino ?? 0)) {
+      _player?.play(_selecionado?.somPreTermino);
+    }
+
+    if ((_tempo <= 1)) {
+      _player?.play(_selecionado?.somTermino);
     }
 
     if (_tempo > 0) {
@@ -65,12 +71,12 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     }
 
     if (_index < _rounds.length - 1) {
-      await _player?.play(_selecionado?.somTermino);
+      // _player?.play(_selecionado?.somTermino);
       _avancar();
       return;
     }
 
-    await _player?.play(_selecionado?.somTermino);
+    // _player?.play(_selecionado?.somTermino);
     setState(() {
       timer.cancel();
       _ativo = false;
@@ -85,17 +91,28 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     });
   }
 
-  // _paly() {
-  //   Timer.run(_iniciar());
-  // }
+  _contador(context) async {
+    return showDialog(
+        useSafeArea: false,
+        context: context,
+        builder: (context) {
+          return Contador(
+              tempo: 3,
+              call: () {
+                Navigator.pop(context);
+              });
+        });
+  }
 
-  _iniciar() async {
+  _iniciar(context) async {
     if (_ativo) {
       return;
     }
 
-    if (_tempo < (_selecionado?.tempo ?? 0)) {
-      await _player?.play(_selecionado?.somInicio);
+    await _contador(context);
+
+    if (_tempo <= (_selecionado?.tempo ?? 0)) {
+      _player?.play(_selecionado?.somInicio);
     }
     setState(() {
       _ativo = true;
@@ -136,10 +153,12 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     timer?.cancel();
   }
 
-  _buttonPlay() {
+  _buttonPlay(context) {
     return !_ativo
         ? TextButton(
-            onPressed: _iniciar,
+            onPressed: () {
+              _iniciar(context);
+            },
             child: const Icon(
               Icons.play_arrow,
               size: 40,
@@ -179,44 +198,50 @@ class _ExecutarRoundState extends State<ExecutarRound> {
             style: const TextStyle(fontSize: 20),
           ),
         ),
-        ContadorTempo(tempo: _tempo)
+        Padding(
+          padding: const EdgeInsets.only(bottom: 15),
+          child: ContadorTempo(tempo: _tempo),
+        )
       ],
     );
 
-    final player = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        IconButton(
-            onPressed: _voltar,
-            icon: const Icon(
-              Icons.arrow_back,
-              size: 40,
-            )),
-        _buttonPlay(),
-        TextButton(
-            onPressed: _parar,
-            child: const Icon(
-              Icons.stop,
-              size: 40,
-            )),
-        IconButton(
-            onPressed: _avancar,
-            icon: const Icon(
-              Icons.arrow_forward,
-              size: 40,
-            )),
-      ],
-    );
+    player(context) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(
+              onPressed: _voltar,
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 40,
+              )),
+          _buttonPlay(context),
+          TextButton(
+              onPressed: _parar,
+              child: const Icon(
+                Icons.stop,
+                size: 40,
+              )),
+          IconButton(
+              onPressed: _avancar,
+              icon: const Icon(
+                Icons.arrow_forward,
+                size: 40,
+              )),
+        ],
+      );
+    }
 
     var lista = Flexible(
       child: ListView.builder(
+          scrollDirection: Axis.vertical,
           itemCount: _rounds.length,
           itemBuilder: (context, index) {
             var r = _rounds[index];
             return ListTile(
-              tileColor: const Color.fromARGB(0, 0, 0, 124),
-              selected: true,
+              selectedTileColor: Colors.amber,
+              selected: (_index + 1) == r.ordem,
               dense: false,
               title: Text(
                 r.nome,
@@ -245,7 +270,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.amber,
-        child: player,
+        child: player(context),
       ),
     );
   }

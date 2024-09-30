@@ -67,6 +67,7 @@ class ProgramacaoList extends StatelessWidget {
         itemBuilder: (context, index) {
           final tr = programacoes[index];
           return ListTile(
+            onTap: () => selecionar(tr),
             title: Text(
               tr.nome,
               style: Theme.of(context).textTheme.titleLarge,

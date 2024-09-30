@@ -11,8 +11,8 @@ class SomUtil {
     if (source == null || source == "") {
       return;
     }
-    await _player.setSource(AssetSource(source));
-    await _player.resume();
+    await _player.play(AssetSource(source));
+    // await _player.play();
   }
 
   pause() async {
