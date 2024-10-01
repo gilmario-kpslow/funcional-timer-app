@@ -1,11 +1,11 @@
-import 'package:cristimer/components/layout/mensagem_util.dart';
+import 'package:cristimer/core/util/mensagem_util.dart';
 // import 'package:cristimer/components/main/configuracao_programa.dart';
 // import 'package:cristimer/components/outros/configuracao.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/formularios/round_form.dart';
-import 'package:cristimer/components/layout/status_programa.dart';
-import 'package:cristimer/components/listas/raunds_lista.dart';
-import 'package:cristimer/components/outros/programa_form_service.dart';
+import 'package:cristimer/view/paginas/formularios/round_form.dart';
+import 'package:cristimer/view/widgets/status_programa.dart';
+import 'package:cristimer/view/paginas/formularios/exercicios_lista.dart';
+import 'package:cristimer/core/util/programa_form_service.dart';
 import 'package:cristimer/core/modelos/programacao.dart';
 import 'package:cristimer/core/modelos/round.dart';
 import 'package:cristimer/core/service/programacao_service.dart';

@@ -1,6 +1,6 @@
-import 'package:cristimer/components/outros/configuracao.dart';
+import 'package:cristimer/view/paginas/configuracao.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/main/programacao_main.dart';
+import 'package:cristimer/view/paginas/programacao_main.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -20,16 +20,12 @@ class Dashboard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                "Menu inicial",
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            )
-          ],
+        Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Text(
+            "Inicio",
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         Row(
           children: [

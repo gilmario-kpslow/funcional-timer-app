@@ -1,9 +1,9 @@
-import 'package:cristimer/components/layout/mensagem_util.dart';
+import 'package:cristimer/core/util/mensagem_util.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/listas/programacao_list.dart';
-import 'package:cristimer/components/main/programa_main.dart';
-import 'package:cristimer/components/outros/executar_round.dart';
-import 'package:cristimer/components/outros/programa_form_service.dart';
+import 'package:cristimer/view/paginas/formularios/programacao_list.dart';
+import 'package:cristimer/view/paginas/programa_main.dart';
+import 'package:cristimer/view/paginas/executar_round.dart';
+import 'package:cristimer/core/util/programa_form_service.dart';
 import 'package:cristimer/core/modelos/programacao.dart';
 import 'package:cristimer/core/service/programacao_service.dart';
 
@@ -81,6 +81,9 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
         tooltip: 'Novo programa',
         child: const Icon(Icons.add),
       ),
+      floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // persistentFooterButtons: [Text("v1.0.0")],
     );
   }
 }

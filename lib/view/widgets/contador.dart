@@ -1,12 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Contador extends StatefulWidget {
-  int tempo;
-  Function call;
-  Contador({super.key, required this.tempo, required this.call});
+  final int tempo;
+  final Function call;
+  const Contador({super.key, required this.tempo, required this.call});
 
   @override
   State<Contador> createState() => _ContadorState();
@@ -42,7 +41,7 @@ class _ContadorState extends State<Contador> {
             padding: const EdgeInsets.all(12.0),
             child: Text(
               "${widget.tempo - _tempo}",
-              style: TextStyle(fontSize: 80),
+              style: const TextStyle(fontSize: 80),
             ),
           ),
         )

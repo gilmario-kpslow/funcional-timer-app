@@ -43,7 +43,6 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
 
     if (id != 0) {
       entity.id = id;
-      // round.ordem = widget.round?.ordem;
     }
     widget.onSubmit(entity);
   }

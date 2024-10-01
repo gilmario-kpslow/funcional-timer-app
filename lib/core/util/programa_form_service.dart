@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/formularios/programacao_form.dart';
+import 'package:cristimer/view/paginas/formularios/programacao_form.dart';
 import 'package:cristimer/core/modelos/programacao.dart';
 import 'package:cristimer/core/service/programacao_service.dart';
 

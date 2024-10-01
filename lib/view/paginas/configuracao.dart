@@ -32,29 +32,31 @@ class Configuracao extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Configurações"),
-        actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.gesture))
-        ],
+        // actions: [
+        //   // IconButton(onPressed: () {}, icon: const Icon(Icons.gesture))
+        // ],
       ),
-      body: Column(
+      body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ElevatedButton(
-            onPressed: () {
-              _removeBanco(context);
-            },
-            child: const Text("Remover banco"),
+          Flexible(
+            fit: FlexFit.tight,
+            child: ElevatedButton(
+              onPressed: () {
+                _removeBanco(context);
+              },
+              child: const Text("Remover banco"),
+            ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              _criarBanco(context);
-            },
-            child: const Text("Recriar banco"),
+          Flexible(
+            fit: FlexFit.tight,
+            child: ElevatedButton(
+              onPressed: () {
+                _criarBanco(context);
+              },
+              child: const Text("Recriar banco"),
+            ),
           ),
-          // DropdownMenu(controller: _tabelaController, dropdownMenuEntries: [
-          //   DropdownMenuEntry(value: "Programacao", label: "Programação"),
-          //   DropdownMenuEntry(value: "Round", label: "Rounds"),
-          // ]),
         ],
       ),
     );

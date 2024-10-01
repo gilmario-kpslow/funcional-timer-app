@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/outros/menu_template.dart';
+import 'package:cristimer/core/util/menu_template.dart';
 import 'package:cristimer/enums/menu_item_option.dart';
 
 class PopupMenu extends StatelessWidget {

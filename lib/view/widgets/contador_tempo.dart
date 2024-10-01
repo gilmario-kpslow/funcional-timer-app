@@ -8,13 +8,17 @@ class ContadorTempo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.only(right: 20, left: 20),
-        decoration: BoxDecoration(
-            border: Border.all(width: 1),
-            borderRadius: const BorderRadius.all(Radius.circular(5))),
+      padding: const EdgeInsets.only(right: 40, left: 40),
+      decoration: BoxDecoration(
+          border: Border.all(width: 1),
+          borderRadius: const BorderRadius.all(Radius.circular(5))),
+      child: Flexible(
+        fit: FlexFit.tight,
         child: Text(
           style: const TextStyle(fontSize: 100),
           TempoUtil.format(tempo),
-        ));
+        ),
+      ),
+    );
   }
 }

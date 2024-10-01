@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/layout/popup_menu.dart';
-import 'package:cristimer/components/outros/menu_template.dart';
+import 'package:cristimer/view/widgets/popup_menu.dart';
+import 'package:cristimer/core/util/menu_template.dart';
 import 'package:cristimer/enums/menu_item_option.dart';
 import 'package:cristimer/core/modelos/programacao.dart';
 

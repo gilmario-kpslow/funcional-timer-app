@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/main/home_main.dart';
+import 'package:cristimer/view/paginas/home_main.dart';
 
 void main() {
   try {

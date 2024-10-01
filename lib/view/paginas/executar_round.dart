@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:cristimer/components/outros/contador.dart';
+import 'package:cristimer/view/widgets/contador.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/components/layout/contador_tempo.dart';
-// import 'package:cristimer/components/layout/round_botao.dart';
+import 'package:cristimer/view/widgets/contador_tempo.dart';
 import 'package:cristimer/core/modelos/programacao.dart';
 import 'package:cristimer/core/modelos/round.dart';
-// import 'package:cristimer/core/service/programacao_service.dart';
 import 'package:cristimer/core/service/round_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
 
@@ -20,7 +17,6 @@ class ExecutarRound extends StatefulWidget {
 }
 
 class _ExecutarRoundState extends State<ExecutarRound> {
-  // final ProgramacaoService _programacaoService = ProgramacaoService();
   final RoundService _roundService = RoundService();
   List<Round> _rounds = [];
   Round? _selecionado;
@@ -71,12 +67,10 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     }
 
     if (_index < _rounds.length - 1) {
-      // _player?.play(_selecionado?.somTermino);
       _avancar();
       return;
     }
 
-    // _player?.play(_selecionado?.somTermino);
     setState(() {
       timer.cancel();
       _ativo = false;
@@ -240,6 +234,10 @@ class _ExecutarRoundState extends State<ExecutarRound> {
           itemBuilder: (context, index) {
             var r = _rounds[index];
             return ListTile(
+              onTap: () {
+                _index = index;
+                _reposicionar(0);
+              },
               selectedTileColor: Colors.amber,
               selected: (_index + 1) == r.ordem,
               dense: false,
@@ -272,6 +270,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
         color: Colors.amber,
         child: player(context),
       ),
+      // persistentFooterButtons: [Text("data")],
     );
   }
 }
