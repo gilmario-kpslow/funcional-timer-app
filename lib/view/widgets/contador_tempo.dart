@@ -12,12 +12,9 @@ class ContadorTempo extends StatelessWidget {
       decoration: BoxDecoration(
           border: Border.all(width: 1),
           borderRadius: const BorderRadius.all(Radius.circular(5))),
-      child: Flexible(
-        fit: FlexFit.tight,
-        child: Text(
-          style: const TextStyle(fontSize: 100),
-          TempoUtil.format(tempo),
-        ),
+      child: Text(
+        style: const TextStyle(fontSize: 100),
+        TempoUtil.format(tempo),
       ),
     );
   }

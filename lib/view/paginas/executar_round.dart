@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cristimer/core/controllers/notification_controller.dart';
 import 'package:cristimer/view/widgets/contador.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/widgets/contador_tempo.dart';
@@ -99,6 +100,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   }
 
   _iniciar(context) async {
+    // NotificationController.createNewNotification();
     if (_ativo) {
       return;
     }
@@ -228,33 +230,36 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     }
 
     var lista = Flexible(
-      child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: _rounds.length,
-          itemBuilder: (context, index) {
-            var r = _rounds[index];
-            return ListTile(
-              onTap: () {
-                _index = index;
-                _reposicionar(0);
-              },
-              selectedTileColor: Colors.amber,
-              selected: (_index + 1) == r.ordem,
-              dense: false,
-              title: Text(
-                r.nome,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              // subtitle: Text(
-              //   r.descricao ?? "",
-              // ),
-              trailing: const Icon(Icons.play_arrow),
-              leading: Text(
-                "${index + 1}",
-                style: const TextStyle(fontSize: 20),
-              ),
-            );
-          }),
+      child: _rounds.length == 0
+          ? Text("data")
+          : ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: _rounds.length,
+              itemBuilder: (context, index) {
+                var r = _rounds[index];
+                return ListTile(
+                  onTap: () {
+                    _index = index;
+                    _reposicionar(0);
+                  },
+                  selectedTileColor: Colors.amber,
+                  selectedColor: Colors.amber,
+                  selected: (_index + 1) == r.ordem,
+                  dense: false,
+                  title: Text(
+                    r.nome,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                  // subtitle: Text(
+                  //   r.descricao ?? "",
+                  // ),
+                  trailing: const Icon(Icons.play_arrow),
+                  leading: Text(
+                    "${index + 1}",
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                );
+              }),
     );
 
     return Scaffold(

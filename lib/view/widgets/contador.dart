@@ -11,9 +11,22 @@ class Contador extends StatefulWidget {
   State<Contador> createState() => _ContadorState();
 }
 
-class _ContadorState extends State<Contador> {
+class _ContadorState extends State<Contador> with TickerProviderStateMixin {
   int _tempo = 0;
   Timer? timer;
+  static const Duration duration = Duration(milliseconds: 500);
+  static const Curve curve = Curves.easeIn;
+
+  late final AnimationController _controller = AnimationController(
+    duration: duration,
+    vsync: this,
+  )..repeat(reverse: true);
+
+  late final CurvedAnimation _animation = CurvedAnimation(
+    parent: _controller,
+    curve: curve,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -25,7 +38,7 @@ class _ContadorState extends State<Contador> {
       setState(() {
         _tempo += 1;
       });
-      if (_tempo >= widget.tempo) {
+      if (_tempo > widget.tempo) {
         widget.call();
       }
     });
@@ -38,10 +51,13 @@ class _ContadorState extends State<Contador> {
       children: [
         Card(
           child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Text(
-              "${widget.tempo - _tempo}",
-              style: const TextStyle(fontSize: 80),
+            padding: const EdgeInsets.all(30.0),
+            child: FadeTransition(
+              opacity: _animation,
+              child: Text(
+                "${widget.tempo - _tempo}",
+                style: const TextStyle(fontSize: 120),
+              ),
             ),
           ),
         )
@@ -51,7 +67,9 @@ class _ContadorState extends State<Contador> {
 
   @override
   void dispose() {
-    super.dispose();
     timer?.cancel();
+    _animation.dispose();
+    _controller.dispose();
+    super.dispose();
   }
 }

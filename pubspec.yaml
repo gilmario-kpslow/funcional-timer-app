@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   audioplayers: ^6.1.0
+  awesome_notifications: ^0.9.3+1
   flutter:
     sdk: flutter
   numberpicker: ^2.1.2
@@ -73,7 +74,7 @@ flutter:
     - assets/audio/toque09.mp3
     - assets/audio/toque10.mp3
     - assets/audio/toque11.mp3
-
+    - assets/imagens/icone.jpeg
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
