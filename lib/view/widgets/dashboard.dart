@@ -1,4 +1,5 @@
 import 'package:cristimer/view/paginas/configuracao.dart';
+import 'package:cristimer/view/widgets/round_botao.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/paginas/programacao_main.dart';
 
@@ -19,6 +20,7 @@ class Dashboard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(15.0),
@@ -27,21 +29,15 @@ class Dashboard extends StatelessWidget {
             style: Theme.of(context).textTheme.titleLarge,
           ),
         ),
-        Row(
-          children: [
-            Flexible(
-              fit: FlexFit.tight,
-              child: ElevatedButton(
-                onPressed: () => _navegarConfiguracao(context),
-                child: const Text("Configurações"),
-              ),
-            ),
-            Flexible(
-                fit: FlexFit.tight,
-                child: ElevatedButton(
-                    onPressed: () => _navegarProgramas(context),
-                    child: const Text("Programas de Treino"))),
-          ],
+        RoundButton(
+          icon: Icons.list,
+          nome: "Rotinas de Treino",
+          call: () => _navegarProgramas(context),
+        ),
+        RoundButton(
+          icon: Icons.settings,
+          nome: "Configuração",
+          call: () => _navegarConfiguracao(context),
         ),
       ],
     );

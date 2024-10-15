@@ -43,18 +43,18 @@ class Configuracao extends StatelessWidget {
             fit: FlexFit.tight,
             child: ElevatedButton(
               onPressed: () {
-                _removeBanco(context);
+                // _removeBanco(context);
               },
-              child: const Text("Remover banco"),
+              child: const Text("Backup database"),
             ),
           ),
           Flexible(
             fit: FlexFit.tight,
             child: ElevatedButton(
               onPressed: () {
-                _criarBanco(context);
+                // _criarBanco(context);
               },
-              child: const Text("Recriar banco"),
+              child: const Text("Restore database"),
             ),
           ),
         ],

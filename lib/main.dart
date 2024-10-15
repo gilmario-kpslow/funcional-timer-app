@@ -1,13 +1,9 @@
-import 'package:cristimer/core/controllers/notification_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/paginas/home_main.dart';
 
 Future<void> main() async {
   try {
     WidgetsFlutterBinding.ensureInitialized();
-
-    await NotificationController.initializeLocalNotifications();
-    await NotificationController.initializeIsolateReceivePort();
 
     runApp(const FuncinalApp());
   } catch (e) {
@@ -29,7 +25,6 @@ class FuncinalApp extends StatefulWidget {
 class _FuncinalAppState extends State<FuncinalApp> {
   @override
   void initState() {
-    NotificationController.startListeningNotificationEvents();
     super.initState();
   }
 
@@ -39,7 +34,7 @@ class _FuncinalAppState extends State<FuncinalApp> {
       navigatorKey: FuncinalApp.navigatorKey,
       title: 'Funcional APP',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white70),
         useMaterial3: true,
       ),
       home: const HomeMain(),

@@ -117,6 +117,7 @@ class _RoundForm extends State<RoundForm> {
             decoration: const InputDecoration(labelText: "Descrição"),
             validator: _defaultValidate,
             maxLines: 2,
+            maxLength: 40,
           ),
           TextFormField(
             controller: _tempoController,
@@ -194,7 +195,7 @@ class _RoundForm extends State<RoundForm> {
         width: 350,
         alignment: Alignment.center,
         child: Text(
-          widget.pausa ? "Criar Pausa" : "Criar Round",
+          widget.pausa ? "Criar Pausa" : "Criar Exercicio",
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),

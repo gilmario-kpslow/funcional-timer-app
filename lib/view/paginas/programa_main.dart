@@ -96,7 +96,7 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
 
   _removeRound(Round round) {
     MensagemUtil.confirmar(
-        context, 'Remover Registro', "Remover o Round ${round.nome}.", () {
+        context, 'Remover Registro', "Remover o Exercicio ${round.nome}.", () {
       roudeService.delete(round.id);
       _getLista();
       Navigator.pop(context);
@@ -181,7 +181,7 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
           ),
           NavigationDestination(
             icon: Icon(Icons.list),
-            label: 'Rounds',
+            label: 'Execicío',
           ),
         ],
       ),
@@ -205,6 +205,7 @@ class _ProgramacaoMainState extends State<ProgramaMain> {
         ],
       ),
       body: widgets[selectedIndex],
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () => _cadastrarRound(null),
         tooltip: 'Novo',

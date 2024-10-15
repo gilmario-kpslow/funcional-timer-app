@@ -14,8 +14,11 @@ class _HomeMainState extends State<HomeMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Funcional Timer"),
+        backgroundColor: Theme.of(context).colorScheme.error,
+        title: const Text(
+          "Funcional Timer",
+          style: TextStyle(color: Colors.white),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -24,7 +27,10 @@ class _HomeMainState extends State<HomeMain> {
                   applicationVersion: "v1.0.0",
                   children: [const SobreWidget()]);
             },
-            icon: const Icon(Icons.info),
+            icon: const Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
             tooltip: "Sobre",
           )
         ],

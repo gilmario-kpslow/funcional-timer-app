@@ -65,7 +65,7 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
             controller: _descricaoController,
             minLines: 2,
             maxLines: 4,
-            validator: _defaultValidate,
+            // validator: _defaultValidate,
           ),
         ],
       ),
@@ -76,7 +76,7 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
       title: Container(
         alignment: Alignment.center,
         child: const Text(
-          "Criar Programação",
+          "Criar Rotina",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),

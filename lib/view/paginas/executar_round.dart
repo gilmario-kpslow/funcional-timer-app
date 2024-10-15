@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:cristimer/core/controllers/notification_controller.dart';
+import 'package:cristimer/view/paginas/programa_main.dart';
 import 'package:cristimer/view/widgets/contador.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/widgets/contador_tempo.dart';
@@ -33,7 +33,9 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     _roundService.getLista(widget.programacao.id).then((lista) {
       setState(() {
         _rounds = lista;
-        _selecionado = lista[0];
+        if (_rounds.isNotEmpty) {
+          _selecionado = lista[0];
+        }
         _tempo = _selecionado?.tempo ?? 0;
         _player = SomUtil();
       });
@@ -186,11 +188,11 @@ class _ExecutarRoundState extends State<ExecutarRound> {
         Text(
             style: const TextStyle(
                 fontSize: 35, color: Colors.blue, fontWeight: FontWeight.bold),
-            "${_selecionado?.nome}"),
+            _selecionado?.nome ?? ""),
         Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Text(
-            "${_selecionado?.descricao}",
+            _selecionado?.descricao ?? "",
             style: const TextStyle(fontSize: 20),
           ),
         ),
@@ -264,8 +266,25 @@ class _ExecutarRoundState extends State<ExecutarRound> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.programacao.nome),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(
+          widget.programacao.nome,
+          style: TextStyle(color: Colors.white),
+        ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProgramaMain(widget.programacao)));
+              },
+              icon: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ))
+        ],
+        backgroundColor: Theme.of(context).colorScheme.error,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

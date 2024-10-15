@@ -68,15 +68,18 @@ class ProgramacaoList extends StatelessWidget {
           final tr = programacoes[index];
           return ListTile(
             onTap: () => selecionar(tr),
+            onLongPress: () {
+              delete(tr);
+            },
             title: Text(
               tr.nome,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             subtitle: Text(
-              tr.descricao,
+              tr.descricao ?? "",
             ),
-            trailing:
-                PopupMenu(select: _menuSelect, value: tr, template: _opcoes),
+            // trailing:
+            //     PopupMenu(select: _menuSelect, value: tr, template: _opcoes),
             leading: Text("${tr.id}"),
             hoverColor: Color(Colors.amberAccent.value),
             dense: false,

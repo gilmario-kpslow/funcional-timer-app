@@ -5,6 +5,7 @@ class DatabaseUtil {
   static Future<Database> getDatabase() async {
     final database = openDatabase(
       join(await getDatabasesPath(), 'funcional.db'),
+      onCreate: (db, version) => DatabaseUtil.recriarBanco(),
       version: 1,
     );
 

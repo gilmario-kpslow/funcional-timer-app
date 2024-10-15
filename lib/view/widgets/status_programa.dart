@@ -43,7 +43,7 @@ class StatusPrograma extends StatelessWidget {
               children: [
                 _info("Nome", programacao?.nome ?? ""),
                 _info("Descrição", programacao?.descricao ?? ""),
-                _info("Rounds", "${lista.length}"),
+                _info("Execícios", "${lista.length}"),
                 _info("Duração", tempo),
               ],
             ),

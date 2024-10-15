@@ -72,14 +72,21 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text("Programas de Treino"),
+        backgroundColor: Theme.of(context).colorScheme.error,
+        title: const Text(
+          "Rotinas de Treino",
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: programacoes,
       floatingActionButton: FloatingActionButton(
         onPressed: _cadastrarProgramacao,
         tooltip: 'Novo programa',
-        child: const Icon(Icons.add),
+        backgroundColor: Colors.red,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

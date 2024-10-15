@@ -2,7 +2,7 @@ import 'package:cristimer/core/modelos/entity.dart';
 
 class Programacao extends Entity<Programacao> {
   final String nome;
-  final String descricao;
+  final String? descricao;
   final String status;
   int? id;
   Programacao(this.id, this.nome, this.descricao, this.status);

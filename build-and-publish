@@ -1,6 +1,12 @@
 #!/bin/bash
-flutter build apk --build-name --build-number
+# LER AS INFORMACOES
+
+echo "build versao $1 numero $2"
+
+flutter build apk --build-name $1 --build-number $2
 #mv build/app/outputs/flutter-apk/app-release.apk
+
+echo "publicando atualizacao"
 
 scp -P 10000 build/app/outputs/flutter-apk/app-release.apk \
     gilmario@gilmariosoftware.com.br:/opt/volumes/site/downloads
