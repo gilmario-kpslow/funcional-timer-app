@@ -9,19 +9,19 @@ class RoundButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      IconButton(
-        iconSize: 80,
-        icon: Icon(icon),
-        onPressed: () {
-          call();
-        },
-        color: Theme.of(context).colorScheme.error,
-      ),
-      Text(
-          style:
-              const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-          nome)
-    ]);
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(children: [
+        IconButton(
+          iconSize: 80,
+          icon: Icon(icon),
+          onPressed: () {
+            call();
+          },
+          color: Colors.redAccent,
+        ),
+        Text(style: Theme.of(context).textTheme.labelLarge, nome)
+      ]),
+    );
   }
 }

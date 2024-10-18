@@ -32,29 +32,42 @@ class Configuracao extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Configurações"),
-        // actions: [
-        //   // IconButton(onPressed: () {}, icon: const Icon(Icons.gesture))
-        // ],
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
-      body: Row(
+      body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(
-            fit: FlexFit.tight,
-            child: ElevatedButton(
-              onPressed: () {
-                // _removeBanco(context);
-              },
-              child: const Text("Backup database"),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              "Realizar backup e restore da base de dados.",
+              style: Theme.of(context).textTheme.labelMedium,
             ),
           ),
-          Flexible(
-            fit: FlexFit.tight,
-            child: ElevatedButton(
-              onPressed: () {
-                // _criarBanco(context);
-              },
-              child: const Text("Restore database"),
+          ListTile(
+            leading: const Icon(
+              Icons.label_important_sharp,
+              color: Colors.redAccent,
+              size: 30,
+            ),
+            onTap: () {},
+            title: const Text(
+              "Fazer backup",
+              style: TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.label_important_sharp,
+              color: Colors.redAccent,
+              size: 30,
+            ),
+            onTap: () {},
+            title: const Text(
+              "Restaurar backup",
+              style: TextStyle(
+                  color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
         ],

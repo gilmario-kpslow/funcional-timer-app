@@ -67,6 +67,7 @@ class ProgramacaoList extends StatelessWidget {
         itemBuilder: (context, index) {
           final tr = programacoes[index];
           return ListTile(
+            tileColor: const Color.fromARGB(255, 255, 174, 174),
             onTap: () => selecionar(tr),
             onLongPress: () {
               delete(tr);
@@ -86,6 +87,9 @@ class ProgramacaoList extends StatelessWidget {
           );
         });
 
-    return SizedBox(child: programacoes.isEmpty ? vazio : lista);
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: SizedBox(child: programacoes.isEmpty ? vazio : lista),
+    );
   }
 }

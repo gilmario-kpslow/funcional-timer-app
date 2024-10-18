@@ -18,28 +18,30 @@ class Dashboard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Text(
-            "Inicio",
-            style: Theme.of(context).textTheme.titleLarge,
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Padding(
+          //   padding: const EdgeInsets.all(15.0),
+          //   child: Text(
+          //     "INICIO",
+          //     style: Theme.of(context).textTheme.displayLarge,
+          //   ),
+          // ),
+          RoundButton(
+            icon: Icons.list,
+            nome: "Rotinas de Treino",
+            call: () => _navegarProgramas(context),
           ),
-        ),
-        RoundButton(
-          icon: Icons.list,
-          nome: "Rotinas de Treino",
-          call: () => _navegarProgramas(context),
-        ),
-        RoundButton(
-          icon: Icons.settings,
-          nome: "Configuração",
-          call: () => _navegarConfiguracao(context),
-        ),
-      ],
+          RoundButton(
+            icon: Icons.settings,
+            nome: "Configuração",
+            call: () => _navegarConfiguracao(context),
+          ),
+        ],
+      ),
     );
   }
 }

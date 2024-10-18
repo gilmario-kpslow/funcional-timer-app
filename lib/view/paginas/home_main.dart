@@ -15,9 +15,9 @@ class _HomeMainState extends State<HomeMain> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.error,
-        title: const Text(
+        title: Text(
           "Funcional Timer",
-          style: TextStyle(color: Colors.white),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           IconButton(
