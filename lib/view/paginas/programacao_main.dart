@@ -21,6 +21,7 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
 
   _getLista() async {
     var list = await service.getLista();
+    print(list.length);
     setState(() {
       lista = list;
     });
@@ -72,7 +73,8 @@ class _ProgramacaoMainState extends State<ProgramacaoMain> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.error,
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: IconThemeData(color: Colors.white),
         title: const Text(
           "Rotinas de Treino",
           style: TextStyle(color: Colors.white),

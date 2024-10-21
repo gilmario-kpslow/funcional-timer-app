@@ -11,9 +11,14 @@ class _ConfiguracaoProgramaState extends State<ConfiguracaoPrograma> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBarDef(titulo: "Configuração") as AppBar,
       appBar: AppBar(
-        title: const Text("Configuração"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(
+          "sdfsd",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: const Column(
         children: [

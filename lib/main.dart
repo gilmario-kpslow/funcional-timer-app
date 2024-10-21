@@ -2,14 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:cristimer/view/paginas/home_main.dart';
 
 Future<void> main() async {
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-
-    runApp(const FuncinalApp());
-  } catch (e) {
-    // ignore: avoid_print
-    print(e);
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const FuncinalApp());
 }
 
 class FuncinalApp extends StatefulWidget {
@@ -35,15 +29,15 @@ class _FuncinalAppState extends State<FuncinalApp> {
       title: 'Funcional APP',
       theme: ThemeData(
         colorScheme: const ColorScheme(
-          brightness: Brightness.dark,
-          primary: Color.fromARGB(255, 255, 0, 0),
-          onPrimary: Colors.redAccent,
-          secondary: Color.fromARGB(255, 177, 33, 33),
+          brightness: Brightness.light,
+          primary: Colors.red,
+          onPrimary: Colors.white,
+          secondary: Colors.red,
           onSecondary: Colors.red,
           error: Colors.red,
           onError: Colors.red,
-          surface: Color.fromARGB(255, 255, 218, 212),
-          onSurface: Color.fromARGB(255, 255, 218, 212),
+          surface: Color.fromARGB(255, 255, 255, 255),
+          onSurface: Colors.red,
         ),
         textTheme: const TextTheme(
             titleLarge: TextStyle(fontSize: 30, color: Colors.white),
