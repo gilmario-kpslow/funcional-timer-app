@@ -12,7 +12,6 @@ class SomUtil {
       return;
     }
     await _player.play(AssetSource(source));
-    // await _player.play();
   }
 
   pause() async {

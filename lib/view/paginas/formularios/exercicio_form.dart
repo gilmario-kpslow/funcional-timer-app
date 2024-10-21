@@ -1,23 +1,24 @@
 import 'package:cristimer/view/widgets/seleciona_som.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/modelos/exercicio.dart';
 import 'package:cristimer/core/util/mask.dart';
 import 'package:cristimer/core/util/tempoutil.dart';
 
-class RoundForm extends StatefulWidget {
-  final void Function(Round round) onSubmit;
-  final Round? round;
+class ExercicioForm extends StatefulWidget {
+  final void Function(Exercicio exercicio) onSubmit;
+  final Exercicio? exercicio;
   final bool pausa;
-  const RoundForm(this.onSubmit, this.round, {super.key, this.pausa = false});
-  const RoundForm.pausa(this.onSubmit,
-      {super.key, this.round, this.pausa = true});
+  const ExercicioForm(this.onSubmit, this.exercicio,
+      {super.key, this.pausa = false});
+  const ExercicioForm.pausa(this.onSubmit,
+      {super.key, this.exercicio, this.pausa = true});
 
   @override
-  State<RoundForm> createState() => _RoundForm();
+  State<ExercicioForm> createState() => _ExercicioForm();
 }
 
-class _RoundForm extends State<RoundForm> {
+class _ExercicioForm extends State<ExercicioForm> {
   final _nomeController = TextEditingController();
   final _tempoController = TextEditingController();
   final _delayController = TextEditingController();
@@ -36,15 +37,16 @@ class _RoundForm extends State<RoundForm> {
 
   _init() {
     // print(widget.round?.somInicio);
-    _nomeController.text = widget.round?.nome ?? "";
-    _tempoController.text = TempoUtil.format(widget.round?.tempo ?? 0);
-    _delayController.text = TempoUtil.format(widget.round?.delayTermino ?? 0);
-    _descricaoController.text = widget.round?.descricao ?? "";
-    _somInicioController.text = widget.round?.somInicio ?? "";
-    _somPreTerminoController.text = widget.round?.somPreTermino ?? "";
-    _somTerminoController.text = widget.round?.somTermino ?? "";
+    _nomeController.text = widget.exercicio?.nome ?? "";
+    _tempoController.text = TempoUtil.format(widget.exercicio?.tempo ?? 0);
+    _delayController.text =
+        TempoUtil.format(widget.exercicio?.delayTermino ?? 0);
+    _descricaoController.text = widget.exercicio?.descricao ?? "";
+    _somInicioController.text = widget.exercicio?.somInicio ?? "";
+    _somPreTerminoController.text = widget.exercicio?.somPreTermino ?? "";
+    _somTerminoController.text = widget.exercicio?.somTermino ?? "";
 
-    id = widget.round?.id ?? 0;
+    id = widget.exercicio?.id ?? 0;
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -59,13 +61,13 @@ class _RoundForm extends State<RoundForm> {
   _submitForm() {
     if (widget.pausa) {
       final tempo = TempoUtil.parse(_tempoController.text);
-      Round round = Round.basico(
+      Exercicio exercicio = Exercicio.basico(
         nome: "Pausa",
         descricao: "Pausa",
         tempo: tempo,
       );
 
-      widget.onSubmit(round);
+      widget.onSubmit(exercicio);
 
       return;
     }
@@ -82,7 +84,7 @@ class _RoundForm extends State<RoundForm> {
     final somPreTermino = _somPreTerminoController.text;
     final somTermino = _somTerminoController.text;
 
-    Round round = Round.basico(
+    Exercicio exercicio = Exercicio.basico(
       nome: nome,
       descricao: descricao,
       tempo: tempo,
@@ -93,10 +95,10 @@ class _RoundForm extends State<RoundForm> {
     );
 
     if (id != 0) {
-      round.id = id;
-      round.ordem = widget.round?.ordem ?? 0;
+      exercicio.id = id;
+      exercicio.ordem = widget.exercicio?.ordem ?? 0;
     }
-    widget.onSubmit(round);
+    widget.onSubmit(exercicio);
   }
 
   @override

@@ -37,17 +37,6 @@ class SobreWidget extends StatelessWidget {
         ),
         ListTile(
           dense: true,
-          title: Text(
-              "Criar animação de contagem quando o botao play for pressionado"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        ListTile(
-          dense: true,
-          title: Text("Criar a opção sobre pra falar do APP"),
-          trailing: Icon(Icons.warning_amber_outlined),
-        ),
-        ListTile(
-          dense: true,
           title: Text("Criar um site de ajuda"),
           trailing: Icon(Icons.warning_amber_outlined),
         ),

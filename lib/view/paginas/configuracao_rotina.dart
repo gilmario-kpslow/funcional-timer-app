@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ConfiguracaoPrograma extends StatefulWidget {
-  const ConfiguracaoPrograma({super.key});
+class ConfiguracaoRotina extends StatefulWidget {
+  const ConfiguracaoRotina({super.key});
 
   @override
-  State<ConfiguracaoPrograma> createState() => _ConfiguracaoProgramaState();
+  State<ConfiguracaoRotina> createState() => _ConfiguracaoProgramaState();
 }
 
-class _ConfiguracaoProgramaState extends State<ConfiguracaoPrograma> {
+class _ConfiguracaoProgramaState extends State<ConfiguracaoRotina> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

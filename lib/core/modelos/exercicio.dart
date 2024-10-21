@@ -1,6 +1,6 @@
-class Round {
+class Exercicio {
   int? id;
-  int? programacaoId;
+  int? rotinaId;
   final String nome;
   final String descricao;
   final int tempo;
@@ -11,9 +11,9 @@ class Round {
   final String somTermino;
   int ordem;
 
-  Round({
+  Exercicio({
     required this.id,
-    required this.programacaoId,
+    required this.rotinaId,
     required this.nome,
     required this.descricao,
     required this.tempo,
@@ -25,7 +25,7 @@ class Round {
     required this.ordem,
   });
 
-  Round.basico(
+  Exercicio.basico(
       {required this.nome,
       required this.descricao,
       required this.tempo,
@@ -36,14 +36,14 @@ class Round {
       this.somTermino = "",
       this.ordem = 0});
 
-  static Round fromMap(Map<String, dynamic> jsonMap) {
-    return Round.fromJson(jsonMap);
+  static Exercicio fromMap(Map<String, dynamic> jsonMap) {
+    return Exercicio.fromJson(jsonMap);
   }
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'programacao_id': programacaoId,
+      'rotina_id': rotinaId,
       'nome': nome,
       'descricao': descricao,
       'tempo': tempo,
@@ -56,10 +56,10 @@ class Round {
     };
   }
 
-  static Round fromJson(Map<String, dynamic> map) {
-    return Round(
+  static Exercicio fromJson(Map<String, dynamic> map) {
+    return Exercicio(
       id: map['id'] as int,
-      programacaoId: map['programacao_id'] as int,
+      rotinaId: map['rotina_id'] as int,
       nome: map['nome'] as String,
       descricao: map['descricao'] as String,
       tempo: map['tempo'] as int,

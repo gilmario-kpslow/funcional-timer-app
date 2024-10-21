@@ -1,16 +1,16 @@
 import 'package:cristimer/core/modelos/entity.dart';
 
-class Programacao extends Entity<Programacao> {
+class Rotina extends Entity<Rotina> {
   final String nome;
   final String? descricao;
   final String status;
   int? id;
-  Programacao(this.id, this.nome, this.descricao, this.status);
-  Programacao.basico(this.nome, this.descricao, this.status);
+  Rotina(this.id, this.nome, this.descricao, this.status);
+  Rotina.basico(this.nome, this.descricao, this.status);
 
   @override
-  Programacao fromMap(Map<String, dynamic> jsonMap) {
-    return Programacao.fromJson(jsonMap);
+  Rotina fromMap(Map<String, dynamic> jsonMap) {
+    return Rotina.fromJson(jsonMap);
   }
 
   @override
@@ -23,8 +23,8 @@ class Programacao extends Entity<Programacao> {
     };
   }
 
-  static Programacao fromJson(Map<String, dynamic> map) {
-    return Programacao(
+  static Rotina fromJson(Map<String, dynamic> map) {
+    return Rotina(
         map['id'] as int, //
         map['nome'] as String,
         map['descricao'] as String,

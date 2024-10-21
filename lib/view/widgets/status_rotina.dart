@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/core/modelos/programacao.dart';
-import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/modelos/rotina.dart';
+import 'package:cristimer/core/modelos/exercicio.dart';
 
-class StatusPrograma extends StatelessWidget {
-  const StatusPrograma({
+class StatusRotina extends StatelessWidget {
+  const StatusRotina({
     super.key,
-    required this.programacao,
+    required this.rotina,
     required this.lista,
     required this.tempo,
   });
 
-  final Programacao? programacao;
-  final List<Round> lista;
+  final Rotina? rotina;
+  final List<Exercicio> lista;
   final String tempo;
 
   _info(String titulo, String valor) {
@@ -41,8 +41,9 @@ class StatusPrograma extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _info("Nome", programacao?.nome ?? ""),
-                _info("Descrição", programacao?.descricao ?? ""),
+                // _info("Nome", programacao?.nome ?? ""),
+                // _info("Descrição", programacao?.descricao ?? ""),
+
                 _info("Execícios", "${lista.length}"),
                 _info("Duração", tempo),
               ],
@@ -54,9 +55,9 @@ class StatusPrograma extends StatelessWidget {
   }
 }
 
-class DadoPrograma extends StatelessWidget {
+class DadoRotina extends StatelessWidget {
   final String texto;
-  const DadoPrograma({
+  const DadoRotina({
     super.key,
     required this.texto,
   });

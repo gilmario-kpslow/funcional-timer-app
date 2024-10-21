@@ -1,26 +1,26 @@
 import 'dart:async';
 
-import 'package:cristimer/view/paginas/programa_main.dart';
+import 'package:cristimer/view/paginas/rotina_main.dart';
 import 'package:cristimer/view/widgets/contador.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/widgets/contador_tempo.dart';
-import 'package:cristimer/core/modelos/programacao.dart';
-import 'package:cristimer/core/modelos/round.dart';
-import 'package:cristimer/core/service/round_service.dart';
+import 'package:cristimer/core/modelos/rotina.dart';
+import 'package:cristimer/core/modelos/exercicio.dart';
+import 'package:cristimer/core/service/exercicio_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
 
-class ExecutarRound extends StatefulWidget {
-  final Programacao programacao;
-  const ExecutarRound(this.programacao, {super.key});
+class ExecutorRotina extends StatefulWidget {
+  final Rotina rotina;
+  const ExecutorRotina(this.rotina, {super.key});
 
   @override
-  State<ExecutarRound> createState() => _ExecutarRoundState();
+  State<ExecutorRotina> createState() => _ExecutorRotinaState();
 }
 
-class _ExecutarRoundState extends State<ExecutarRound> {
-  final RoundService _roundService = RoundService();
-  List<Round> _rounds = [];
-  Round? _selecionado;
+class _ExecutorRotinaState extends State<ExecutorRotina> {
+  final ExercicioService _exercicioService = ExercicioService();
+  List<Exercicio> _exercicios = [];
+  Exercicio? _selecionado;
   int _index = 0;
   int _tempo = 0;
   bool _ativo = false;
@@ -30,10 +30,14 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   @override
   void initState() {
     super.initState();
-    _roundService.getLista(widget.programacao.id).then((lista) {
+    _init();
+  }
+
+  _init() {
+    _exercicioService.getLista(widget.rotina.id).then((lista) {
       setState(() {
-        _rounds = lista;
-        if (_rounds.isNotEmpty) {
+        _exercicios = lista;
+        if (_exercicios.isNotEmpty) {
           _selecionado = lista[0];
         }
         _tempo = _selecionado?.tempo ?? 0;
@@ -69,7 +73,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
       return;
     }
 
-    if (_index < _rounds.length - 1) {
+    if (_index < _exercicios.length - 1) {
       _avancar();
       return;
     }
@@ -83,7 +87,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   _reposicionar(int next) {
     setState(() {
       _index = _index + next;
-      _selecionado = _rounds[_index];
+      _selecionado = _exercicios[_index];
       _tempo = _selecionado?.tempo ?? 0;
     });
   }
@@ -102,7 +106,6 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   }
 
   _iniciar(context) async {
-    // NotificationController.createNewNotification();
     if (_ativo) {
       return;
     }
@@ -140,7 +143,7 @@ class _ExecutarRoundState extends State<ExecutarRound> {
   }
 
   _avancar() {
-    if (_index < _rounds.length - 1) {
+    if (_index < _exercicios.length - 1) {
       _reposicionar(1);
     }
   }
@@ -171,74 +174,72 @@ class _ExecutarRoundState extends State<ExecutarRound> {
 
   @override
   Widget build(BuildContext context) {
-    // const botoes = Padding(
-    //   padding: EdgeInsets.only(bottom: 10.0),
-    //   child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-    //     RoundButton(
-    //         icon: Icons.published_with_changes_rounded, nome: "Reiniciar"),
-    //     RoundButton(icon: Icons.star_outline, nome: "Favoritar"),
-    //     RoundButton(icon: Icons.settings_suggest, nome: "Configurar"),
-    //   ]),
-    // );
-
-    var round = Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-            style: const TextStyle(
-                fontSize: 35, color: Colors.blue, fontWeight: FontWeight.bold),
-            _selecionado?.nome ?? ""),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10),
-          child: Text(
-            _selecionado?.descricao ?? "",
-            style: const TextStyle(fontSize: 20),
+    var round = Container(
+      width: double.infinity,
+      color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+              style: const TextStyle(
+                  fontSize: 35, color: Colors.red, fontWeight: FontWeight.bold),
+              _selecionado?.nome ?? "Nome do exercicio"),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: Text(
+              _selecionado?.descricao ?? "Descricao do exercicio",
+              style: const TextStyle(fontSize: 20),
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 15),
-          child: ContadorTempo(tempo: _tempo),
-        )
-      ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: 15),
+            child: ContadorTempo(tempo: _tempo),
+          )
+        ],
+      ),
     );
 
     player(context) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          IconButton(
-              onPressed: _voltar,
-              icon: const Icon(
-                Icons.arrow_back,
-                size: 40,
-              )),
-          _buttonPlay(context),
-          TextButton(
-              onPressed: _parar,
-              child: const Icon(
-                Icons.stop,
-                size: 40,
-              )),
-          IconButton(
-              onPressed: _avancar,
-              icon: const Icon(
-                Icons.arrow_forward,
-                size: 40,
-              )),
-        ],
-      );
+      return _exercicios.isEmpty
+          ? null
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                IconButton(
+                    onPressed: _voltar,
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      size: 40,
+                    )),
+                _buttonPlay(context),
+                TextButton(
+                    onPressed: _parar,
+                    child: const Icon(
+                      Icons.stop,
+                      size: 40,
+                    )),
+                IconButton(
+                    onPressed: _avancar,
+                    icon: const Icon(
+                      Icons.arrow_forward,
+                      size: 40,
+                    )),
+              ],
+            );
     }
 
     var lista = Flexible(
-      child: _rounds.length == 0
-          ? Text("data")
+      child: _exercicios.isEmpty
+          ? const ListTile(
+              title: Text("Nenhum exercicio cadastrado"),
+            )
           : ListView.builder(
               scrollDirection: Axis.vertical,
-              itemCount: _rounds.length,
+              itemCount: _exercicios.length,
               itemBuilder: (context, index) {
-                var r = _rounds[index];
+                var r = _exercicios[index];
                 return ListTile(
                   onTap: () {
                     _index = index;
@@ -267,24 +268,27 @@ class _ExecutarRoundState extends State<ExecutarRound> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.programacao.nome,
-          style: TextStyle(color: Colors.white),
+          widget.rotina.nome,
+          style: const TextStyle(color: Colors.white),
         ),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
               onPressed: () {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ProgramaMain(widget.programacao)));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RotinaMain(widget.rotina)))
+                    .then((resp) {
+                  _init();
+                });
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.edit,
                 color: Colors.white,
               ))
         ],
-        backgroundColor: Theme.of(context).colorScheme.error,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -294,7 +298,6 @@ class _ExecutarRoundState extends State<ExecutarRound> {
         color: Colors.amber,
         child: player(context),
       ),
-      // persistentFooterButtons: [Text("data")],
     );
   }
 }

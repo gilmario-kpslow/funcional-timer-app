@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/paginas/programacao_main.dart';
+import 'package:cristimer/view/paginas/rotinas.dart';
 import 'package:cristimer/view/paginas/configuracao.dart';
 
 class DefaultDrawer extends StatelessWidget {
@@ -36,24 +36,16 @@ class DefaultDrawer extends StatelessWidget {
             title: const Text('Programas'),
             selected: index == 1,
             onTap: () {
-              // Update the state of the app
-              // _tap(1);
-              // Then close the drawer
               Navigator.pop(context);
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const ProgramacaoMain()),
+                MaterialPageRoute(builder: (context) => const Rotinas()),
               );
             },
           ),
           ListTile(
             title: const Text('Configurações'),
-            // selected: index == 2,
             onTap: () {
-              // Update the state of the app
-              // _tap(2);
-              // Then close the drawer
               Navigator.pop(context);
               Navigator.push(
                 context,

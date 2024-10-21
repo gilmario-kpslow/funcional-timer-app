@@ -1,14 +1,14 @@
 import 'package:cristimer/view/paginas/configuracao.dart';
 import 'package:cristimer/view/widgets/round_botao.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/paginas/programacao_main.dart';
+import 'package:cristimer/view/paginas/rotinas.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
-  _navegarProgramas(context) {
+  _navegarRotinas(context) {
     Navigator.push(
-        context, MaterialPageRoute(builder: (ctx) => const ProgramacaoMain()));
+        context, MaterialPageRoute(builder: (ctx) => const Rotinas()));
   }
 
   _navegarConfiguracao(context) {
@@ -23,17 +23,10 @@ class Dashboard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(15.0),
-          //   child: Text(
-          //     "INICIO",
-          //     style: Theme.of(context).textTheme.displayLarge,
-          //   ),
-          // ),
           RoundButton(
             icon: Icons.list,
             nome: "Rotinas de Treino",
-            call: () => _navegarProgramas(context),
+            call: () => _navegarRotinas(context),
           ),
           RoundButton(
             icon: Icons.settings,

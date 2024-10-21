@@ -1,14 +1,14 @@
 import 'package:cristimer/core/database/databaseutil.dart';
-import 'package:cristimer/core/modelos/round.dart';
+import 'package:cristimer/core/modelos/exercicio.dart';
 import 'package:sqflite/sqflite.dart';
 
-class RoundService {
-  static const String table = "ROUND";
+class ExercicioService {
+  static const String table = "EXERCICIO";
 
-  salvar(Round entity) async {
+  salvar(Exercicio entity) async {
     final db = await DatabaseUtil.getDatabase();
     if (entity.ordem == 0) {
-      var ordem = await getOrder(entity.programacaoId);
+      var ordem = await getOrder(entity.rotinaId);
 
       if (ordem.first.row[0] == null) {
         entity.ordem = 1;
@@ -16,7 +16,6 @@ class RoundService {
         entity.ordem = ordem.first.row[0] + 1;
       }
     }
-    // print(entity.toMap());
 
     await db.insert(
       table,
@@ -25,13 +24,13 @@ class RoundService {
     );
   }
 
-  Future<List<Round>> getLista(int? idPrograma) async {
+  Future<List<Exercicio>> getLista(int? rotinaId) async {
     final db = await DatabaseUtil.getDatabase();
     final List<Map<String, dynamic>> lista = await db.query(table,
-        orderBy: "ordem", where: "programacao_id=?", whereArgs: [idPrograma]);
+        orderBy: "ordem", where: "rotina_id=?", whereArgs: [rotinaId]);
 
     return lista.map((Map<String, dynamic> m) {
-      return Round.fromMap(m);
+      return Exercicio.fromMap(m);
     }).toList();
   }
 
@@ -43,14 +42,14 @@ class RoundService {
   Future<void> ajuste(int? id) async {
     final db = await DatabaseUtil.getDatabase();
 
-    await db.rawUpdate(
-        "UPDATE $table SET ORDEM = id WHERE programacao_id = ? ", [id]);
+    await db
+        .rawUpdate("UPDATE $table SET ORDEM = id WHERE rotina_id = ? ", [id]);
   }
 
   getOrder(int? id) async {
     final db = await DatabaseUtil.getDatabase();
     return await db.rawQuery(
-        "SELECT COUNT(*) as ordem FROM $table WHERE programacao_id=?", [id]);
+        "SELECT COUNT(*) as ordem FROM $table WHERE rotina_id=?", [id]);
   }
 
   delete(int? id) async {
@@ -58,8 +57,8 @@ class RoundService {
     await db.delete(table, where: 'id= ?', whereArgs: [id]);
   }
 
-  deleteByPrograma(int? id) async {
+  deleteByRotina(int? id) async {
     final db = await DatabaseUtil.getDatabase();
-    await db.delete(table, where: "programacao_id=?", whereArgs: [id]);
+    await db.delete(table, where: "rotina_id=?", whereArgs: [id]);
   }
 }

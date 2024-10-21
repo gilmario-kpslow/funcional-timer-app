@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/core/modelos/programacao.dart';
+import 'package:cristimer/core/modelos/rotina.dart';
 
-class ProgramacaoForm extends StatefulWidget {
-  final Programacao? programa;
-  const ProgramacaoForm(this.onSubmit, this.programa, {super.key});
+class RotinaForm extends StatefulWidget {
+  final Rotina? programa;
+  const RotinaForm(this.onSubmit, this.programa, {super.key});
 
-  final void Function(Programacao p) onSubmit;
+  final void Function(Rotina p) onSubmit;
 
   @override
-  State<ProgramacaoForm> createState() => _ProgramacaoForm();
+  State<RotinaForm> createState() => _RotinaForm();
 }
 
-class _ProgramacaoForm extends State<ProgramacaoForm> {
+class _RotinaForm extends State<RotinaForm> {
   final _nomeController = TextEditingController();
   final _descricaoController = TextEditingController();
   int id = 0;
@@ -39,7 +39,7 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
     final nome = _nomeController.text;
     final descricao = _descricaoController.text;
 
-    var entity = Programacao(null, nome, descricao, statusAtivo);
+    var entity = Rotina(null, nome, descricao, statusAtivo);
 
     if (id != 0) {
       entity.id = id;
@@ -65,7 +65,6 @@ class _ProgramacaoForm extends State<ProgramacaoForm> {
             controller: _descricaoController,
             minLines: 2,
             maxLines: 4,
-            // validator: _defaultValidate,
           ),
         ],
       ),
