@@ -1,3 +1,4 @@
+import 'package:cristimer/core/util/color_consts.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 
@@ -31,7 +32,7 @@ class RotinaList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 2),
             child: ListTile(
-              tileColor: const Color.fromARGB(255, 253, 190, 190),
+              tileColor: itemSelecionadoColor,
               onTap: () => selecionar(tr),
               onLongPress: () {
                 delete(tr);

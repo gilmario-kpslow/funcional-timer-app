@@ -38,7 +38,7 @@ class _ContadorState extends State<Contador> with TickerProviderStateMixin {
       setState(() {
         _tempo += 1;
       });
-      if (_tempo > widget.tempo) {
+      if (_tempo >= widget.tempo) {
         widget.call();
       }
     });

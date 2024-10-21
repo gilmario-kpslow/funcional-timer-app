@@ -1,3 +1,4 @@
+import 'package:cristimer/core/util/color_consts.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/widgets/popup_menu.dart';
 import 'package:cristimer/core/util/menu_template.dart';
@@ -71,7 +72,7 @@ class ExercicioList extends StatelessWidget {
             padding: const EdgeInsets.all(2),
             key: Key("${tr.id}"),
             child: ListTile(
-              tileColor: const Color.fromARGB(255, 253, 190, 190),
+              tileColor: itemSelecionadoColor,
               title: Text(
                 tr.nome,
                 style: Theme.of(context).textTheme.titleLarge,

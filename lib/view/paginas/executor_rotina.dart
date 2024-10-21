@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:cristimer/core/util/color_consts.dart';
+import 'package:cristimer/core/util/tempoutil.dart';
 import 'package:cristimer/view/paginas/rotina_main.dart';
 import 'package:cristimer/view/widgets/contador.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,8 @@ import 'package:cristimer/core/modelos/rotina.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
 import 'package:cristimer/core/service/exercicio_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 
 class ExecutorRotina extends StatefulWidget {
   final Rotina rotina;
@@ -26,6 +30,11 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
   bool _ativo = false;
   Timer? timer;
   SomUtil? _player;
+  GlobalKey listaKey = GlobalKey();
+  GlobalKey statusKey = GlobalKey();
+  final ScrollController _scroll = ScrollController();
+
+  // Widget? _listaComponent;
 
   @override
   void initState() {
@@ -84,11 +93,34 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
     });
   }
 
-  _reposicionar(int next) {
+  _reposicionar(int next, BuildContext context) {
     setState(() {
       _index = _index + next;
       _selecionado = _exercicios[_index];
       _tempo = _selecionado?.tempo ?? 0;
+      if (_index == 0) {
+        _scroll.jumpTo(0);
+        return;
+      }
+
+      listaKey.currentContext;
+
+      final box = listaKey.currentContext?.findRenderObject() as RenderBox;
+      final status = statusKey.currentContext?.findRenderObject() as RenderBox;
+      final item =
+          listaKey.currentContext?.findAncestorRenderObjectOfType() as ListView;
+
+      // final pos = item.itemExtent * _index;
+
+      final a = MediaQuery.of(context).size;
+      // print(itemKey.size.height);
+      // print(box.size.height);
+
+      // if (pos + box.localToGlobal(Offset.zero).dy > a.height) {
+      //   print("Maioop");
+      // }
+      // print(pos);
+      // _scroll.jumpTo(pos.dy);
     });
   }
 
@@ -123,7 +155,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
 
   _voltar() {
     if (_index > 0) {
-      _reposicionar(-1);
+      _reposicionar(-1, context);
     }
   }
 
@@ -138,20 +170,20 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
       _ativo = false;
       _tempo = _selecionado?.tempo ?? 0;
       _index = 0;
-      _reposicionar(0);
+      _reposicionar(0, context);
     });
   }
 
   _avancar() {
     if (_index < _exercicios.length - 1) {
-      _reposicionar(1);
+      _reposicionar(1, context);
     }
   }
 
   @override
   void dispose() {
-    super.dispose();
     timer?.cancel();
+    super.dispose();
   }
 
   _buttonPlay(context) {
@@ -174,7 +206,10 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
 
   @override
   Widget build(BuildContext context) {
+    // _scroll.attach();
+
     var round = Container(
+      key: statusKey,
       width: double.infinity,
       color: Colors.white,
       child: Column(
@@ -230,39 +265,48 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
             );
     }
 
-    var lista = Flexible(
+    var listaComponent = Flexible(
+      key: listaKey,
       child: _exercicios.isEmpty
           ? const ListTile(
               title: Text("Nenhum exercicio cadastrado"),
             )
-          : ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: _exercicios.length,
-              itemBuilder: (context, index) {
-                var r = _exercicios[index];
-                return ListTile(
-                  onTap: () {
-                    _index = index;
-                    _reposicionar(0);
-                  },
-                  selectedTileColor: Colors.amber,
-                  selectedColor: Colors.amber,
-                  selected: (_index + 1) == r.ordem,
-                  dense: false,
-                  title: Text(
-                    r.nome,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  // subtitle: Text(
-                  //   r.descricao ?? "",
-                  // ),
-                  trailing: const Icon(Icons.play_arrow),
-                  leading: Text(
-                    "${index + 1}",
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                );
-              }),
+          : Padding(
+              padding: const EdgeInsets.only(bottom: 5),
+              child: ListView.builder(
+                  controller: _scroll,
+                  scrollDirection: Axis.vertical,
+                  itemCount: _exercicios.length,
+                  itemBuilder: (context, index) {
+                    var r = _exercicios[index];
+                    return ListTile(
+                      key: Key("ITEM_${_index}"),
+                      onTap: () {
+                        _index = index;
+                        _reposicionar(0, context);
+                      },
+                      selectedTileColor: itemSelecionadoColor,
+                      // selectedColor: Colors.amber,
+                      selected: (_index + 1) == r.ordem,
+                      dense: false,
+                      title: Text(
+                        r.nome,
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
+                      // subtitle: Text(
+                      //   r.descricao ?? "",
+                      // ),
+                      trailing: Text(
+                        TempoUtil.format(r.tempo),
+                        style: Theme.of(context).textTheme.displayLarge,
+                      ),
+                      leading: Text(
+                        "${index + 1}",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    );
+                  }),
+            ),
     );
 
     return Scaffold(
@@ -292,12 +336,40 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [round, lista],
+        children: [round, listaComponent],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.amber,
+        color: itemSelecionadoColor,
         child: player(context),
       ),
     );
   }
+
+  // Widget stickyBuilder(BuildContext context) {
+  //   return AnimatedBuilder(
+  //     animation: _scroll,
+  //     builder: (context, child) {
+  //       final keyContext = stickyKey.currentContext;
+  //       if (keyContext != null) {
+  //         // widget is visible
+  //         final box = keyContext.findRenderObject() as RenderBox;
+  //         final pos = box.localToGlobal(Offset.zero);
+  //         return Positioned(
+  //           top: pos.dy + box.size.height,
+  //           left: 50.0,
+  //           right: 50.0,
+  //           height: box.size.height,
+  //           child: Material(
+  //             child: Container(
+  //               alignment: Alignment.center,
+  //               color: Colors.purple,
+  //               child: const Text("^ Nah I think you're okay"),
+  //             ),
+  //           ),
+  //         );
+  //       }
+  //       return Container();
+  //     },
+  //   );
+  // }
 }
