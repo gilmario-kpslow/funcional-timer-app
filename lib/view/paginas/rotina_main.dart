@@ -86,7 +86,7 @@ class _RotinaMainState extends State<RotinaMain> {
 
   _remove(Exercicio exercicio) {
     MensagemUtil.confirmar(context, 'Remover Registro',
-        "Remover o Exercicio \"${exercicio.nome}\"?", () {
+        "Remover o Exercício \"${exercicio.nome}\"?", () {
       exercicioService.delete(exercicio.id);
       _getLista();
       Navigator.pop(context);
@@ -128,8 +128,12 @@ class _RotinaMainState extends State<RotinaMain> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(rotina?.nome ?? ""),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        title: Text(
+          rotina?.nome ?? "",
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         primary: true,
         actions: [
           IconButton(
@@ -149,7 +153,7 @@ class _RotinaMainState extends State<RotinaMain> {
               children: [
                 status,
                 Text(
-                  "Exercicios",
+                  "Exercícios",
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ],

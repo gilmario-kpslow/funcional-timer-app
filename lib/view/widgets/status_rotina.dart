@@ -42,7 +42,13 @@ class StatusRotina extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // _info("Nome", programacao?.nome ?? ""),
-                // _info("Descrição", programacao?.descricao ?? ""),
+                Padding(
+                  padding: const EdgeInsets.only(left: 25, right: 15),
+                  child: Text(
+                    rotina?.descricao ?? "",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
 
                 _info("Execícios", "${lista.length}"),
                 _info("Duração", tempo),

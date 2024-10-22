@@ -12,6 +12,7 @@ import 'package:cristimer/core/service/exercicio_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 
 class ExecutorRotina extends StatefulWidget {
   final Rotina rotina;
@@ -32,6 +33,9 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
   SomUtil? _player;
   GlobalKey listaKey = GlobalKey();
   GlobalKey statusKey = GlobalKey();
+  GlobalKey buttonKey = GlobalKey();
+  GlobalKey appBarKey = GlobalKey();
+
   final ScrollController _scroll = ScrollController();
 
   // Widget? _listaComponent;
@@ -105,22 +109,35 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
 
       listaKey.currentContext;
 
-      final box = listaKey.currentContext?.findRenderObject() as RenderBox;
-      final status = statusKey.currentContext?.findRenderObject() as RenderBox;
-      final item =
-          listaKey.currentContext?.findAncestorRenderObjectOfType() as ListView;
+      final status = statusKey.currentContext?.size;
+      final lista = listaKey.currentContext?.size;
+      final botoes = buttonKey.currentContext?.size;
+      final appBat = appBarKey.currentContext?.size;
 
+      // print(item);
       // final pos = item.itemExtent * _index;
 
       final a = MediaQuery.of(context).size;
+
+      print("tela ${a.height}");
+      print("lista ${lista?.height}");
+      print("status ${status?.height}");
+      print("botoes ${botoes?.height}");
+      print("appBar ${appBat?.height}");
+
+      print(
+          "${(botoes?.height ?? 0) + (status?.height ?? 0) + (lista?.height ?? 0) + (appBat?.height ?? 0)}");
+
       // print(itemKey.size.height);
       // print(box.size.height);
 
       // if (pos + box.localToGlobal(Offset.zero).dy > a.height) {
       //   print("Maioop");
       // }
-      // print(pos);
-      // _scroll.jumpTo(pos.dy);
+      //  print(pos);
+      if (_ativo) {
+        //  _scroll.jumpTo();
+      }
     });
   }
 
@@ -230,7 +247,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
           Padding(
             padding: const EdgeInsets.only(bottom: 15),
             child: ContadorTempo(tempo: _tempo),
-          )
+          ),
         ],
       ),
     );
@@ -239,6 +256,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
       return _exercicios.isEmpty
           ? null
           : Row(
+              key: buttonKey,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -311,6 +329,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
 
     return Scaffold(
       appBar: AppBar(
+        key: appBarKey,
         title: Text(
           widget.rotina.nome,
           style: const TextStyle(color: Colors.white),
