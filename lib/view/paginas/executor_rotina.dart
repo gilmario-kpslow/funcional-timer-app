@@ -10,9 +10,6 @@ import 'package:cristimer/core/modelos/rotina.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
 import 'package:cristimer/core/service/exercicio_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 
 class ExecutorRotina extends StatefulWidget {
   final Rotina rotina;
