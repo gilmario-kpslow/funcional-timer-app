@@ -31,14 +31,8 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
   bool _ativo = false;
   Timer? timer;
   SomUtil? _player;
-  GlobalKey listaKey = GlobalKey();
-  GlobalKey statusKey = GlobalKey();
-  GlobalKey buttonKey = GlobalKey();
-  GlobalKey appBarKey = GlobalKey();
 
   final ScrollController _scroll = ScrollController();
-
-  // Widget? _listaComponent;
 
   @override
   void initState() {
@@ -60,9 +54,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
   }
 
   _relogio(Timer timer) async {
-    // print("$_ativo TIMER ${timer.tick}");
     if (!_ativo) {
-      // timer = null;
       timer.cancel();
       return;
     }
@@ -107,36 +99,12 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
         return;
       }
 
-      listaKey.currentContext;
-
-      final status = statusKey.currentContext?.size;
-      final lista = listaKey.currentContext?.size;
-      final botoes = buttonKey.currentContext?.size;
-      final appBat = appBarKey.currentContext?.size;
-
-      // print(item);
-      // final pos = item.itemExtent * _index;
-
-      final a = MediaQuery.of(context).size;
-
-      print("tela ${a.height}");
-      print("lista ${lista?.height}");
-      print("status ${status?.height}");
-      print("botoes ${botoes?.height}");
-      print("appBar ${appBat?.height}");
-
-      print(
-          "${(botoes?.height ?? 0) + (status?.height ?? 0) + (lista?.height ?? 0) + (appBat?.height ?? 0)}");
-
-      // print(itemKey.size.height);
-      // print(box.size.height);
-
-      // if (pos + box.localToGlobal(Offset.zero).dy > a.height) {
-      //   print("Maioop");
-      // }
-      //  print(pos);
       if (_ativo) {
-        //  _scroll.jumpTo();
+        var d =
+            (_scroll.position.maxScrollExtent / _exercicios.length) * _index;
+
+        _scroll.animateTo(d,
+            duration: const Duration(milliseconds: 400), curve: Curves.easeOut);
       }
     });
   }
@@ -226,7 +194,6 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
     // _scroll.attach();
 
     var round = Container(
-      key: statusKey,
       width: double.infinity,
       color: Colors.white,
       child: Column(
@@ -256,7 +223,6 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
       return _exercicios.isEmpty
           ? null
           : Row(
-              key: buttonKey,
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -284,7 +250,6 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
     }
 
     var listaComponent = Flexible(
-      key: listaKey,
       child: _exercicios.isEmpty
           ? const ListTile(
               title: Text("Nenhum exercicio cadastrado"),
@@ -329,7 +294,6 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
 
     return Scaffold(
       appBar: AppBar(
-        key: appBarKey,
         title: Text(
           widget.rotina.nome,
           style: const TextStyle(color: Colors.white),
