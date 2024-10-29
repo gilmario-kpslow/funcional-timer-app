@@ -30,7 +30,7 @@ class _FuncinalAppState extends State<FuncinalApp> {
       theme: ThemeData(
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
-          primary: Colors.red,
+          primary: Color.fromARGB(255, 192, 30, 0),
           onPrimary: Colors.white,
           secondary: Colors.red,
           onSecondary: Colors.red,
@@ -38,6 +38,11 @@ class _FuncinalAppState extends State<FuncinalApp> {
           onError: Colors.red,
           surface: Color.fromARGB(255, 255, 255, 255),
           onSurface: Colors.red,
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 192, 30, 0),
+          titleTextStyle: TextStyle(color: Colors.white, fontSize: 25),
+          iconTheme: IconThemeData(color: Colors.white),
         ),
         textTheme: const TextTheme(
             titleLarge: TextStyle(fontSize: 30, color: Colors.white),

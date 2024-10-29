@@ -128,13 +128,9 @@ class _RotinaMainState extends State<RotinaMain> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
         title: Text(
           rotina?.nome ?? "",
-          style: TextStyle(color: Colors.white),
         ),
-        iconTheme: const IconThemeData(color: Colors.white),
-        primary: true,
         actions: [
           IconButton(
             onPressed: _cadastrarPausa,

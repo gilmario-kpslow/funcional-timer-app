@@ -14,10 +14,10 @@ class _HomeMainState extends State<HomeMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.error,
-        title: Text(
+        // backgroundColor: Theme.of(context).colorScheme.primary,
+        title: const Text(
           "Funcional Timer",
-          style: Theme.of(context).textTheme.titleLarge,
+          // style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           IconButton(
@@ -29,7 +29,6 @@ class _HomeMainState extends State<HomeMain> {
             },
             icon: const Icon(
               Icons.info,
-              color: Colors.white,
             ),
             tooltip: "Sobre",
           )

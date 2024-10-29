@@ -71,21 +71,16 @@ class _RotinasState extends State<Rotinas> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           "Rotinas de Treino",
-          style: TextStyle(color: Colors.white),
         ),
       ),
       body: programacoes,
       floatingActionButton: FloatingActionButton(
         onPressed: _cadastrar,
         tooltip: 'Nova Rotina',
-        backgroundColor: Colors.red,
         child: const Icon(
           Icons.add,
-          color: Colors.white,
         ),
       ),
       floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,

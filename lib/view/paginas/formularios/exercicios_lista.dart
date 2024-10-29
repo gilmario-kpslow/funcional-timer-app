@@ -18,10 +18,6 @@ class ExercicioList extends StatelessWidget {
   final Function(int index, int newIndex) _reorder;
   static const List<MenuTemplate> _opcoes = [
     MenuTemplate(
-        titulo: "Selecionar",
-        icone: Icons.check,
-        valor: MenuItemOption.selecionar),
-    MenuTemplate(
         titulo: "Editar", icone: Icons.edit, valor: MenuItemOption.editar),
     MenuTemplate(
         titulo: "Remover", icone: Icons.remove, valor: MenuItemOption.excluir)

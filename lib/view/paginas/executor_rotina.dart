@@ -293,10 +293,10 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
       appBar: AppBar(
         title: Text(
           widget.rotina.nome,
-          style: const TextStyle(color: Colors.white),
+          // style: const TextStyle(color: Colors.white),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        iconTheme: const IconThemeData(color: Colors.white),
+        // backgroundColor: Theme.of(context).colorScheme.primary,
+        // iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
               onPressed: () {

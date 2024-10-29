@@ -13,12 +13,12 @@ class _ConfiguracaoProgramaState extends State<ConfiguracaoRotina> {
     return Scaffold(
       // appBar: AppBarDef(titulo: "Configuração") as AppBar,
       appBar: AppBar(
-        title: Text(
-          "sdfsd",
-          style: TextStyle(color: Colors.white),
+        title: const Text(
+          "Configuracoes Gerais",
+          // style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        iconTheme: const IconThemeData(color: Colors.white),
+        // backgroundColor: Theme.of(context).colorScheme.primary,
+        // iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: const Column(
         children: [
