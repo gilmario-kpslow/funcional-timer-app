@@ -32,7 +32,7 @@ class RotinaList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 2),
             child: ListTile(
-              tileColor: itemSelecionadoColor,
+              tileColor: Theme.of(context).colorScheme.onTertiary,
               onTap: () => selecionar(tr),
               onLongPress: () {
                 delete(tr);

@@ -198,8 +198,9 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-              style: const TextStyle(
-                  fontSize: 35, color: Colors.red, fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.headlineLarge,
+              // const TextStyle(.,
+              //     fontSize: 35, fontWeight: FontWeight.bold),
               _selecionado?.nome ?? "Nome do exercicio"),
           Padding(
             padding: const EdgeInsets.only(bottom: 10),
@@ -265,8 +266,8 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
                         _index = index;
                         _reposicionar(0, context);
                       },
-                      selectedTileColor: itemSelecionadoColor,
-                      // selectedColor: Colors.amber,
+                      // selectedTileColor: itemSelecionadoColor,
+                      selectedColor: Theme.of(context).colorScheme.onTertiary,
                       selected: (_index + 1) == r.ordem,
                       dense: false,
                       title: Text(
@@ -319,7 +320,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
         children: [round, listaComponent],
       ),
       bottomNavigationBar: BottomAppBar(
-        color: itemSelecionadoColor,
+        color: Theme.of(context).colorScheme.onTertiary,
         child: player(context),
       ),
     );

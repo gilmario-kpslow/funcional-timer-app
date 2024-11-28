@@ -68,7 +68,7 @@ class ExercicioList extends StatelessWidget {
             padding: const EdgeInsets.all(2),
             key: Key("${tr.id}"),
             child: ListTile(
-              tileColor: itemSelecionadoColor,
+              tileColor: Theme.of(context).colorScheme.onTertiary,
               title: Text(
                 tr.nome,
                 style: Theme.of(context).textTheme.titleLarge,
