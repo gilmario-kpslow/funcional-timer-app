@@ -43,11 +43,11 @@ class RotinaList extends StatelessWidget {
               ),
               subtitle: Text(
                 tr.descricao ?? "",
-                style: Theme.of(context).textTheme.bodyMedium,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
               leading: Text(
                 "${tr.id}",
-                style: Theme.of(context).textTheme.labelLarge,
+                style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
           );

@@ -1,4 +1,3 @@
-import 'package:cristimer/core/util/color_consts.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/widgets/popup_menu.dart';
 import 'package:cristimer/core/util/menu_template.dart';
@@ -75,6 +74,7 @@ class ExercicioList extends StatelessWidget {
               ),
               subtitle: Text(
                 "${TempoUtil.format(tr.tempo)} ${tr.descricao}",
+                style: Theme.of(context).textTheme.labelMedium,
               ),
               trailing: PopupMenu(
                 select: _menuSelect,
@@ -83,11 +83,8 @@ class ExercicioList extends StatelessWidget {
               ),
               leading: Text(
                 "${index + 1}",
-                style: const TextStyle(fontSize: 20),
+                style: Theme.of(context).textTheme.labelMedium,
               ),
-              // leading: tr.nome == 'Pausa'
-              //     ? const Icon(Icons.pause)
-              //     : const Icon(Icons.play_arrow_outlined),
             ),
           );
         });
