@@ -18,17 +18,14 @@ class FuncinalApp extends StatefulWidget {
 }
 
 class _FuncinalAppState extends State<FuncinalApp> {
-  @override
-  void initState() {
-    super.initState();
-  }
+  var temas = [temaVermelho, temaAzul];
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: FuncinalApp.navigatorKey,
       title: 'Funcional APP',
-      theme: temaAzul,
+      theme: temas[0],
       home: const HomeMain(),
     );
   }
