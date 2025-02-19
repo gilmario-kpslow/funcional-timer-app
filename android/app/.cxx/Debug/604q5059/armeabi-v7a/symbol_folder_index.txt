@@ -1,0 +1,1 @@
+/home/gilmario/NetBeansProjects/gilmario/funcional_timer_app/build/app/intermediates/cxx/Debug/604q5059/obj/armeabi-v7a

@@ -4,7 +4,11 @@ class SomUtil {
   final AudioPlayer _player = AudioPlayer();
 
   SomUtil() {
+    AudioPlayer.global.setAudioContext(AudioContextConfig(
+            stayAwake: true, focus: AudioContextConfigFocus.mixWithOthers)
+        .build());
     _player.setReleaseMode(ReleaseMode.stop);
+    _player.setPlayerMode(PlayerMode.lowLatency);
   }
 
   play(String? source) async {

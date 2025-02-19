@@ -1,0 +1,2 @@
+/home/gilmario/NetBeansProjects/gilmario/funcional_timer_app/android/app/.cxx/Debug/604q5059/armeabi-v7a/CMakeFiles/edit_cache.dir
+/home/gilmario/NetBeansProjects/gilmario/funcional_timer_app/android/app/.cxx/Debug/604q5059/armeabi-v7a/CMakeFiles/rebuild_cache.dir

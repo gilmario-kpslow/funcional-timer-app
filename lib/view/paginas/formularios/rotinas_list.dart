@@ -1,4 +1,3 @@
-import 'package:cristimer/core/util/color_consts.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 
