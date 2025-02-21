@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:cristimer/core/util/color_consts.dart';
+import 'package:cristimer/core/modelos/serie.dart';
+import 'package:cristimer/core/service/serie_service.dart';
 import 'package:cristimer/core/util/tempoutil.dart';
 import 'package:cristimer/view/paginas/rotina_main.dart';
 import 'package:cristimer/view/widgets/contador.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:cristimer/view/widgets/contador_tempo.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
-import 'package:cristimer/core/service/exercicio_service.dart';
+// import 'package:cristimer/core/service/exercicio_service.dart';
 import 'package:cristimer/core/util/somutil.dart';
 
 class ExecutorRotina extends StatefulWidget {
@@ -20,9 +21,14 @@ class ExecutorRotina extends StatefulWidget {
 }
 
 class _ExecutorRotinaState extends State<ExecutorRotina> {
-  final ExercicioService _exercicioService = ExercicioService();
+  // final ExercicioService _exercicioService = ExercicioService();
+  final SerieService _serieService = SerieService();
   List<Exercicio> _exercicios = [];
+  List<Serie> _series = [];
+
   Exercicio? _selecionado;
+  Serie? _serie;
+
   int _index = 0;
   int _tempo = 0;
   bool _ativo = false;
@@ -38,14 +44,26 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
   }
 
   _init() {
-    _exercicioService.getLista(widget.rotina.id).then((lista) {
+    _player = SomUtil();
+    // _exercicioService.getLista(widget.rotina.id).then((lista) {
+    //   setState(() {
+    //     _exercicios = lista;
+    //     // if (_exercicios.isNotEmpty) {
+    //     //   _selecionado = lista[0];
+    //     // }
+    //     _tempo = _selecionado?.tempo ?? 0;
+    //     _player = SomUtil();
+    //   });
+    // });
+
+    _serieService.getListaPorRotina(widget.rotina.id).then((lista) {
       setState(() {
-        _exercicios = lista;
-        if (_exercicios.isNotEmpty) {
-          _selecionado = lista[0];
+        _series = lista;
+        if (_series.isNotEmpty) {
+          _serie = lista[0];
         }
-        _tempo = _selecionado?.tempo ?? 0;
-        _player = SomUtil();
+        // _tempo = _selecionado?.tempo ?? 0;
+        // _player = SomUtil();
       });
     });
   }

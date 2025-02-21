@@ -5,7 +5,8 @@ class Serie extends Entity<Serie> {
   final String? descricao;
   int? id;
   int? rotinaId;
-  Serie(this.id, this.rotinaId, this.nome, this.descricao);
+  int repeticoes;
+  Serie(this.id, this.rotinaId, this.nome, this.descricao, this.repeticoes);
 
   @override
   Serie fromMap(Map<String, dynamic> jsonMap) {
@@ -19,6 +20,7 @@ class Serie extends Entity<Serie> {
       'rotina_id': rotinaId,
       'nome': nome,
       'descricao': descricao,
+      'repeticoes': repeticoes,
     };
   }
 
@@ -27,6 +29,7 @@ class Serie extends Entity<Serie> {
         map['id'] as int, //
         map['rotina_id'] as int,
         map['nome'] as String,
-        map['descricao'] as String);
+        map['descricao'] as String,
+        map['repeticoes'] as int);
   }
 }

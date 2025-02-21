@@ -17,22 +17,18 @@ class DatabaseUtil {
     );
 
     await db.execute(
-        'CREATE TABLE SERIE( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, nome TEXT NOT NULL, DESCRICAO TEXT)');
+        'CREATE TABLE SERIE( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, nome TEXT NOT NULL, DESCRICAO TEXT, som_inicio TEXT, som_pre_termino TEXT, som_termino TEXT)');
 
     await db.execute(
-      'CREATE TABLE EXERCICIO( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, descricao TEXT, tempo INTEGER NOT NULL, delay_termino INTEGER DEFAULT 0, delay_inicio INTEGER DEFAULT 0, som_inicio TEXT, som_pre_termino TEXT, som_termino TEXT, ordem INTEGER not null)',
+      'CREATE TABLE EXERCICIO( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, descricao TEXT)',
     );
 
     await db.execute(
-        'CREATE TABLE ROTINA_HISTORICO( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, data_execucao DATETIME NOT NULL)');
-
-    await db.execute(
-      'CREATE TABLE EXERCICIO_SERIE(id INTEGER PRIMARY KEY AUTOINCREMENT, serie_id INTEGER NOT NULL, exercicio_id INTEGER NOT NULL, repeticoes INTEGER NOT NULL)',
+      'CREATE TABLE SERIE_EXERCICIO( id INTEGER PRIMARY KEY AUTOINCREMENT, id_serie INTEGER NOT NULL, tempo INTEGER NOT NULL, delay_termino INTEGER DEFAULT 0, delay_inicio INTEGER DEFAULT 0, som_inicio TEXT, som_pre_termino TEXT, som_termino TEXT, ordem INTEGER not null)',
     );
 
     await db.execute(
-      'CREATE TABLE ROTINA_SERIE(id INTEGER PRIMARY KEY AUTOINCREMENT, serie_id INTEGER NOT NULL, rotina_id INTEGER NOT NULL, repeticoes INTEGER NOT NULL)',
-    );
+        'CREATE TABLE HISTORICO_EXECUCAO( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, data_execucao DATETIME NOT NULL)');
   }
 
   static Future<void> removerBanco() async {
