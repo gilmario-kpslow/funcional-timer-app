@@ -1,3 +1,4 @@
+import 'package:cristimer/core/modelos/serie.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
@@ -11,7 +12,7 @@ class StatusRotina extends StatelessWidget {
   });
 
   final Rotina? rotina;
-  final List<Exercicio> lista;
+  final List<Serie> lista;
   final String tempo;
 
   _info(String titulo, String valor) {

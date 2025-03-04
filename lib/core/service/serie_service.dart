@@ -33,7 +33,7 @@ class SerieService {
   Future<List<Serie>> getListaPorRotina(int? idRotina) async {
     final db = await DatabaseUtil.getDatabase();
     final List<Map<String, dynamic>> lista =
-        await db.query('serie', where: "id_rotina=?", whereArgs: [idRotina]);
+        await db.query('serie', where: "rotina_id=?", whereArgs: [idRotina]);
 
     return lista.map((Map<String, dynamic> m) {
       return Serie(0, 0, "", "", 0).fromMap(m);

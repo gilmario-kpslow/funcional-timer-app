@@ -1,4 +1,8 @@
+import 'package:cristimer/core/modelos/serie.dart';
+import 'package:cristimer/core/service/serie_service.dart';
 import 'package:cristimer/core/util/mensagem_util.dart';
+import 'package:cristimer/view/paginas/formularios/serie_form.dart';
+import 'package:cristimer/view/paginas/formularios/serie_lista%20.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/paginas/formularios/exercicio_form.dart';
 import 'package:cristimer/view/widgets/status_rotina.dart';
@@ -21,7 +25,8 @@ class RotinaMain extends StatefulWidget {
 class _RotinaMainState extends State<RotinaMain> {
   RotinaService service = RotinaService();
   ExercicioService exercicioService = ExercicioService();
-  List<Exercicio> lista = List.empty();
+  SerieService serieService = SerieService();
+  List<Serie> lista = List.empty();
   String tempo = "";
   int selectedIndex = 0;
   RotinaFormService formService = RotinaFormService();
@@ -54,9 +59,10 @@ class _RotinaMainState extends State<RotinaMain> {
   }
 
   _getLista() async {
-    var list = await exercicioService.getLista(rotina?.id);
+    var list = await serieService.getListaPorRotina(rotina?.id);
 
-    var t = list.isEmpty ? 0 : list.map((r) => r.tempo).reduce((a, b) => a + b);
+    // var t = list.isEmpty ? 0 : list.map((r) => r.tempo).reduce((a, b) => a + b);
+    var t = 0;
 
     setState(() {
       lista = list;
@@ -64,14 +70,14 @@ class _RotinaMainState extends State<RotinaMain> {
     });
   }
 
-  _seleciona(Exercicio exercicio) {}
+  _seleciona(Serie exercicio) {}
 
-  _cadastrar(Exercicio? exercicio) async {
+  _cadastrar(Serie? serie) async {
     showDialog(
         useSafeArea: true,
         context: context,
         builder: (ctx) {
-          return ExercicioForm(_addExercicio, exercicio);
+          return SerieForm(_addExercicio, serie, widget.rotina.id);
         });
   }
 
@@ -80,11 +86,12 @@ class _RotinaMainState extends State<RotinaMain> {
         useSafeArea: true,
         context: context,
         builder: (ctx) {
-          return ExercicioForm.pausa(_addExercicio);
+          // return SerieForm.pausa(_addExercicio);
+          return Text("OK");
         });
   }
 
-  _remove(Exercicio exercicio) {
+  _remove(Serie exercicio) {
     MensagemUtil.confirmar(context, 'Remover Registro',
         "Remover o Exercício \"${exercicio.nome}\"?", () {
       exercicioService.delete(exercicio.id);
@@ -93,12 +100,12 @@ class _RotinaMainState extends State<RotinaMain> {
     });
   }
 
-  _addExercicio(Exercicio exercicio) async {
-    exercicio.rotinaId = widget.rotina.id;
+  _addExercicio(Serie serie) async {
+    serie.rotinaId = widget.rotina.id;
 
     Navigator.pop(context);
 
-    await exercicioService.salvar(exercicio);
+    await serieService.salvar(serie);
 
     await _getLista();
   }
@@ -107,7 +114,7 @@ class _RotinaMainState extends State<RotinaMain> {
     if (oldOrder < newOrder) {
       newOrder -= 1;
     }
-    final Exercicio item = lista.removeAt(oldOrder);
+    final Serie item = lista.removeAt(oldOrder);
     setState(() {
       lista.insert(newOrder, item);
     });
@@ -123,7 +130,8 @@ class _RotinaMainState extends State<RotinaMain> {
 
     Flexible consulta = Flexible(
       child:
-          ExercicioList(lista, _remove, _cadastrar, _seleciona, _reorderRounds),
+          // ExercicioList(lista, _remove, _cadastrar, _seleciona, _reorderRounds),
+          SerieList(lista, _remove, _cadastrar, _seleciona, _reorderRounds),
     );
 
     return Scaffold(
@@ -149,7 +157,7 @@ class _RotinaMainState extends State<RotinaMain> {
               children: [
                 status,
                 Text(
-                  "Exercícios",
+                  "Series",
                   style: Theme.of(context).textTheme.displaySmall,
                 ),
               ],

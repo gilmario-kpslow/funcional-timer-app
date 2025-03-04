@@ -26,8 +26,8 @@ class ExercicioService {
 
   Future<List<Exercicio>> getLista(int? rotinaId) async {
     final db = await DatabaseUtil.getDatabase();
-    final List<Map<String, dynamic>> lista = await db.query(table,
-        orderBy: "ordem", where: "rotina_id=?", whereArgs: [rotinaId]);
+    final List<Map<String, dynamic>> lista =
+        await db.query(table, orderBy: "nome");
 
     return lista.map((Map<String, dynamic> m) {
       return Exercicio.fromMap(m);

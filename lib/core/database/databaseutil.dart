@@ -5,13 +5,19 @@ class DatabaseUtil {
   static Future<Database> getDatabase() async {
     final database = openDatabase(
       join(await getDatabasesPath(), 'funcional.db'),
-      onCreate: (db, version) => DatabaseUtil.recriarBanco(db, version),
+      onCreate: (db, version) => DatabaseUtil._recriarBanco(db, version),
       version: 2,
     );
     return database;
   }
 
-  static Future<void> recriarBanco(db, int version) async {
+  static Future<void> recriarBanco() async {
+    final db = await getDatabase();
+
+    _recriarBanco(db, 0);
+  }
+
+  static Future<void> _recriarBanco(db, int version) async {
     await db.execute(
       'CREATE TABLE ROTINA(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT, status TEXT)',
     );

@@ -43,6 +43,14 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
     _init();
   }
 
+  _editar(context) {
+    Navigator.push(context,
+            MaterialPageRoute(builder: (context) => RotinaMain(widget.rotina)))
+        .then((resp) {
+      _init();
+    });
+  }
+
   _init() {
     _player = SomUtil();
     // _exercicioService.getLista(widget.rotina.id).then((lista) {
@@ -267,8 +275,10 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
 
     var listaComponent = Flexible(
       child: _exercicios.isEmpty
-          ? const ListTile(
-              title: Text("Nenhum exercicio cadastrado"),
+          ? ListTile(
+              onTap: () => _editar(context),
+              title: const Text(
+                  "Nenhum exercicio cadastrado, clique para editar."),
             )
           : Padding(
               padding: const EdgeInsets.only(bottom: 5),
@@ -318,15 +328,7 @@ class _ExecutorRotinaState extends State<ExecutorRotina> {
         // iconTheme: const IconThemeData(color: Colors.white),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RotinaMain(widget.rotina)))
-                    .then((resp) {
-                  _init();
-                });
-              },
+              onPressed: () => _editar(context),
               icon: const Icon(
                 Icons.edit,
                 color: Colors.white,

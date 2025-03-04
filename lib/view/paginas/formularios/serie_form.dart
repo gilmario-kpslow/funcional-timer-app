@@ -1,17 +1,19 @@
+import 'package:cristimer/core/modelos/serie.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 
-class RotinaForm extends StatefulWidget {
-  final Rotina? programa;
-  const RotinaForm(this.onSubmit, this.programa, {super.key});
+class SerieForm extends StatefulWidget {
+  final Serie? serie;
+  final int? rotinaID;
+  const SerieForm(this.onSubmit, this.serie, this.rotinaID, {super.key});
 
-  final void Function(Rotina p) onSubmit;
+  final void Function(Serie p) onSubmit;
 
   @override
-  State<RotinaForm> createState() => _RotinaForm();
+  State<SerieForm> createState() => _SerieForm();
 }
 
-class _RotinaForm extends State<RotinaForm> {
+class _SerieForm extends State<SerieForm> {
   final _nomeController = TextEditingController();
   final _descricaoController = TextEditingController();
   int id = 0;
@@ -20,9 +22,9 @@ class _RotinaForm extends State<RotinaForm> {
   @override
   void initState() {
     super.initState();
-    _nomeController.text = widget.programa?.nome ?? "";
-    _descricaoController.text = widget.programa?.descricao ?? "";
-    id = widget.programa?.id ?? 0;
+    _nomeController.text = widget.serie?.nome ?? "";
+    _descricaoController.text = widget.serie?.descricao ?? "";
+    id = widget.serie?.id ?? 0;
   }
 
   String? _defaultValidate(String? value) {
@@ -39,7 +41,7 @@ class _RotinaForm extends State<RotinaForm> {
     final nome = _nomeController.text;
     final descricao = _descricaoController.text;
 
-    var entity = Rotina(null, nome, descricao, statusAtivo);
+    var entity = Serie(null, widget.rotinaID, nome, descricao, 1);
 
     if (id != 0) {
       entity.id = id;
