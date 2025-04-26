@@ -1,6 +1,5 @@
 import 'package:cristimer/core/modelos/serie.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/core/modelos/rotina.dart';
 
 class SerieForm extends StatefulWidget {
   final Serie? serie;

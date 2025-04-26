@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/widgets/popup_menu.dart';
+import 'package:cristimer/view/components/popup_menu.dart';
 import 'package:cristimer/core/util/menu_template.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
 import 'package:cristimer/core/util/tempoutil.dart';

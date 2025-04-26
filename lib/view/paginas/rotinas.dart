@@ -1,6 +1,6 @@
 import 'package:cristimer/core/util/mensagem_util.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/paginas/formularios/rotinas_list.dart';
+import 'package:cristimer/view/formularios/rotinas_list.dart';
 import 'package:cristimer/view/paginas/rotina_main.dart';
 import 'package:cristimer/view/paginas/executor_rotina.dart';
 import 'package:cristimer/core/util/rotina_form_service.dart';

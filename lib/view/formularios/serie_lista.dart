@@ -1,8 +1,7 @@
 import 'package:cristimer/core/modelos/serie.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/widgets/popup_menu.dart';
+import 'package:cristimer/view/components/popup_menu.dart';
 import 'package:cristimer/core/util/menu_template.dart';
-import 'package:cristimer/core/util/tempoutil.dart';
 import 'package:cristimer/enums/menu_item_option.dart';
 
 class SerieList extends StatelessWidget {
@@ -63,10 +62,12 @@ class SerieList extends StatelessWidget {
         itemCount: lista.length,
         itemBuilder: (context, index) {
           final tr = lista[index];
+
           return Padding(
             padding: const EdgeInsets.all(2),
             key: Key("${tr.id}"),
             child: ListTile(
+              onLongPress: () => delete(tr),
               tileColor: Theme.of(context).colorScheme.onTertiary,
               title: Text(
                 tr.nome,

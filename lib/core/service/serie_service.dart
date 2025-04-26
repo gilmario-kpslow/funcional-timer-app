@@ -1,6 +1,7 @@
 import 'package:cristimer/core/database/databaseutil.dart';
 import 'package:cristimer/core/modelos/serie.dart';
 import 'package:cristimer/core/service/exercicio_service.dart';
+import 'package:cristimer/core/util/table_const.dart';
 import 'package:sqflite/sqflite.dart';
 
 class SerieService {
@@ -8,22 +9,23 @@ class SerieService {
 
   get(int? id) async {
     final db = await DatabaseUtil.getDatabase();
-    var m = await db.query('serie', where: "id =?", whereArgs: [id]);
+    var m = await db.query(tableSerie, where: "id =?", whereArgs: [id]);
     return Serie(0, 0, "", "", 0).fromMap(m[0]);
   }
 
   salvar(Serie entity) async {
     final db = await DatabaseUtil.getDatabase();
-    await db.insert(
-      'serie',
+    var id = await db.insert(
+      tableSerie,
       entity.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+    return id;
   }
 
   Future<List<Serie>> getLista() async {
     final db = await DatabaseUtil.getDatabase();
-    final List<Map<String, dynamic>> lista = await db.query('serie');
+    final List<Map<String, dynamic>> lista = await db.query(tableSerie);
 
     return lista.map((Map<String, dynamic> m) {
       return Serie(0, 0, "", "", 0).fromMap(m);
@@ -33,7 +35,7 @@ class SerieService {
   Future<List<Serie>> getListaPorRotina(int? idRotina) async {
     final db = await DatabaseUtil.getDatabase();
     final List<Map<String, dynamic>> lista =
-        await db.query('serie', where: "rotina_id=?", whereArgs: [idRotina]);
+        await db.query(tableSerie, where: "rotina_id=?", whereArgs: [idRotina]);
 
     return lista.map((Map<String, dynamic> m) {
       return Serie(0, 0, "", "", 0).fromMap(m);
@@ -42,7 +44,7 @@ class SerieService {
 
   delete(int? id) async {
     final db = await DatabaseUtil.getDatabase();
-    await exercicioService.deleteByRotina(id);
-    await db.delete("serie", where: "id=?", whereArgs: [id]);
+    // await exercicioService.deleteBySerie(id);
+    await db.delete(tableSerie, where: "id=?", whereArgs: [id]);
   }
 }

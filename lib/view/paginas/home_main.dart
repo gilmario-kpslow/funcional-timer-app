@@ -1,6 +1,6 @@
-import 'package:cristimer/view/widgets/sobre.dart';
+import 'package:cristimer/view/components/sobre.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/widgets/dashboard.dart';
+import 'package:cristimer/view/components/dashboard.dart';
 
 class HomeMain extends StatefulWidget {
   const HomeMain({super.key});
@@ -14,10 +14,8 @@ class _HomeMainState extends State<HomeMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Theme.of(context).colorScheme.primary,
         title: const Text(
           "Funcional Timer",
-          // style: Theme.of(context).textTheme.titleLarge,
         ),
         actions: [
           IconButton(

@@ -25,6 +25,8 @@ class Serie extends Entity<Serie> {
   }
 
   static Serie fromJson(Map<String, dynamic> map) {
+    print(map['descricao']);
+    print(map);
     return Serie(
         map['id'] as int, //
         map['rotina_id'] as int,

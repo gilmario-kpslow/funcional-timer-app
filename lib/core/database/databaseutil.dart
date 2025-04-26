@@ -19,47 +19,44 @@ class DatabaseUtil {
 
   static Future<void> _recriarBanco(db, int version) async {
     await db.execute(
-      'CREATE TABLE ROTINA(id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, descricao TEXT, status TEXT)',
+      'create table rotina(id integer primary key autoincrement, nome text, descricao text, status text)',
     );
 
     await db.execute(
-        'CREATE TABLE SERIE( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, nome TEXT NOT NULL, DESCRICAO TEXT, som_inicio TEXT, som_pre_termino TEXT, som_termino TEXT)');
+        'create table serie( id integer primary key autoincrement, rotina_id integer not null, nome text not null, descricao text, repeticoes not null, som_inicio text, som_pre_termino text, som_termino text)');
 
     await db.execute(
-      'CREATE TABLE EXERCICIO( id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT NOT NULL, descricao TEXT)',
+      'create table exercicio( id integer primary key autoincrement, nome text not null, descricao text)',
     );
 
     await db.execute(
-      'CREATE TABLE SERIE_EXERCICIO( id INTEGER PRIMARY KEY AUTOINCREMENT, id_serie INTEGER NOT NULL, tempo INTEGER NOT NULL, delay_termino INTEGER DEFAULT 0, delay_inicio INTEGER DEFAULT 0, som_inicio TEXT, som_pre_termino TEXT, som_termino TEXT, ordem INTEGER not null)',
+      'create table serie_exercicio( id integer primary key autoincrement, id_serie integer not null, tempo integer not null, delay_termino integer default 0, delay_inicio integer default 0, som_inicio text, som_pre_termino text, som_termino text, ordem integer not null)',
     );
 
     await db.execute(
-        'CREATE TABLE HISTORICO_EXECUCAO( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, data_execucao DATETIME NOT NULL)');
+        'create table historico_execucao( id integer primary key autoincrement, rotina_id integer not null, data_execucao datetime not null)');
   }
 
   static Future<void> removerBanco() async {
     final db = await getDatabase();
+
     await db.execute(
-      'DROP TABLE EXERCICIO_SERIE;',
+      'DROP TABLE IF EXISTS historico_execucao;',
     );
 
     await db.execute(
-      'DROP TABLE ROTINA_SERIE;',
+      'DROP TABLE IF EXISTS serie_exercicio;',
     );
 
     await db.execute(
-      'DROP TABLE EXERCICIO;',
+      'DROP TABLE IF EXISTS exercicio;',
     );
     await db.execute(
-      'DROP TABLE ROTINA_HISTORICO;',
-    );
-
-    await db.execute(
-      'DROP TABLE ROTINA;',
+      'DROP TABLE IF EXISTS serie;',
     );
 
     await db.execute(
-      'DROP TABLE SERIE;',
+      'DROP TABLE IF EXISTS rotina;',
     );
   }
 }

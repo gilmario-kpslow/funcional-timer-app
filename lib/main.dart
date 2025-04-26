@@ -1,4 +1,4 @@
-import 'package:cristimer/view/widgets/temas.dart';
+import 'package:cristimer/view/components/temas.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/paginas/home_main.dart';
 

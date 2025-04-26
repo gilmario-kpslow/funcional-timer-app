@@ -1,12 +1,13 @@
 import 'package:cristimer/core/modelos/serie.dart';
 import 'package:cristimer/core/service/serie_service.dart';
 import 'package:cristimer/core/util/mensagem_util.dart';
-import 'package:cristimer/view/paginas/formularios/serie_form.dart';
-import 'package:cristimer/view/paginas/formularios/serie_lista%20.dart';
+import 'package:cristimer/view/formularios/serie_form.dart';
+import 'package:cristimer/view/formularios/serie_lista.dart';
+import 'package:cristimer/view/paginas/nova_serie.dart';
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/paginas/formularios/exercicio_form.dart';
-import 'package:cristimer/view/widgets/status_rotina.dart';
-import 'package:cristimer/view/paginas/formularios/exercicios_lista.dart';
+import 'package:cristimer/view/formularios/exercicio_form.dart';
+import 'package:cristimer/view/components/status_rotina.dart';
+import 'package:cristimer/view/formularios/exercicios_lista.dart';
 import 'package:cristimer/core/util/rotina_form_service.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
@@ -70,31 +71,36 @@ class _RotinaMainState extends State<RotinaMain> {
     });
   }
 
-  _seleciona(Serie exercicio) {}
+  _seleciona(Serie serie) {}
 
   _cadastrar(Serie? serie) async {
-    showDialog(
-        useSafeArea: true,
-        context: context,
-        builder: (ctx) {
-          return SerieForm(_addExercicio, serie, widget.rotina.id);
-        });
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NovaSerie(
+          rotinaID: rotina?.id,
+          serie: serie,
+        ),
+      ),
+    ).then((resp) {
+      _init();
+    });
   }
 
   _cadastrarPausa() async {
-    showDialog(
-        useSafeArea: true,
-        context: context,
-        builder: (ctx) {
-          // return SerieForm.pausa(_addExercicio);
-          return Text("OK");
-        });
+    // showDialog(
+    //     useSafeArea: true,
+    //     context: context,
+    //     builder: (ctx) {
+    //       // return SerieForm.pausa(_addExercicio);
+    //       // return Text("OK");
+    //     });
   }
 
-  _remove(Serie exercicio) {
-    MensagemUtil.confirmar(context, 'Remover Registro',
-        "Remover o Exercício \"${exercicio.nome}\"?", () {
-      exercicioService.delete(exercicio.id);
+  _remove(Serie serie) {
+    MensagemUtil.confirmar(
+        context, 'Remover registro', "Remover a Serie \"${serie.nome}\"?", () {
+      serieService.delete(serie.id);
       _getLista();
       Navigator.pop(context);
     });

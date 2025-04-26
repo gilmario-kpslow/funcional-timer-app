@@ -1,4 +1,4 @@
-import 'package:cristimer/view/widgets/seleciona_som.dart';
+import 'package:cristimer/view/components/seleciona_som.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';

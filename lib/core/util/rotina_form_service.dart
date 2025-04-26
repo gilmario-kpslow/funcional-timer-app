@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:cristimer/view/paginas/formularios/rotina_form.dart';
+import 'package:cristimer/view/formularios/rotina_form.dart';
 import 'package:cristimer/core/modelos/rotina.dart';
 import 'package:cristimer/core/service/rotina_service.dart';
 

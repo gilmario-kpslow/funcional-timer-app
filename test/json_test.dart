@@ -3,6 +3,10 @@
 // import 'package:cristimer/core/modelos/programacao.dart';
 
 void main() {
+  var texto =
+      "CREATE TABLE HISTORICO_EXECUCAO( id INTEGER PRIMARY KEY AUTOINCREMENT, rotina_id INTEGER NOT NULL, data_execucao DATETIME NOT NULL)";
+  print(texto.toLowerCase());
+
   // Programacao p = Programacao("nome", "descricao", 10);
 
   // print(jsonEncode(p));

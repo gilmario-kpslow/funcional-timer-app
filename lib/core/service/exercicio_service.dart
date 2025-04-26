@@ -1,10 +1,9 @@
 import 'package:cristimer/core/database/databaseutil.dart';
 import 'package:cristimer/core/modelos/exercicio.dart';
+import 'package:cristimer/core/util/table_const.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ExercicioService {
-  static const String table = "EXERCICIO";
-
   salvar(Exercicio entity) async {
     final db = await DatabaseUtil.getDatabase();
     if (entity.ordem == 0) {
@@ -18,7 +17,7 @@ class ExercicioService {
     }
 
     await db.insert(
-      table,
+      tableExercicio,
       entity.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -27,7 +26,7 @@ class ExercicioService {
   Future<List<Exercicio>> getLista(int? rotinaId) async {
     final db = await DatabaseUtil.getDatabase();
     final List<Map<String, dynamic>> lista =
-        await db.query(table, orderBy: "nome");
+        await db.query(tableExercicio, orderBy: "nome");
 
     return lista.map((Map<String, dynamic> m) {
       return Exercicio.fromMap(m);
@@ -35,30 +34,37 @@ class ExercicioService {
   }
 
   Future<void> setOrdem(int? id, int ordem) async {
-    final db = await DatabaseUtil.getDatabase();
-    await db.update(table, {'ordem': ordem}, where: 'id= ?', whereArgs: [id]);
+    // final db = await DatabaseUtil.getDatabase();
+    // await db.update(tableExercicio, {'ordem': ordem},
+    //     where: 'id= ?', whereArgs: [id]);
   }
 
   Future<void> ajuste(int? id) async {
     final db = await DatabaseUtil.getDatabase();
 
-    await db
-        .rawUpdate("UPDATE $table SET ORDEM = id WHERE rotina_id = ? ", [id]);
+    await db.rawUpdate(
+        "UPDATE $tableExercicio SET ORDEM = id WHERE rotina_id = ? ", [id]);
   }
 
   getOrder(int? id) async {
     final db = await DatabaseUtil.getDatabase();
     return await db.rawQuery(
-        "SELECT COUNT(*) as ordem FROM $table WHERE rotina_id=?", [id]);
+        "SELECT COUNT(*) as ordem FROM $tableExercicio WHERE rotina_id=?",
+        [id]);
   }
 
   delete(int? id) async {
     final db = await DatabaseUtil.getDatabase();
-    await db.delete(table, where: 'id= ?', whereArgs: [id]);
+    await db.delete(tableExercicio, where: 'id= ?', whereArgs: [id]);
   }
 
   deleteByRotina(int? id) async {
     final db = await DatabaseUtil.getDatabase();
-    await db.delete(table, where: "rotina_id=?", whereArgs: [id]);
+    await db.delete(tableExercicio, where: "rotina_id=?", whereArgs: [id]);
+  }
+
+  deleteBySerie(int? id) async {
+    final db = await DatabaseUtil.getDatabase();
+    await db.delete(tableExercicio, where: "serie_id=?", whereArgs: [id]);
   }
 }

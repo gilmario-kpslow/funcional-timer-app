@@ -1,5 +1,5 @@
 import 'package:cristimer/view/paginas/configuracao.dart';
-import 'package:cristimer/view/widgets/round_botao.dart';
+import 'package:cristimer/view/components/round_botao.dart';
 import 'package:flutter/material.dart';
 import 'package:cristimer/view/paginas/rotinas.dart';
 
